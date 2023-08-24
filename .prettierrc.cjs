@@ -1,5 +1,5 @@
 const config = {
-	trailingComma: 'es5',
+	trailingComma: 'all',
 	arrowParens: 'avoid',
 	endOfLine: 'lf',
 	singleQuote: true,

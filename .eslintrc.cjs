@@ -6,6 +6,7 @@ module.exports = {
 	parserOptions: {
 		ecmaVersion: 'latest',
 		sourceType: 'module',
+		ecmaFeatures: { jsx: true },
 	},
 	settings: {
 		react: {
@@ -24,22 +25,25 @@ module.exports = {
 		'eslint:recommended',
 		'plugin:react/recommended',
 		'plugin:@typescript-eslint/recommended',
-		'prettier',
+		'plugin:prettier/recommended',
 	],
+	globals: {
+		JSX: 'readonly',
+	},
 	rules: {
 		'no-unused-vars': 'error',
 		'no-console': 'warn',
 		'no-trailing-spaces': 'error',
 		'prefer-const': 'warn',
-		indent: ['warn', 2],
 		'max-len': ['error', { code: 120 }],
 		'comma-dangle': ['error', 'always-multiline'],
+		indent: ['warn', 'tab'],
 		semi: ['error', 'always'],
 
 		'react/react-in-jsx-scope': 'off',
-		// 'jsx-closing-tag-location': 'warn',
-		// 'jsx-filename-extension': 'error',
-		// 'react/jsx-first-prop-new-line': ['warn', 'always'],
+		'react/jsx-closing-tag-location': 'warn',
+		'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+		'react/jsx-first-prop-new-line': ['warn', 'always'],
 
 		'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
 
