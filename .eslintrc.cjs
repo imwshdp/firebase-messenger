@@ -31,7 +31,7 @@ module.exports = {
 		JSX: 'readonly',
 	},
 	rules: {
-		'no-unused-vars': 'error',
+		'no-unused-vars': 'warn',
 		'no-console': 'warn',
 		'no-trailing-spaces': 'error',
 		'prefer-const': 'warn',
@@ -43,7 +43,7 @@ module.exports = {
 		'react/react-in-jsx-scope': 'off',
 		'react/jsx-closing-tag-location': 'warn',
 		'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
-		'react/jsx-first-prop-new-line': ['warn', 'always'],
+		// 'react/jsx-first-prop-new-line': ['warn', 'always'],
 
 		'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
 
@@ -51,19 +51,19 @@ module.exports = {
 		'react-hooks/exhaustive-deps': 'warn',
 
 		'simple-import-sort/exports': 'error',
-		'simple-import-sort/imports': [
-			'error',
-			{
-				groups: [
-					['^react'],
-					['^(@|components)(/.*|$)'],
-					['^\\u0000'],
-					['^'],
-					['^\\.'],
-					['^.+\\.?(scss)$'],
-				],
-			},
-		],
+		// 'simple-import-sort/imports': [
+		// 	'error',
+		// 	{
+		// 		groups: [
+		// 			['^react'],
+		// 			['^(@|components)(/.*|$)'],
+		// 			['^\\u0000'],
+		// 			['^'],
+		// 			['^\\.'],
+		// 			['^.+\\.?(scss)$'],
+		// 		],
+		// 	},
+		// ],
 
 		'prettier/prettier': ['error', {}, { usePrettierrc: true }],
 	},

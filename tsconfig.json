@@ -1,8 +1,13 @@
 {
 	"compilerOptions": {
-		"target": "ES2020",
+		"target": "ES2021",
 		"useDefineForClassFields": true,
-		"lib": ["ES2020", "DOM", "DOM.Iterable"],
+		"lib": ["ES2021", "DOM", "DOM.Iterable"],
+		"allowJs": false,
+		"esModuleInterop": false,
+		"allowSyntheticDefaultImports": true,
+		"forceConsistentCasingInFileNames": true,
+
 		"module": "ESNext",
 		"skipLibCheck": true,
 
@@ -18,7 +23,31 @@
 		"strict": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
-		"noFallthroughCasesInSwitch": true
+		"noFallthroughCasesInSwitch": true,
+		"baseUrl": "./",
+		"paths": {
+			"@App": ["src/App"],
+
+			"@Components": ["src/Components"],
+			"@Components/*": ["src/Components/*"],
+
+			"@Containers": ["src/Containers"],
+			"@Containers/*": ["src/Containers/*"],
+
+			"@Pages": ["src/Pages"],
+			"@Pages/*": ["src/Pages/*"],
+
+			"@Assets": ["src/Assets"],
+			"@Assets/*": ["src/Assets/*"],
+
+			"@Shared": ["src/Shared"],
+			"@Shared/*": ["src/Shared/*"],
+
+			"@Store": ["src/Store"],
+			"@Store/*": ["src/Store/*"],
+
+			"@Router": ["src/Router"]
+		}
 	},
 	"include": ["src"],
 	"references": [{ "path": "./tsconfig.node.json" }]
