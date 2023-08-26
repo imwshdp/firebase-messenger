@@ -1,0 +1,89 @@
+* {
+	font-family: 'Montserrat', sans-serif;
+
+	&::-webkit-scrollbar {
+		width: 8px;
+		height: 8px;
+	}
+
+	&::-webkit-scrollbar-track {
+		background-color: transparent;
+		border-radius: 7px;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: #b3b3b3;
+		border-radius: 7px;
+		border: 1px solid #f3f5fc;
+	}
+	&::-webkit-scrollbar-corner {
+		background-color: transparent;
+	}
+}
+
+html {
+	overflow: hidden;
+}
+
+:root {
+	--primary-padding: 20px;
+	--secondary-padding: 10px;
+
+	--primary-gap: 10px;
+	--primary-padding-page: 40px;
+	--primary-border-radius: 10px;
+	--primary-animation-duration: 0.3s;
+
+	--light-1: #f8f9fa;
+	--light-2: #e9ecef;
+	--light-3: #dee2e6;
+	--light-4: #ced4da;
+	--light-secondary-1: rgb(0, 0, 0, 0.3);
+
+	--dark-1: #212529;
+	--dark-2: #343a40;
+	--dark-3: #495057;
+	--dark-4: #6c757d;
+	--dark-secondary-1: rgba(255, 255, 255, 0.3);
+
+	--accent-1: #ee6c4d;
+}
+
+body {
+	position: relative;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+}
+
+.h1 {
+	font-weight: 500;
+	font-size: 24px;
+	line-height: 29px;
+}
+
+.h2 {
+	font-size: 16px;
+	line-height: 20px;
+}
+
+.h3 {
+	font-size: 14px;
+	line-height: 18px;
+}
+
+.text {
+	&_common {
+		font-size: 14px;
+		line-height: 17px;
+	}
+	&_small {
+		font-size: 12px;
+		line-height: 15px;
+	}
+}
+
+a {
+	text-decoration: underline;
+	color: var(--accent-1);
+}

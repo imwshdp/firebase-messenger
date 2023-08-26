@@ -1,33 +1,30 @@
 import { FC } from 'react';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import useAppDispatch from '@Shared/hooks/useAppDispatch';
+import { Link, useNavigate } from 'react-router-dom';
+
 import { Form } from '@Components';
-import { setUser } from '@Store/slices/userSlice';
-import { useNavigate } from 'react-router-dom';
+import { auth } from '@Config';
+import { RoutesLinks } from '@Router';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 const FormOfRegistrationContainer: FC = () => {
-	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
 	const handleRegister = (email: string, password: string) => {
-		const auth = getAuth();
 		createUserWithEmailAndPassword(auth, email, password)
-			.then(({ user }) => {
-				dispatch(
-					setUser({
-						email: user.email,
-						id: user.uid,
-						token: user.refreshToken,
-					}),
-				);
-				navigate('/login');
+			.then(() => {
+				alert('успешная регистрация');
 			})
-			.catch(console.error);
+			.then(() => navigate(RoutesLinks.login, { replace: true }))
+			.catch(alert);
 	};
 
 	return (
 		<div>
-			<Form buttonTitle='Зарегистрироваться' handleSubmit={handleRegister} />
+			<Form buttonTitle='Зарегистрироваться' handleSubmit={handleRegister} type='register'>
+				<span>
+					Уже есть запись? <Link to='/login'>Войти</Link>
+				</span>
+			</Form>
 		</div>
 	);
 };

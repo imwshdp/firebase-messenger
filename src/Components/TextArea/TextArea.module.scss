@@ -1,0 +1,14 @@
+@import '@Assets/styles/mixins.scss';
+
+.textarea {
+	padding: 0 4px;
+
+	font-size: 14px;
+	overflow: auto;
+
+	&_transparent {
+		background-color: transparent;
+	}
+
+	@include textarea;
+}

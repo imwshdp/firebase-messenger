@@ -1,12 +1,46 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
-import { RoutesData } from './RoutesData';
-import { HomePage, LoginPage, RegistrationPage } from '@Pages';
+import { FC } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
-export const Router = (
-	<Routes>
-		<Route path={RoutesData.root} element={<Navigate to={RoutesData.home} />} />
-		<Route path={RoutesData.home} element={<HomePage />} />
-		<Route path={RoutesData.login} element={<LoginPage />} />
-		<Route path={RoutesData.registration} element={<RegistrationPage />} />
-	</Routes>
-);
+import { Layout } from '@Components';
+import { HomePageContainer } from '@Containers/HomePageContainer';
+import { LoginPage, NotFoundPage, RegistrationPage } from '@Pages';
+import { RoutesLinks } from '@Router';
+import PrivateLayout from '@Shared/hocs/PrivateLayout';
+import PublicLayout from '@Shared/hocs/PublicLayout';
+
+const Router: FC = () => {
+	return (
+		<Routes>
+			<Route path={RoutesLinks.root} element={<Layout />}>
+				<Route
+					index
+					element={
+						<PrivateLayout>
+							<HomePageContainer />
+						</PrivateLayout>
+					}
+				/>
+				<Route
+					path={RoutesLinks.login}
+					element={
+						<PublicLayout>
+							<LoginPage />
+						</PublicLayout>
+					}
+				/>
+				<Route
+					path={RoutesLinks.registration}
+					element={
+						<PublicLayout>
+							<RegistrationPage />
+						</PublicLayout>
+					}
+				/>
+
+				<Route path='*' element={<NotFoundPage />} />
+			</Route>
+		</Routes>
+	);
+};
+
+export default Router;

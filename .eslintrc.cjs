@@ -51,19 +51,23 @@ module.exports = {
 		'react-hooks/exhaustive-deps': 'warn',
 
 		'simple-import-sort/exports': 'error',
-		// 'simple-import-sort/imports': [
-		// 	'error',
-		// 	{
-		// 		groups: [
-		// 			['^react'],
-		// 			['^(@|components)(/.*|$)'],
-		// 			['^\\u0000'],
-		// 			['^'],
-		// 			['^\\.'],
-		// 			['^.+\\.?(scss)$'],
-		// 		],
-		// 	},
-		// ],
+		'simple-import-sort/imports': [
+			'error',
+			{
+				groups: [
+					['^react'],
+					['^@?\\w'],
+					['^(@|components)(/.*|$)'],
+					['^\\u0000'],
+					['^\\.\\.(?!/?$)'],
+					['^\\.\\./?$'],
+					['^\\./(?=.*/)(?!/?$)'],
+					['^\\.(?!/?$)'],
+					['^\\./?$'],
+					['^.+\\.?(scss)$'],
+				],
+			},
+		],
 
 		'prettier/prettier': ['error', {}, { usePrettierrc: true }],
 	},

@@ -1,21 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
-import './index.scss';
-
-import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+
 import App from '@App';
+import { AppContainer } from '@Containers';
 import { store } from '@Store';
 
-import './firebase.ts';
+// TODO think
+import '@Config';
+
+import '@Assets/styles/index.scss';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-	<React.StrictMode>
-		<BrowserRouter>
-			<Provider store={store}>
+	// <React.StrictMode>
+	<BrowserRouter>
+		<Provider store={store}>
+			<AppContainer>
 				<App />
-			</Provider>
-		</BrowserRouter>
-	</React.StrictMode>,
+			</AppContainer>
+		</Provider>
+	</BrowserRouter>,
+	// </React.StrictMode>,
 );

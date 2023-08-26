@@ -1,22 +1,20 @@
-import { useAuth } from '@Shared/hooks/useAuth';
 import { FC } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+
+import { ChatView } from '@Components';
+import { useAuth } from '@Shared/hooks/useAuth';
+
+import styles from './HomePage.module.scss';
 
 const HomePage: FC = () => {
-	const { isAuth, email } = useAuth();
+	const { email } = useAuth();
 
 	const greeting = `Welcome ${email}!`;
 
-	return isAuth ? (
-		<section>
-			<h1>homepage</h1>
-			<h2>{greeting}</h2>
-			<Link to='login'>login</Link>
-			<hr></hr>
-			<Link to='registration'>register</Link>
+	return (
+		<section className={styles['page_wrapper']}>
+			<h1>{greeting}</h1>
+			<ChatView />
 		</section>
-	) : (
-		<Navigate to='/login' />
 	);
 };
 

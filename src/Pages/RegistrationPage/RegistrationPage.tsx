@@ -1,14 +1,10 @@
-import { FormOfRegistrationContainer } from '@Containers';
 import { FC } from 'react';
-import { Link } from 'react-router-dom';
+
+import { FormOfRegistrationContainer } from '@Containers';
 
 const RegistrationPage: FC = () => {
 	return (
 		<section>
-			<h1>Register</h1>
-			<p>
-				or <Link to='/login'>Login</Link>
-			</p>
 			<FormOfRegistrationContainer />
 		</section>
 	);

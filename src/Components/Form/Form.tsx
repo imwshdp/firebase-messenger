@@ -1,10 +1,24 @@
-import { ChangeEvent, FC, useState } from 'react';
+import { ChangeEvent, FC, ReactNode, useState } from 'react';
 
+import { Button } from '@Components';
+
+import styles from './Form.module.scss';
+
+type FormType = 'login' | 'register';
 interface PropsType {
 	buttonTitle: string;
 	handleSubmit: (email: string, password: string) => void;
+	handleAlternativeSubmit?: () => void;
+	type: FormType;
+	children?: ReactNode;
 }
-const Form: FC<PropsType> = ({ buttonTitle, handleSubmit }) => {
+const Form: FC<PropsType> = ({
+	buttonTitle,
+	handleSubmit,
+	handleAlternativeSubmit,
+	type,
+	children,
+}) => {
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
 
@@ -16,14 +30,16 @@ const Form: FC<PropsType> = ({ buttonTitle, handleSubmit }) => {
 		setPassword(event.target.value);
 	};
 
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const handleClick = (event: any) => {
-		event.preventDefault();
+	const handleLoginClick = () => {
 		handleSubmit(email, password);
 	};
 
+	const handleGoogleLoginClick = () => {
+		if (handleAlternativeSubmit) handleAlternativeSubmit();
+	};
+
 	return (
-		<form>
+		<form className={styles['form']}>
 			<input type='email' value={email} onChange={handleEmailChange} placeholder='Введите почту' />
 			<input
 				type='password'
@@ -31,7 +47,14 @@ const Form: FC<PropsType> = ({ buttonTitle, handleSubmit }) => {
 				onChange={handlePasswordChange}
 				placeholder='Введите пароль'
 			/>
-			<button onClick={handleClick}>{buttonTitle}</button>
+			<Button onClick={handleLoginClick} title={buttonTitle} />
+			{type === 'login' && (
+				<>
+					<b>или</b>
+					<Button onClick={handleGoogleLoginClick} title='Войти с помощью Google' />
+				</>
+			)}
+			{children}
 		</form>
 	);
 };

@@ -1,6 +1,6 @@
-export const RoutesData = {
+export const RoutesLinks = {
 	root: '/',
-	home: '/home',
 	login: '/login',
 	registration: '/registration',
+	redirect: '*',
 };

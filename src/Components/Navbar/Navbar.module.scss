@@ -1,0 +1,11 @@
+.navbar {
+	display: flex;
+	flex: 1;
+	justify-content: start;
+
+	padding: var(--primary-padding);
+
+	background-color: var(--light-2);
+	box-shadow: 0 0 2px var(--light-secondary-1) inset;
+	border-radius: 0 var(--primary-border-radius) var(--primary-border-radius) 0;
+}

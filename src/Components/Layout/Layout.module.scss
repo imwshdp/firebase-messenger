@@ -1,0 +1,21 @@
+.app {
+	position: relative;
+	display: grid;
+	grid-template-columns: 250px 1fr;
+
+	&__aside,
+	&__main {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+
+		height: 100vh;
+	}
+
+	&__main {
+		padding: var(--primary-padding-page);
+
+		background-color: var(--light-1);
+		overflow: auto;
+	}
+}

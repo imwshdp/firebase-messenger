@@ -1,20 +1,34 @@
 import { FC } from 'react';
-import { Form } from '@Components';
-// import useAppDispatch from '@Shared/hooks/useAppDispatch';
+import { Link, useNavigate } from 'react-router-dom';
 
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { setUser } from '@Store/slices/userSlice';
+import { Form } from '@Components';
+import { auth, googleProvider } from '@Config';
+import { RoutesLinks } from '@Router';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
-import { useNavigate } from 'react-router-dom';
+import { setUser } from '@Store/slices/userSlice';
+import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 
 const FormOfLoginContainer: FC = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
 
 	const handleLogin = (email: string, password: string) => {
-		const auth = getAuth();
-
 		signInWithEmailAndPassword(auth, email, password)
+			.then(({ user }) => {
+				dispatch(
+					setUser({
+						email: user.email,
+						id: user.uid,
+						token: user.refreshToken,
+					}),
+				);
+			})
+			.then(() => navigate(RoutesLinks.root, { replace: true }))
+			.catch(alert);
+	};
+
+	const handleGoogleLogin = () => {
+		signInWithPopup(auth, googleProvider)
 			.then(({ user }) => {
 				dispatch(
 					setUser({
@@ -25,12 +39,21 @@ const FormOfLoginContainer: FC = () => {
 				);
 				navigate('/');
 			})
-			.catch(err => console.error(err));
+			.catch(alert);
 	};
 
 	return (
 		<div>
-			<Form buttonTitle='Залогиниться' handleSubmit={handleLogin} />
+			<Form
+				buttonTitle='Залогиниться'
+				handleSubmit={handleLogin}
+				handleAlternativeSubmit={handleGoogleLogin}
+				type='login'
+			>
+				<span>
+					Впервые здесь? <Link to='/registration'>Зарегистрироваться</Link>
+				</span>
+			</Form>
 		</div>
 	);
 };

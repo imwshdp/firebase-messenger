@@ -46,7 +46,10 @@
 			"@Store": ["src/Store"],
 			"@Store/*": ["src/Store/*"],
 
-			"@Router": ["src/Router"]
+			"@Router": ["src/Router"],
+			"@Router/*": ["src/Router/*"],
+
+			"@Config": ["src/Config"]
 		}
 	},
 	"include": ["src"],
