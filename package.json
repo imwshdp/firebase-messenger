@@ -12,10 +12,17 @@
 		"lint:format": "prettier --log-level warn --write \"./**/*.{js,jsx,ts,tsx,css,scss,md,json}\" ",
 		"lint": "yarn run lint:format && yarn run lint:fix"
 	},
+	"lint-staged": {
+		"*.{js,jsx,ts,tsx,json}": [
+			"yarn run lint:fix"
+		],
+		"*.{js,jsx,ts,tsx,css,scss,json}": [
+			"yarn run lint:format"
+		]
+	},
 	"dependencies": {
 		"@firebase/auth-types": "^0.12.0",
 		"@reduxjs/toolkit": "^1.9.5",
-		"antd": "^5.8.4",
 		"clsx": "^2.0.0",
 		"firebase": "^10.3.0",
 		"react": "^18.2.0",
@@ -38,6 +45,8 @@
 		"eslint-plugin-react-hooks": "^4.6.0",
 		"eslint-plugin-react-refresh": "^0.4.3",
 		"eslint-plugin-simple-import-sort": "^10.0.0",
+		"husky": "^8.0.3",
+		"lint-staged": "^14.0.1",
 		"prettier": "^3.0.2",
 		"typescript": "^5.0.2",
 		"vite": "^4.4.5"

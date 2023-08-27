@@ -7,10 +7,10 @@ import App from '@App';
 import { AppContainer } from '@Containers';
 import { store } from '@Store';
 
+import '@Assets/styles/index.scss';
+
 // TODO think
 import '@Config';
-
-import '@Assets/styles/index.scss';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	// <React.StrictMode>

@@ -1,12 +1,14 @@
 import { FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { Form } from '@Components';
+import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+
 import { auth, googleProvider } from '@Config';
 import { RoutesLinks } from '@Router';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import { setUser } from '@Store/slices/userSlice';
-import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+
+import { Form } from '@Components';
 
 const FormOfLoginContainer: FC = () => {
 	const dispatch = useAppDispatch();

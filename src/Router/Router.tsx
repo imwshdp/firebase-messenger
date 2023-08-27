@@ -1,12 +1,13 @@
 import { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { Layout } from '@Components';
 import { HomePageContainer } from '@Containers/HomePageContainer';
 import { LoginPage, NotFoundPage, RegistrationPage } from '@Pages';
 import { RoutesLinks } from '@Router';
 import PrivateLayout from '@Shared/hocs/PrivateLayout';
 import PublicLayout from '@Shared/hocs/PublicLayout';
+
+import { Layout } from '@Components';
 
 const Router: FC = () => {
 	return (

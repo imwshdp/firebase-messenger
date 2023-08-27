@@ -1,7 +1,8 @@
 import { FC, useState } from 'react';
 
-import { TextArea } from '@Components';
 import { MAX_CHAT_VIEW_PANEL_HEIGHT } from '@Shared/content/constants';
+
+import { TextArea } from '@Components';
 
 import styles from './ChatView.module.scss';
 
@@ -9,7 +10,7 @@ const ChatView: FC = () => {
 	const [value, setValue] = useState('');
 
 	return (
-		<section className={styles['chat_view']}>
+		<section className={styles['chat_view']} id='123'>
 			<div className={styles['chat_view__container']}></div>
 			<div
 				className={styles['chat_view__panel']}

@@ -1,13 +1,14 @@
 module.exports = {
 	root: true,
-	env: { browser: true, node: true, es2020: true },
-	ignorePatterns: ['dist', '.eslintrc.cjs', 'node_modules'],
+	env: { browser: true, node: true, es2023: true },
+	ignorePatterns: ['.eslintrc.cjs', 'node_modules', 'package.json', 'public', 'build', 'dist'],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
 		ecmaVersion: 'latest',
 		sourceType: 'module',
 		ecmaFeatures: { jsx: true },
 	},
+
 	settings: {
 		react: {
 			version: 'detect',
@@ -31,44 +32,41 @@ module.exports = {
 		JSX: 'readonly',
 	},
 	rules: {
-		'no-unused-vars': 'warn',
-		'no-console': 'warn',
-		'no-trailing-spaces': 'error',
-		'prefer-const': 'warn',
-		'max-len': ['error', { code: 120 }],
-		'comma-dangle': ['error', 'always-multiline'],
-		indent: ['warn', 'tab'],
-		semi: ['error', 'always'],
+		'no-unused-vars': 0,
+		'no-console': 1,
+		'no-trailing-spaces': 2,
+		'prefer-const': 1,
+		'max-len': [2, { code: 120 }],
+		indent: [0, 'tab'],
+		semi: [1, 'always'],
 
-		'react/react-in-jsx-scope': 'off',
-		'react/jsx-closing-tag-location': 'warn',
-		'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
-		// 'react/jsx-first-prop-new-line': ['warn', 'always'],
+		'react/react-in-jsx-scope': 0,
+		'react/jsx-closing-tag-location': 1,
+		'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+		'react/jsx-first-prop-new-line': [2, 'multiline-multiprop'],
+		'react/jsx-max-props-per-line': [2, { maximum: 1, when: 'multiline' }],
+		'react/jsx-closing-bracket-location': [2, 'tag-aligned'],
 
-		'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+		'react-refresh/only-export-components': [1, { allowConstantExport: true }],
 
-		'react-hooks/rules-of-hooks': 'error',
-		'react-hooks/exhaustive-deps': 'warn',
+		'react-hooks/rules-of-hooks': 2,
+		'react-hooks/exhaustive-deps': 1,
 
-		'simple-import-sort/exports': 'error',
+		'simple-import-sort/exports': 2,
 		'simple-import-sort/imports': [
-			'error',
+			2,
 			{
 				groups: [
 					['^react'],
+					['^\\w'],
 					['^@?\\w'],
-					['^(@|components)(/.*|$)'],
-					['^\\u0000'],
-					['^\\.\\.(?!/?$)'],
-					['^\\.\\./?$'],
-					['^\\./(?=.*/)(?!/?$)'],
-					['^\\.(?!/?$)'],
-					['^\\./?$'],
+					['^(@?Components)(/.*|$)'],
+					['^\\.'],
 					['^.+\\.?(scss)$'],
 				],
 			},
 		],
 
-		'prettier/prettier': ['error', {}, { usePrettierrc: true }],
+		'prettier/prettier': [2, {}, { usePrettierrc: true }],
 	},
 };

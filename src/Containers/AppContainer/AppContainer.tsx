@@ -1,10 +1,12 @@
 import { FC, ReactNode } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { Loader } from '@Components/Loader';
+import { getAuth } from 'firebase/auth';
+
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import { setUser } from '@Store/slices/userSlice';
-import { getAuth } from 'firebase/auth';
+
+import { Loader } from '@Components/Loader';
 
 interface PropsType {
 	children: ReactNode;

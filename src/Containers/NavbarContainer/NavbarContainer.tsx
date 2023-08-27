@@ -1,11 +1,12 @@
 import { FC } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-import { Navbar } from '@Components';
 import { auth } from '@Config';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import { useAuth } from '@Shared/hooks/useAuth';
 import { removeUser } from '@Store/slices/userSlice';
+
+import { Navbar } from '@Components';
 
 const NavbarContainer: FC = () => {
 	const { isAuth } = useAuth();

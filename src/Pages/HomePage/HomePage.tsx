@@ -1,7 +1,8 @@
 import { FC } from 'react';
 
-import { ChatView } from '@Components';
 import { useAuth } from '@Shared/hooks/useAuth';
+
+import { ChatView } from '@Components';
 
 import styles from './HomePage.module.scss';
 
