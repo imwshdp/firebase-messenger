@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, ReactNode, useState } from 'react';
 
-import { Button } from '@Components';
+import { Button, FileUploader } from '@Components';
 
 import styles from './Form.module.scss';
 
@@ -47,13 +47,18 @@ const Form: FC<PropsType> = ({
 				onChange={handlePasswordChange}
 				placeholder='Введите пароль'
 			/>
+
+			{type === 'register' && <FileUploader onChange={() => {}} />}
+
 			<Button onClick={handleLoginClick} title={buttonTitle} />
+
 			{type === 'login' && (
 				<>
 					<b>или</b>
 					<Button onClick={handleGoogleLoginClick} title='Войти с помощью Google' />
 				</>
 			)}
+
 			{children}
 		</form>
 	);

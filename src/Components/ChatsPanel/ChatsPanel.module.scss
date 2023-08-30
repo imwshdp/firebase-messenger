@@ -1,0 +1,15 @@
+.chats {
+	display: flex;
+	flex-direction: column;
+
+	height: 100%;
+	min-width: 100px;
+	width: 300px;
+
+	gap: var(--primary-gap);
+
+	border: 1px solid black;
+	border-radius: var(--primary-border-radius);
+
+	overflow: hidden;
+}

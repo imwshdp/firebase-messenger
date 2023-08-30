@@ -9,17 +9,16 @@ import { store } from '@Store';
 
 import '@Assets/styles/index.scss';
 
-// TODO think
-import '@Config';
+import '@Config'; // TODO research firebase config
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-	// <React.StrictMode>
-	<BrowserRouter>
-		<Provider store={store}>
-			<AppContainer>
-				<App />
-			</AppContainer>
-		</Provider>
-	</BrowserRouter>,
-	// </React.StrictMode>,
+	<React.StrictMode>
+		<BrowserRouter>
+			<Provider store={store}>
+				<AppContainer>
+					<App />
+				</AppContainer>
+			</Provider>
+		</BrowserRouter>
+	</React.StrictMode>,
 );

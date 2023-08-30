@@ -1,0 +1,23 @@
+.file-selector {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	gap: var(--secondary-gap);
+	padding: 8px 14px;
+
+	border: 1px solid black; // TODO add var
+	cursor: pointer;
+
+	svg {
+		width: 18px;
+		height: 18px;
+	}
+
+	&__input {
+		position: absolute;
+		overflow: hidden;
+		opacity: 0;
+		z-index: -1;
+	}
+}

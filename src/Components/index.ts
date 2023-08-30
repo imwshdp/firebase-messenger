@@ -1,8 +1,12 @@
 export { Button } from './Button';
+export { ButtonWithIcon } from './ButtonWithIcon';
+export { ChatsPanel } from './ChatsPanel';
 export { ChatView } from './ChatView';
+export { FileUploader } from './FileUploader';
 export { Form } from './Form';
 export { Layout } from './Layout';
 export { Loader } from './Loader';
 export { Message } from './Message';
 export { Navbar } from './Navbar';
+export { Search } from './Search';
 export { TextArea } from './TextArea';

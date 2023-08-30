@@ -2,9 +2,9 @@
 	display: flex;
 	flex-direction: column;
 
-	width: 50%;
+	min-width: 400px;
 
-	gap: 10px;
+	gap: var(--primary-gap);
 	padding: var(--primary-padding);
 	margin: auto;
 

@@ -10,14 +10,13 @@ interface PropsType {
 	value: string;
 	setValue: (value: string) => void;
 
+	type?: TextAreaType;
 	disabled?: boolean;
 	placeholder?: string;
 
 	name?: string;
 	cols?: number;
 	rows?: number;
-
-	type?: TextAreaType;
 
 	resizable?: boolean;
 	maxHeight?: number;
@@ -28,7 +27,7 @@ const TextArea: FC<PropsType> = ({
 	setValue,
 	name,
 	disabled,
-	placeholder,
+	placeholder = 'Enter text...',
 	cols,
 	rows,
 	type,

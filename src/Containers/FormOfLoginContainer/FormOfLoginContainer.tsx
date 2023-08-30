@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 
-import { auth, googleProvider } from '@Config';
+import { auth } from '@Config';
 import { RoutesLinks } from '@Router';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import { setUser } from '@Store/slices/userSlice';
@@ -16,12 +16,16 @@ const FormOfLoginContainer: FC = () => {
 
 	const handleLogin = (email: string, password: string) => {
 		signInWithEmailAndPassword(auth, email, password)
-			.then(({ user }) => {
+			.then(res => {
+				console.log('user = ', res);
+				const { user } = res;
 				dispatch(
 					setUser({
 						email: user.email,
 						id: user.uid,
 						token: user.refreshToken,
+						displayName: user.displayName || 'Anonymous',
+						photoUrl: user.photoURL || null,
 					}),
 				);
 			})
@@ -30,13 +34,17 @@ const FormOfLoginContainer: FC = () => {
 	};
 
 	const handleGoogleLogin = () => {
-		signInWithPopup(auth, googleProvider)
-			.then(({ user }) => {
+		signInWithPopup(auth, new GoogleAuthProvider())
+			.then(res => {
+				console.log('user = ', res);
+				const { user } = res;
 				dispatch(
 					setUser({
 						email: user.email,
 						id: user.uid,
 						token: user.refreshToken,
+						displayName: user.displayName || 'Anonymous',
+						photoUrl: user.photoURL || null,
 					}),
 				);
 				navigate('/');

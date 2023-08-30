@@ -1,0 +1,27 @@
+.button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 30px;
+	height: 30px;
+	max-width: 30px;
+	max-height: 30px;
+
+	padding: 4px;
+
+	border-radius: 50%;
+
+	transition: all var(--primary-animation-duration) ease-in-out;
+	background-color: var(--light-2);
+
+	&:hover {
+		transition: all var(--primary-animation-duration) ease-in-out;
+		background-color: var(--light-3);
+	}
+
+	svg {
+		width: 16px;
+		height: 16px;
+	}
+}

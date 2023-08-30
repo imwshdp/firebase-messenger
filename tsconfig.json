@@ -40,6 +40,8 @@
 			"@Assets": ["src/Assets"],
 			"@Assets/*": ["src/Assets/*"],
 
+			"@Api": ["src/Api"],
+
 			"@Shared": ["src/Shared"],
 			"@Shared/*": ["src/Shared/*"],
 
@@ -52,6 +54,6 @@
 			"@Config": ["src/Config"]
 		}
 	},
-	"include": ["src"],
+	"include": ["src", "./src/global.d.ts"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

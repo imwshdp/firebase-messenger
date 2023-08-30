@@ -1,8 +1,7 @@
 import { FC, ReactNode } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { getAuth } from 'firebase/auth';
-
+import { auth } from '@Config';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import { setUser } from '@Store/slices/userSlice';
 
@@ -14,7 +13,7 @@ interface PropsType {
 
 const AppContainer: FC<PropsType> = ({ children }) => {
 	const dispatch = useAppDispatch();
-	const [user, loading] = useAuthState(getAuth());
+	const [user, loading] = useAuthState(auth);
 
 	if (user) {
 		dispatch(
@@ -22,6 +21,8 @@ const AppContainer: FC<PropsType> = ({ children }) => {
 				email: user.email,
 				id: user.uid,
 				token: user.refreshToken,
+				displayName: user.displayName || 'Anonymous',
+				photoUrl: user.photoURL || null,
 			}),
 		);
 	}

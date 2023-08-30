@@ -1,13 +1,21 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 
 import { MAX_CHAT_VIEW_PANEL_HEIGHT } from '@Shared/content/constants';
+import { IconOfSend } from '@Shared/content/Icons';
 
-import { TextArea } from '@Components';
+import { ButtonWithIcon, TextArea } from '@Components';
 
 import styles from './ChatView.module.scss';
 
-const ChatView: FC = () => {
-	const [value, setValue] = useState('');
+interface PropsType {
+	value: string;
+	setValue: (value: string) => void;
+}
+
+const ChatView: FC<PropsType> = ({ value, setValue }) => {
+	const handleSendMessage = () => {
+		setValue('');
+	};
 
 	return (
 		<section className={styles['chat_view']} id='123'>
@@ -24,7 +32,11 @@ const ChatView: FC = () => {
 					maxHeight={MAX_CHAT_VIEW_PANEL_HEIGHT}
 				/>
 
-				<div className={styles['chat_view__panel__submit']} />
+				<ButtonWithIcon
+					className={styles['chat_view__panel__submit']}
+					icon={<IconOfSend />}
+					onClick={handleSendMessage}
+				/>
 			</div>
 		</section>
 	);
