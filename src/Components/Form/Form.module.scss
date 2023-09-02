@@ -11,4 +11,9 @@
 	border: 1px solid var(--light-4);
 	background-color: var(--light-3);
 	border-radius: var(--primary-border-radius);
+
+	&__text {
+		display: flex;
+		align-self: center;
+	}
 }

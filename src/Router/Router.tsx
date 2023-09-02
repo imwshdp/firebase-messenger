@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { HomePageContainer } from '@Containers/HomePageContainer';
+import { HomePageContainer } from '@Containers';
 import { LoginPage, NotFoundPage, RegistrationPage } from '@Pages';
 import { RoutesLinks } from '@Router';
 import PrivateLayout from '@Shared/hocs/PrivateLayout';

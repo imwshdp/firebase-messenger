@@ -1,1 +1,1 @@
-export { default as FormOfRegistrationContainer } from './FormOfRegistrationContainer';
+export { default } from './FormOfRegistrationContainer';

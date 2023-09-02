@@ -1,61 +1,71 @@
-import { ChangeEvent, FC, ReactNode, useState } from 'react';
+import { FC, ReactNode, useState } from 'react';
 
-import { Button, FileUploader } from '@Components';
+import { FORM_TYPE } from '@Shared/content/constants';
+import { RegistrationRequestParamsType } from '@Shared/types';
+
+import { Button, FileUploader, Input } from '@Components';
 
 import styles from './Form.module.scss';
 
-type FormType = 'login' | 'register';
 interface PropsType {
 	buttonTitle: string;
-	handleSubmit: (email: string, password: string) => void;
-	handleAlternativeSubmit?: () => void;
-	type: FormType;
+	handleLogin?: (email: string, password: string) => void;
+	handleRegister?: (data: RegistrationRequestParamsType) => void;
+	handleAlternativeLogin?: () => void;
+	type: FORM_TYPE;
 	children?: ReactNode;
 }
 const Form: FC<PropsType> = ({
 	buttonTitle,
-	handleSubmit,
-	handleAlternativeSubmit,
+	// TODO research
+	handleLogin = () => {},
+	handleRegister = () => {},
+	handleAlternativeLogin,
 	type,
 	children,
 }) => {
 	const [email, setEmail] = useState<string>('');
 	const [password, setPassword] = useState<string>('');
+	const [profilePicture, setProfilePicture] = useState<File | null>(null);
+	const [displayName, setDisplayName] = useState<string>('');
 
-	const handleEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
-		setEmail(event.target.value);
-	};
-
-	const handlePasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
-		setPassword(event.target.value);
+	const handleProfilePictureChange = (file: File) => {
+		setProfilePicture(file);
 	};
 
 	const handleLoginClick = () => {
-		handleSubmit(email, password);
+		handleLogin(email, password);
 	};
 
-	const handleGoogleLoginClick = () => {
-		if (handleAlternativeSubmit) handleAlternativeSubmit();
+	const handleRegisterClick = () => {
+		handleRegister({ email, password, displayName, profilePicture });
 	};
+
+	const handleSubmitButtonClick = type === FORM_TYPE.login ? handleLoginClick : handleRegisterClick;
 
 	return (
 		<form className={styles['form']}>
-			<input type='email' value={email} onChange={handleEmailChange} placeholder='Введите почту' />
-			<input
-				type='password'
-				value={password}
-				onChange={handlePasswordChange}
-				placeholder='Введите пароль'
-			/>
+			<Input type='email' value={email} setValue={setEmail} placeholder='Введите почту' />
+			<Input type='password' value={password} setValue={setPassword} placeholder='Введите пароль' />
 
-			{type === 'register' && <FileUploader onChange={() => {}} />}
-
-			<Button onClick={handleLoginClick} title={buttonTitle} />
-
-			{type === 'login' && (
+			{type === FORM_TYPE.register && (
 				<>
-					<b>или</b>
-					<Button onClick={handleGoogleLoginClick} title='Войти с помощью Google' />
+					<Input
+						type='displayName'
+						value={displayName}
+						setValue={setDisplayName}
+						placeholder='Введите отображаемое имя'
+					/>
+					<FileUploader placeholder='Загрузить аватар' onChange={handleProfilePictureChange} />
+				</>
+			)}
+
+			<Button onClick={handleSubmitButtonClick} title={buttonTitle} />
+
+			{type === FORM_TYPE.login && (
+				<>
+					<b className={styles['form__text']}>или</b>
+					<Button onClick={handleAlternativeLogin} title='Войти с помощью Google' />
 				</>
 			)}
 

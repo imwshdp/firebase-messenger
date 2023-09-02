@@ -19,7 +19,7 @@ const Navbar: FC<PropsType> = ({ children, user }) => {
 
 	const [isCollapsed, setIsCollapsed] = useState(false);
 
-	const handleCloseClick = () => setIsCollapsed(previousIsCollapsed => !previousIsCollapsed);
+	const handleCloseClick = () => setIsCollapsed((previousIsCollapsed) => !previousIsCollapsed);
 
 	return (
 		<nav

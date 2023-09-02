@@ -1,6 +1,6 @@
 const config = {
 	trailingComma: 'all',
-	arrowParens: 'avoid',
+	arrowParens: 'always',
 	endOfLine: 'lf',
 	singleQuote: true,
 	jsxSingleQuote: true,

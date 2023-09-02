@@ -1,1 +1,1 @@
-export { default as ChatsPanel } from './ChatsPanel';
+export { default } from './ChatsPanel';

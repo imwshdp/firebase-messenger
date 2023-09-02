@@ -1,7 +1,7 @@
-export { AppContainer } from './AppContainer';
-export { ChatsPanelContainer } from './ChatsPanelContainer';
-export { ChatViewContainer } from './ChatViewContainer';
-export { FormOfLoginContainer } from './FormOfLoginContainer';
-export { FormOfRegistrationContainer } from './FormOfRegistrationContainer';
-export { HomePageContainer } from './HomePageContainer';
-export { NavbarContainer } from './NavbarContainer';
+export { default as AppContainer } from './AppContainer';
+export { default as ChatsPanelContainer } from './ChatsPanelContainer';
+export { default as ChatViewContainer } from './ChatViewContainer';
+export { default as FormOfLoginContainer } from './FormOfLoginContainer';
+export { default as FormOfRegistrationContainer } from './FormOfRegistrationContainer';
+export { default as HomePageContainer } from './HomePageContainer';
+export { default as NavbarContainer } from './NavbarContainer';

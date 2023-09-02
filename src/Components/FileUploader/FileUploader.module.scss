@@ -4,9 +4,10 @@
 	align-items: center;
 
 	gap: var(--secondary-gap);
-	padding: 8px 14px;
+	padding: 8px 16px;
 
 	border: 1px solid black; // TODO add var
+	border-radius: var(--primary-border-radius);
 	cursor: pointer;
 
 	svg {

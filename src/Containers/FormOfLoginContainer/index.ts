@@ -1,1 +1,1 @@
-export { default as FormOfLoginContainer } from './FormOfLoginContainer';
+export { default } from './FormOfLoginContainer';

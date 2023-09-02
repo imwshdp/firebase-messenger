@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Search } from '@Components/Search';
+import { Search } from '@Components';
 
 import styles from './ChatsPanel.module.scss';
 

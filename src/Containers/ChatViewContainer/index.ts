@@ -1,1 +1,1 @@
-export { default as ChatViewContainer } from './ChatViewContainer';
+export { default } from './ChatViewContainer';
