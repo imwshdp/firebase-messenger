@@ -1,3 +1,5 @@
+// User
+
 export type RegistrationRequestParamsType = {
 	email: string;
 	password: string;
@@ -8,4 +10,10 @@ export type RegistrationRequestParamsType = {
 export type LoginRequestParamsType = {
 	email: string;
 	password: string;
+};
+
+// Chats
+
+export type FetchChatsRequestParamsType = {
+	userName: string;
 };

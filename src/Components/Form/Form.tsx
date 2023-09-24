@@ -1,7 +1,7 @@
 import { FC, ReactNode, useState } from 'react';
 
 import { FORM_TYPE } from '@Shared/content/constants';
-import { RegistrationRequestParamsType } from '@Shared/types';
+import { RegistrationRequestParamsType } from '@Shared/model';
 
 import { Button, FileUploader, Input } from '@Components';
 

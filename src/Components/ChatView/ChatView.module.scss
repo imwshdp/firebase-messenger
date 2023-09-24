@@ -3,8 +3,8 @@
 	flex-direction: column;
 	flex: 1;
 
-	gap: var(--primary-gap);
-	padding: var(--primary-padding);
+	gap: var(--primary-offset);
+	padding: var(--primary-offset);
 
 	background-color: var(--light-3);
 	border-radius: var(--primary-border-radius);
@@ -14,8 +14,8 @@
 		flex-direction: column;
 		flex: 1;
 
-		gap: var(--primary-gap);
-		padding: var(--primary-padding);
+		gap: var(--primary-offset);
+		padding: var(--primary-offset);
 	}
 
 	&__panel {
@@ -25,8 +25,8 @@
 		height: fit-content;
 		min-height: 50px;
 
-		gap: var(--primary-gap);
-		padding: var(--secondary-padding);
+		gap: var(--primary-offset);
+		padding: var(--secondary-offset);
 
 		background-color: var(--light-4);
 		border-radius: var(--primary-border-radius);

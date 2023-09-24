@@ -4,8 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { RoutesLinks } from '@Router';
 import { FORM_TYPE } from '@Shared/content/constants';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
-import { RegistrationRequestParamsType } from '@Shared/types';
-import { registerUserFx } from '@Store/slices/user';
+import { RegistrationRequestParamsType } from '@Shared/model';
+import { registerUser } from '@Store/slices/user';
 
 import { Form } from '@Components';
 
@@ -14,7 +14,7 @@ const FormOfRegistrationContainer: FC = () => {
 	const dispatch = useAppDispatch();
 
 	const handleRegister = (data: RegistrationRequestParamsType) => {
-		dispatch(registerUserFx(data))
+		dispatch(registerUser(data))
 			.then(() => {
 				alert('Успешная регистрация');
 			})

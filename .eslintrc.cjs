@@ -39,6 +39,7 @@ module.exports = {
 		'max-len': [2, { code: 120 }],
 		indent: [0, 'tab'],
 		semi: [1, 'always'],
+		'@typescript-eslint/no-explicit-any': [1, { ignoreRestArgs: true }],
 
 		'react/react-in-jsx-scope': 0,
 		'react/jsx-closing-tag-location': 1,

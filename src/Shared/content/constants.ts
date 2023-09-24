@@ -4,3 +4,14 @@ export const enum FORM_TYPE {
 	login,
 	register,
 }
+
+export const DEBOUNCE_DELAY = 1000;
+
+export const DATABASES = {
+	users: 'users',
+	chats: 'chats',
+};
+
+export const ERROR_CODES = {
+	internal: 500,
+};

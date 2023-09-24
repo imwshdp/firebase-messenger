@@ -27,7 +27,7 @@ const TextArea: FC<PropsType> = ({
 	setValue,
 	name,
 	disabled,
-	placeholder = 'Enter text...',
+	placeholder = 'Введите текст...',
 	cols,
 	rows,
 	type,

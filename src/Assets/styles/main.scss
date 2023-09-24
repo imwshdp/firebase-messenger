@@ -26,14 +26,12 @@ html {
 }
 
 :root {
-	--primary-padding: 20px;
-	--secondary-padding: 10px;
-
-	--primary-gap: 20px;
-	--secondary-gap: 10px;
+	--primary-offset: 20px;
+	--secondary-offset: 10px;
 
 	--primary-gap-page: 20px;
 	--primary-padding-page: 40px;
+
 	--primary-border-radius: 10px;
 	--primary-animation-duration: 0.3s;
 

@@ -22,7 +22,7 @@ const ChatView: FC<PropsType> = ({ value, setValue }) => {
 			<div className={styles['chat_view__container']}></div>
 			<div
 				className={styles['chat_view__panel']}
-				style={{ maxHeight: 'MAX_CHAT_VIEW_PANEL_HEIGHT - calc(var(--secondary-padding) * 2)' }}
+				style={{ maxHeight: 'MAX_CHAT_VIEW_PANEL_HEIGHT - calc(var(--secondary-offset) * 2)' }}
 			>
 				<TextArea
 					value={value}

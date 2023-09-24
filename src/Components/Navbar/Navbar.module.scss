@@ -6,7 +6,7 @@
 
 	width: 200px;
 	gap: 20px;
-	padding: var(--primary-padding);
+	padding: var(--primary-offset);
 
 	background-color: var(--light-2);
 	box-shadow: 0 0 2px var(--light-secondary-1) inset;
@@ -25,6 +25,7 @@
 		width: 40px;
 		height: 40px;
 
+		border: 1px solid var(--light-secondary-1);
 		border-radius: 50%;
 	}
 

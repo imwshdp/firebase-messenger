@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { RoutesLinks } from '@Router';
 import { FORM_TYPE } from '@Shared/content/constants';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
-import { loginWithEmailPasswordFx, loginWithGoogleFx } from '@Store/slices/user';
+import { loginWithEmailPassword, loginWithGoogle } from '@Store/slices/user';
 
 import { Form } from '@Components';
 
@@ -13,13 +13,13 @@ const FormOfLoginContainer: FC = () => {
 	const navigate = useNavigate();
 
 	const handleLogin = (email: string, password: string) => {
-		dispatch(loginWithEmailPasswordFx({ email, password }))
+		dispatch(loginWithEmailPassword({ email, password }))
 			.then(() => navigate(RoutesLinks.root, { replace: true }))
 			.catch(alert);
 	};
 
 	const handleGoogleLogin = () => {
-		dispatch(loginWithGoogleFx())
+		dispatch(loginWithGoogle())
 			.then(() => navigate(RoutesLinks.root))
 			.catch(alert);
 	};

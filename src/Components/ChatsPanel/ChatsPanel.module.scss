@@ -6,10 +6,47 @@
 	min-width: 100px;
 	width: 300px;
 
-	gap: var(--primary-gap);
+	gap: var(--primary-offset);
 
 	border: 1px solid black;
 	border-radius: var(--primary-border-radius);
 
 	overflow: hidden;
+
+	&__list {
+		display: flex;
+		flex-direction: column;
+
+		gap: var(--secondary-offset);
+
+		// TODO var
+		border: 1px solid rgb(59, 146, 95);
+
+		overflow: auto;
+		scrollbar-gutter: stable;
+
+		&__chat {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+
+			gap: var(--secondary-offset);
+			padding: var(--secondary-offset);
+
+			background-color: var(--light-2);
+			border-radius: var(--primary-border-radius);
+
+			&__profile-picture {
+				display: block;
+
+				width: 40px;
+				height: 40px;
+
+				padding: var(--secondary-offset);
+
+				border: 1px solid var(--light-secondary-1);
+				border-radius: 50%;
+			}
+		}
+	}
 }

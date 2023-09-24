@@ -1,37 +1,41 @@
-import { FC, ReactNode } from 'react';
+import { FC, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
+import App from '@App';
 import { auth } from '@Config';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
-import { setUser } from '@Store/slices/user/userSlice';
+import useAppSelector from '@Shared/hooks/useAppSelector';
+import { fetchChats } from '@Store/slices/chats';
+import { setUser } from '@Store/slices/user/slice';
 
 import { Loader } from '@Components';
 
-interface PropsType {
-	children: ReactNode;
-}
-
-const AppContainer: FC<PropsType> = ({ children }) => {
+const AppContainer: FC = () => {
+	fetchChats();
 	const dispatch = useAppDispatch();
+
+	const isLoadingViaLogin = useAppSelector((state) => state.user.loading);
 	const [user, loading] = useAuthState(auth);
+	const isLoading = loading || isLoadingViaLogin;
 
-	if (user) {
-		const { email, uid, refreshToken, displayName } = user;
+	useEffect(() => {
+		if (user) {
+			const { email, uid, displayName } = user;
 
-		if (email && uid && refreshToken && displayName) {
-			dispatch(
-				setUser({
-					email,
-					uid,
-					token: refreshToken,
-					displayName: displayName || 'Anonymous',
-					photoUrl: user.photoURL || null,
-				}),
-			);
+			if (email && uid && displayName) {
+				dispatch(
+					setUser({
+						email,
+						uid,
+						displayName: displayName || 'Anonymous',
+						photoUrl: user.photoURL || null,
+					}),
+				);
+			}
 		}
-	}
+	}, [user]);
 
-	return <>{loading ? <Loader /> : children}</>;
+	return <>{isLoading ? <Loader /> : <App />}</>;
 };
 
 export default AppContainer;

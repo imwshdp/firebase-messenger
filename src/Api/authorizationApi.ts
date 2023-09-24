@@ -10,9 +10,9 @@ import { doc, setDoc } from 'firebase/firestore/lite';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 
 import { auth, db, storage } from '@Config';
-import { LoginRequestParamsType, RegistrationRequestParamsType } from '@Shared/types';
+import { LoginRequestParamsType, RegistrationRequestParamsType } from '@Shared/model';
 
-interface ISetDocUser {
+interface SetDocUser {
 	uid: string;
 	displayName: string;
 	email: string;
@@ -28,11 +28,9 @@ export const registerNewUser = async ({
 	const response = await createUserWithEmailAndPassword(auth, email, password);
 
 	// TODO handle errors
-	console.log(response);
-
 	const { user } = response;
 
-	const userData: ISetDocUser = {
+	const userData: SetDocUser = {
 		uid: user.uid,
 		displayName,
 		email,
@@ -58,10 +56,10 @@ export const registerNewUser = async ({
 		});
 	}
 
-	// create user on firestore
+	// create user in firestore
 	await setDoc(doc(db, 'users', user.uid), userData);
 
-	// create empty user chats on firestore
+	// create empty user chats in firestore
 	await setDoc(doc(db, 'userChats', user.uid), {});
 };
 

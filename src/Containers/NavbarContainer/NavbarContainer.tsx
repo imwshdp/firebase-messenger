@@ -5,7 +5,7 @@ import { auth } from '@Config';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import useAppSelector from '@Shared/hooks/useAppSelector';
 import { useAuth } from '@Shared/hooks/useAuth';
-import { removeUser } from '@Store/slices/user/userSlice';
+import { removeUser } from '@Store/slices/user/slice';
 
 import { Navbar } from '@Components';
 

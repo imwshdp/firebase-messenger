@@ -3,7 +3,7 @@ import { FC, ReactNode, useState } from 'react';
 import clsx from 'clsx';
 
 import { IconOfArrow } from '@Shared/content/Icons';
-import { IUser } from '@Shared/types';
+import { User } from '@Shared/model';
 
 import { ButtonWithIcon } from '@Components';
 
@@ -11,7 +11,7 @@ import styles from './Navbar.module.scss';
 
 interface PropsType {
 	children: ReactNode;
-	user: IUser;
+	user: User;
 }
 
 const Navbar: FC<PropsType> = ({ children, user }) => {
