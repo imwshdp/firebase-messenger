@@ -15,7 +15,7 @@ interface PropsType {
 }
 
 const Navbar: FC<PropsType> = ({ children, user }) => {
-	const { displayName, photoUrl } = user;
+	const { displayName, photoURL } = user;
 
 	const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -30,10 +30,10 @@ const Navbar: FC<PropsType> = ({ children, user }) => {
 			<>
 				{children}
 				{displayName && <span>{displayName}</span>}
-				{photoUrl && (
+				{photoURL && (
 					<img
 						className={styles['navbar__profile-picture']}
-						src={photoUrl}
+						src={photoURL}
 						alt='User Profile Photo'
 					/>
 				)}

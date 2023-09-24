@@ -1,5 +1,6 @@
 export { default as Button } from './Button';
 export { default as ButtonWithIcon } from './ButtonWithIcon';
+export { default as ChatLink } from './ChatLink';
 export { default as ChatsPanel } from './ChatsPanel';
 export { default as ChatView } from './ChatView';
 export { default as FileUploader } from './FileUploader';

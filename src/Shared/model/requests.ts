@@ -1,5 +1,7 @@
 // User
 
+import { UserChatInfo } from './model';
+
 export type RegistrationRequestParamsType = {
 	email: string;
 	password: string;
@@ -14,6 +16,11 @@ export type LoginRequestParamsType = {
 
 // Chats
 
-export type FetchChatsRequestParamsType = {
+export type FilterChatsRequestParamsType = {
 	userName: string;
+};
+
+export type OpenChatWithUserRequestParamsType = {
+	currentUser: UserChatInfo;
+	chatUser: UserChatInfo;
 };

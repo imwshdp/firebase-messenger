@@ -3,8 +3,8 @@
 export interface User {
 	uid: string;
 	email: string;
-	displayName: string | null;
-	photoUrl: string | null;
+	displayName: string;
+	photoURL: string | null;
 }
 
 export interface UserState extends User {
@@ -18,4 +18,10 @@ export interface ChatsState {
 	chats: User[];
 	loading: boolean;
 	error: string | null;
+}
+
+export interface UserChatInfo {
+	uid: string;
+	displayName: string;
+	photoURL: string | null;
 }

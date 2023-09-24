@@ -7,7 +7,7 @@ const initialState: UserState = {
 	email: '',
 	uid: '',
 	displayName: '',
-	photoUrl: null,
+	photoURL: null,
 
 	loading: false,
 	error: null,

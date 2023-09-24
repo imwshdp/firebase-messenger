@@ -1,0 +1,33 @@
+.chat {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
+	gap: var(--secondary-offset);
+	padding: var(--secondary-offset);
+
+	background-color: var(--light-2);
+	border-radius: var(--primary-border-radius);
+
+	transition: background-color var(--primary-animation-duration) ease-in;
+	cursor: pointer;
+
+	&:hover {
+		background-color: var(--light-3);
+	}
+
+	&__profile-picture {
+		display: block;
+
+		width: 40px;
+		height: 40px;
+
+		background-color: var(--light-1);
+		border: 1px solid var(--light-secondary-1);
+		border-radius: 50%;
+
+		&__icon {
+			padding: var(--secondary-offset);
+		}
+	}
+}

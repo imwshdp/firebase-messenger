@@ -19,12 +19,12 @@ export const loginWithEmailPassword = createAsyncThunk<
 	const response = await ApiService.auth.login(data);
 
 	if (!response) {
-		rejectWithValue(`${ERROR_CODES.internal}: Unable to log in. Please try later.`);
+		rejectWithValue(`${ERROR_CODES.internal}: Unable to log in. Please try again later.`);
 	}
 
 	const { user } = response;
 	const { email, uid, displayName, photoURL } = user;
-	return { email, uid, displayName, photoUrl: photoURL } as User;
+	return { email, uid, displayName, photoURL } as User;
 });
 
 export const loginWithGoogle = createAsyncThunk<User, void, RejectWithValueType>(
@@ -33,11 +33,11 @@ export const loginWithGoogle = createAsyncThunk<User, void, RejectWithValueType>
 		const response = await ApiService.auth.loginByGoogle();
 
 		if (!response) {
-			rejectWithValue(`${ERROR_CODES.internal}: Unable to log in. Please try later.`);
+			rejectWithValue(`${ERROR_CODES.internal}: Unable to log in. Please try again later.`);
 		}
 
 		const { user } = response;
 		const { email, uid, displayName, photoURL } = user;
-		return { email, uid, displayName, photoUrl: photoURL } as User;
+		return { email, uid, displayName, photoURL } as User;
 	},
 );

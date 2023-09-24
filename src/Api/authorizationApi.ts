@@ -6,10 +6,11 @@ import {
 	updateProfile,
 	UserCredential,
 } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore/lite';
+import { collection, doc, setDoc } from 'firebase/firestore/lite';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 
 import { auth, db, storage } from '@Config';
+import { DATABASES } from '@Shared/content/constants';
 import { LoginRequestParamsType, RegistrationRequestParamsType } from '@Shared/model';
 
 interface SetDocUser {
@@ -57,10 +58,12 @@ export const registerNewUser = async ({
 	}
 
 	// create user in firestore
-	await setDoc(doc(db, 'users', user.uid), userData);
+	const usersRef = collection(db, DATABASES.users);
+	await setDoc(doc(usersRef, user.uid), userData);
 
 	// create empty user chats in firestore
-	await setDoc(doc(db, 'userChats', user.uid), {});
+	const userChatsRef = collection(db, DATABASES.usersChats);
+	await setDoc(doc(userChatsRef, user.uid), {});
 };
 
 export const loginWithEmailPassword = async ({

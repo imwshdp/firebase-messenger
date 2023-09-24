@@ -11,10 +11,10 @@ import { setUser } from '@Store/slices/user/slice';
 import { Loader } from '@Components';
 
 const AppContainer: FC = () => {
-	fetchChats();
 	const dispatch = useAppDispatch();
 
 	const isLoadingViaLogin = useAppSelector((state) => state.user.loading);
+
 	const [user, loading] = useAuthState(auth);
 	const isLoading = loading || isLoadingViaLogin;
 
@@ -27,13 +27,17 @@ const AppContainer: FC = () => {
 					setUser({
 						email,
 						uid,
-						displayName: displayName || 'Anonymous',
-						photoUrl: user.photoURL || null,
+						displayName: displayName,
+						photoURL: user.photoURL || null,
 					}),
 				);
 			}
 		}
 	}, [user]);
+
+	useEffect(() => {
+		fetchChats();
+	}, []);
 
 	return <>{isLoading ? <Loader /> : <App />}</>;
 };
