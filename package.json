@@ -10,7 +10,8 @@
 		"lint:prepend": "yarn add -D eslint && yarn add -D eslint-plugin-prettier",
 		"lint:fix": "eslint -c .eslintrc.cjs . --ext .jsx,.js,.ts,.tsx --quiet --report-unused-disable-directives --fix --ignore-path ./.gitignore",
 		"lint:format": "prettier --log-level warn --write \"./**/*.{js,jsx,ts,tsx,css,scss,md,json}\" ",
-		"lint": "yarn run lint:format && yarn run lint:fix"
+		"lint": "yarn run lint:format && yarn run lint:fix",
+		"prepare": "husky install"
 	},
 	"lint-staged": {
 		"*.{js,jsx,ts,tsx,json}": [

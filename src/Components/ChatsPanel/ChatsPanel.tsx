@@ -35,7 +35,6 @@ const ChatsPanel: FC<PropsType> = ({ searchValue, setSearchValue, chats, users, 
 			<Search value={searchValue} setValue={handleSearch} disabled={isLoading} ref={inputRef} />
 			<section className={styles['chats__list']}>
 				{chats.map(({ userInfo }) => (
-					// TODO swap containers
 					<ChatLinkContainer
 						key={userInfo.uid}
 						// TODO add anon as default to store
