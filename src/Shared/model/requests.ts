@@ -1,6 +1,6 @@
 // User
 
-import { UserChatInfo } from './model';
+import { UserInfo } from './model';
 
 export type RegistrationRequestParamsType = {
 	email: string;
@@ -21,6 +21,6 @@ export type FilterChatsRequestParamsType = {
 };
 
 export type OpenChatWithUserRequestParamsType = {
-	currentUser: UserChatInfo;
-	chatUser: UserChatInfo;
+	currentUser: UserInfo;
+	chatUser: UserInfo;
 };

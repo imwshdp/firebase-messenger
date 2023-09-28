@@ -6,7 +6,7 @@ import {
 	updateProfile,
 	UserCredential,
 } from 'firebase/auth';
-import { collection, doc, setDoc } from 'firebase/firestore/lite';
+import { collection, doc, setDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 
 import { auth, db, storage } from '@Config';

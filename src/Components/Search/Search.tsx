@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from 'react';
+import { ChangeEvent, forwardRef } from 'react';
 
 import styles from './Search.module.scss';
 
@@ -9,7 +9,10 @@ interface PropsType {
 	disabled?: boolean;
 }
 
-const Search: FC<PropsType> = ({ value, setValue, placeholder = 'Введите текст...', disabled }) => {
+const Search = forwardRef<HTMLInputElement, PropsType>(function Search(
+	{ value, setValue, placeholder = 'Введите текст...', disabled },
+	ref,
+) {
 	const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
 		setValue(event.target.value);
 	};
@@ -22,8 +25,9 @@ const Search: FC<PropsType> = ({ value, setValue, placeholder = 'Введите 
 			className={styles['search']}
 			placeholder={placeholder}
 			disabled={disabled}
+			ref={ref}
 		/>
 	);
-};
+});
 
 export default Search;

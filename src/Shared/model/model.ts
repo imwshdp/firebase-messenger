@@ -1,10 +1,15 @@
-// User
+// General
 
-export interface User {
+export interface UserInfo {
 	uid: string;
-	email: string;
 	displayName: string;
 	photoURL: string | null;
+}
+
+// User
+
+export interface User extends UserInfo {
+	email: string;
 }
 
 export interface UserState extends User {
@@ -14,14 +19,25 @@ export interface UserState extends User {
 
 // Chats
 
+export interface UserChatInfo {
+	id: string;
+	date: {
+		nanoseconds: string;
+		seconds: string;
+	};
+	userInfo: UserInfo;
+}
+
 export interface ChatsState {
-	chats: User[];
+	chats: UserChatInfo[];
 	loading: boolean;
 	error: string | null;
 }
 
-export interface UserChatInfo {
-	uid: string;
-	displayName: string;
-	photoURL: string | null;
+// Users
+
+export interface UsersState {
+	users: UserInfo[];
+	loading: boolean;
+	error: string | null;
 }

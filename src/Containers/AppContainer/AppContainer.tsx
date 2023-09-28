@@ -5,7 +5,6 @@ import App from '@App';
 import { auth } from '@Config';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import useAppSelector from '@Shared/hooks/useAppSelector';
-import { fetchChats } from '@Store/slices/chats';
 import { setUser } from '@Store/slices/user/slice';
 
 import { Loader } from '@Components';
@@ -34,10 +33,6 @@ const AppContainer: FC = () => {
 			}
 		}
 	}, [user]);
-
-	useEffect(() => {
-		fetchChats();
-	}, []);
 
 	return <>{isLoading ? <Loader /> : <App />}</>;
 };

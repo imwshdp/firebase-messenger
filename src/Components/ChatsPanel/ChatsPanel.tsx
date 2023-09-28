@@ -1,7 +1,7 @@
-import { FC } from 'react';
+import { FC, useEffect, useRef } from 'react';
 
 import { ChatLinkContainer } from '@Containers';
-import { User } from '@Shared/model';
+import { UserChatInfo, UserInfo } from '@Shared/model';
 
 import { Search } from '@Components';
 
@@ -11,20 +11,43 @@ interface PropsType {
 	searchValue: string;
 	setSearchValue: (value: string) => void;
 
-	chats: User[];
+	chats: UserChatInfo[];
+	users: UserInfo[];
+
 	isLoading: boolean;
 }
 
-const ChatsPanel: FC<PropsType> = ({ searchValue, setSearchValue, chats, isLoading }) => {
+const ChatsPanel: FC<PropsType> = ({ searchValue, setSearchValue, chats, users, isLoading }) => {
+	const inputRef = useRef<HTMLInputElement | null>(null);
+
 	const handleSearch = (newValue: string) => {
 		setSearchValue(newValue);
 	};
 
+	useEffect(() => {
+		if (!isLoading) {
+			inputRef.current?.focus();
+		}
+	}, [isLoading]);
+
 	return (
 		<aside className={styles['chats']}>
-			<Search value={searchValue} setValue={handleSearch} disabled={isLoading} />
+			<Search value={searchValue} setValue={handleSearch} disabled={isLoading} ref={inputRef} />
 			<section className={styles['chats__list']}>
-				{chats.map(({ uid, displayName, photoURL }) => (
+				{chats.map(({ userInfo }) => (
+					// TODO swap containers
+					<ChatLinkContainer
+						key={userInfo.uid}
+						// TODO add anon as default to store
+						uid={userInfo.uid}
+						displayName={userInfo.displayName}
+						photoURL={userInfo.photoURL || null}
+					/>
+				))}
+
+				<div className={styles['chats__list__separator']} />
+
+				{users.map(({ uid, displayName, photoURL }) => (
 					<ChatLinkContainer
 						key={uid}
 						// TODO add anon as default to store

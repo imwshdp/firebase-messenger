@@ -26,6 +26,13 @@
 		overflow: auto;
 		scrollbar-gutter: stable;
 
+		&__separator {
+			height: 1px;
+			width: 100%;
+
+			background-color: black;
+		}
+
 		&__overlay {
 			position: absolute;
 			top: 0;

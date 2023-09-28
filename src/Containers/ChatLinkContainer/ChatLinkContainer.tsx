@@ -14,7 +14,6 @@ interface PropsType {
 
 const ChatLinkContainer: FC<PropsType> = (props) => {
 	const dispatch = useAppDispatch();
-
 	const currentUser = useAppSelector((state) => state.user);
 
 	const handleClick = () => {

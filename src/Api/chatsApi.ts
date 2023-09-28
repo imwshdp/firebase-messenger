@@ -1,39 +1,8 @@
-import {
-	collection,
-	doc,
-	DocumentData,
-	getDoc,
-	getDocs,
-	query,
-	serverTimestamp,
-	setDoc,
-	updateDoc,
-	where,
-} from 'firebase/firestore/lite';
+import { collection, doc, getDoc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 
 import { db } from '@Config';
 import { DATABASES } from '@Shared/content/constants';
-import { FilterChatsRequestParamsType, OpenChatWithUserRequestParamsType } from '@Shared/model';
-
-export const fetchChats = async () => {
-	const result: DocumentData[] = [];
-	const usersRef = collection(db, DATABASES.users);
-	const usersQuery = query(usersRef);
-	const querySnapshot = await getDocs(usersQuery);
-	querySnapshot.forEach((document) => result.push(document.data()));
-	return result;
-};
-
-export const searchChats = async ({ userName }: FilterChatsRequestParamsType) => {
-	const result: DocumentData[] = [];
-	const usersRef = collection(db, DATABASES.users);
-	const usersQuery = userName
-		? query(usersRef, where('dispayName', '==', userName))
-		: query(usersRef);
-	const querySnapshot = await getDocs(usersQuery);
-	querySnapshot.forEach((document) => result.push(document.data()));
-	return result;
-};
+import { OpenChatWithUserRequestParamsType } from '@Shared/model';
 
 export const openChat = async ({ currentUser, chatUser }: OpenChatWithUserRequestParamsType) => {
 	const {
@@ -56,6 +25,7 @@ export const openChat = async ({ currentUser, chatUser }: OpenChatWithUserReques
 
 	// create chat history and userChat for both users if chat doesn't exist yet
 	if (!response.exists()) {
+		console.log('зашли в создание');
 		await setDoc(doc(chatsRef, combinedId), {
 			messages: [],
 		});
@@ -81,4 +51,6 @@ export const openChat = async ({ currentUser, chatUser }: OpenChatWithUserReques
 			[`${combinedId}.date`]: serverTimestamp(),
 		});
 	}
+
+	console.log('скипнули создание');
 };

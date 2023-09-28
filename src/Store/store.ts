@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { default as chatsReducer } from './slices/chats/slice';
-import { default as userReducer } from './slices/user/slice';
+import { default as chatsReducer } from './slices/chats';
+import { default as userReducer } from './slices/user';
+import { default as usersReducer } from './slices/users';
 
 export const store = configureStore({
 	reducer: {
 		user: userReducer,
 		chats: chatsReducer,
+		users: usersReducer,
 	},
 });
 
