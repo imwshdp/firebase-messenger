@@ -16,3 +16,8 @@ export const DATABASES = {
 export const ERROR_CODES = {
 	internal: 500,
 };
+
+export enum LinkListType {
+	Users,
+	Chats,
+}

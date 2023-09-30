@@ -2,7 +2,7 @@ import { FC, ReactNode, useState } from 'react';
 
 import clsx from 'clsx';
 
-import { IconOfArrow } from '@Shared/content/Icons';
+import { IconOfArrow, IconOfUser } from '@Shared/content/Icons';
 import { User } from '@Shared/model';
 
 import { ButtonWithIcon } from '@Components';
@@ -30,11 +30,18 @@ const Navbar: FC<PropsType> = ({ children, user }) => {
 			<>
 				{children}
 				{displayName && <span>{displayName}</span>}
-				{photoURL && (
+				{photoURL ? (
 					<img
 						className={styles['navbar__profile-picture']}
 						src={photoURL}
 						alt='User Profile Photo'
+					/>
+				) : (
+					<IconOfUser
+						className={clsx(
+							styles['navbar__profile-picture'],
+							styles['navbar__profile-picture__icon'],
+						)}
 					/>
 				)}
 				<ButtonWithIcon

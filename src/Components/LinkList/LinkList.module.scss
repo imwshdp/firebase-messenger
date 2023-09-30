@@ -1,0 +1,26 @@
+.list {
+	position: relative;
+
+	&__items {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+
+		gap: var(--secondary-offset);
+
+		overflow: auto;
+		scrollbar-gutter: stable;
+	}
+
+	&__overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		width: 100%;
+		height: 100%;
+
+		background-color: rgb(255, 255, 255, 0.5);
+	}
+}

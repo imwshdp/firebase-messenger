@@ -16,6 +16,7 @@ export const fetchChats = async () => {
 export const searchChats = async ({ userName }: FilterChatsRequestParamsType) => {
 	const result: DocumentData[] = [];
 	const usersRef = collection(db, DATABASES.users);
+
 	const usersQuery = userName
 		? query(usersRef, where('displayName', '==', userName))
 		: query(usersRef);

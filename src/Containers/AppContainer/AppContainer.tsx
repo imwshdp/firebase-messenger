@@ -5,7 +5,7 @@ import App from '@App';
 import { auth } from '@Config';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import useAppSelector from '@Shared/hooks/useAppSelector';
-import { setUser } from '@Store/slices/user/slice';
+import { setUser } from '@Store/slices/user';
 
 import { Loader } from '@Components';
 

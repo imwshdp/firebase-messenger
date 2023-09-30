@@ -8,6 +8,7 @@ import { DATABASES } from '@Shared/content/constants';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import useAppSelector from '@Shared/hooks/useAppSelector';
 import { setChats } from '@Store/slices/chats';
+import { resetChat } from '@Store/slices/messages';
 import { fetchUsers } from '@Store/slices/users';
 
 const HomePageContainer: FC = () => {
@@ -31,6 +32,10 @@ const HomePageContainer: FC = () => {
 
 	useEffect(() => {
 		dispatch(fetchUsers());
+
+		return () => {
+			dispatch(resetChat());
+		};
 	}, []);
 
 	return <HomePage />;

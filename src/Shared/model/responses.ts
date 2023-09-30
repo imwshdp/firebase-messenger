@@ -7,12 +7,12 @@ export type LoginResponseType = {
 	profilePicture: File | null;
 };
 
-interface UserChatSnapshotInfo {
+type UserChatSnapshotInfo = {
 	date: {
 		nanoseconds: string;
 		seconds: string;
 	};
 	userInfo: UserInfo;
-}
+};
 
 export type UserChatsSnapshotResponseType = [string, UserChatSnapshotInfo];

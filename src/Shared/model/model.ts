@@ -41,3 +41,18 @@ export interface UsersState {
 	loading: boolean;
 	error: string | null;
 }
+
+// Messages
+
+export interface MessagesState {
+	chatId: string | null;
+	user: UserInfo | null;
+	// TODO fix any
+	messages: Array<any>;
+	error: string | null;
+}
+
+export interface MessageState {
+	text: string;
+	images: File[];
+}

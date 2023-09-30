@@ -9,6 +9,32 @@
 	background-color: var(--light-3);
 	border-radius: var(--primary-border-radius);
 
+	&__header {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+
+		height: 60px;
+
+		padding: 0 var(--secondary-offset);
+		gap: var(--secondary-offset);
+
+		background-color: var(--light-4);
+		border-radius: var(--primary-border-radius);
+
+		&__profile-picture {
+			display: block;
+
+			width: 40px;
+			height: 40px;
+
+			object-fit: cover;
+
+			border: 1px solid var(--light-secondary-1);
+			border-radius: 50%;
+		}
+	}
+
 	&__container {
 		display: flex;
 		flex-direction: column;
@@ -34,11 +60,6 @@
 		& > * {
 			display: flex;
 			flex: 1;
-		}
-
-		&__submit {
-			display: flex;
-			align-self: end;
 		}
 	}
 }

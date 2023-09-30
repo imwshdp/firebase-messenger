@@ -2,6 +2,7 @@ import { collection, doc, getDoc, serverTimestamp, setDoc, updateDoc } from 'fir
 
 import { db } from '@Config';
 import { DATABASES } from '@Shared/content/constants';
+import { getCombinedId } from '@Shared/helpers/getCombinedId';
 import { OpenChatWithUserRequestParamsType } from '@Shared/model';
 
 export const openChat = async ({ currentUser, chatUser }: OpenChatWithUserRequestParamsType) => {
@@ -17,15 +18,13 @@ export const openChat = async ({ currentUser, chatUser }: OpenChatWithUserReques
 		photoURL: currentUserPhotoURL,
 	} = currentUser;
 
-	const combinedId =
-		currentUserId > chatUserId ? currentUserId + chatUserId : chatUserId + currentUserId;
+	const combinedId = getCombinedId(currentUserId, chatUserId);
 
 	const chatsRef = collection(db, DATABASES.chats);
 	const response = await getDoc(doc(chatsRef, combinedId));
 
 	// create chat history and userChat for both users if chat doesn't exist yet
 	if (!response.exists()) {
-		console.log('зашли в создание');
 		await setDoc(doc(chatsRef, combinedId), {
 			messages: [],
 		});
@@ -51,6 +50,4 @@ export const openChat = async ({ currentUser, chatUser }: OpenChatWithUserReques
 			[`${combinedId}.date`]: serverTimestamp(),
 		});
 	}
-
-	console.log('скипнули создание');
 };

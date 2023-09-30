@@ -21,7 +21,7 @@ const userSlice = createSlice({
 			return { ...state, ...payload };
 		},
 		removeUser() {
-			return { ...initialState };
+			return initialState;
 		},
 	},
 	extraReducers: (builder) => {

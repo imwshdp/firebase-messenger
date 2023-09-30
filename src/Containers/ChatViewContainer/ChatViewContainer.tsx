@@ -1,15 +1,13 @@
-import { useState } from 'react';
+import { FC } from 'react';
+
+import useAppSelector from '@Shared/hooks/useAppSelector';
 
 import { ChatView } from '@Components';
 
-const ChatViewContainer = () => {
-	const [value, setValue] = useState(''); // TODO use store
+const ChatViewContainer: FC = () => {
+	const chatUser = useAppSelector((state) => state.messages.user);
 
-	const handleSetValue = (newValue: string) => {
-		setValue(newValue);
-	};
-
-	return <ChatView value={value} setValue={handleSetValue} />;
+	return <ChatView chatUser={chatUser} />;
 };
 
 export default ChatViewContainer;

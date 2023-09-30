@@ -1,43 +1,38 @@
 import { FC } from 'react';
 
-import { MAX_CHAT_VIEW_PANEL_HEIGHT } from '@Shared/content/constants';
-import { IconOfSend } from '@Shared/content/Icons';
-
-import { ButtonWithIcon, TextArea } from '@Components';
+import { MessagesHistoryContainer, NewMessageViewContainer } from '@Containers';
+import { UserInfo } from '@Shared/model';
 
 import styles from './ChatView.module.scss';
 
 interface PropsType {
-	value: string;
-	setValue: (value: string) => void;
+	chatUser: UserInfo | null;
 }
 
-const ChatView: FC<PropsType> = ({ value, setValue }) => {
-	const handleSendMessage = () => {
-		setValue('');
-	};
-
+const ChatView: FC<PropsType> = ({ chatUser }) => {
 	return (
-		<section className={styles['chat_view']} id='123'>
-			<div className={styles['chat_view__container']}></div>
-			<div
+		<section className={styles['chat_view']}>
+			<header className={styles['chat_view__header']}>
+				{chatUser && (
+					<>
+						<img
+							className={styles['chat_view__header__profile-picture']}
+							// TODO handle ?
+							src={chatUser.photoURL || ''}
+							alt='User Profile Photo'
+						/>
+						<h1>Conversation with</h1>
+						<b>{chatUser.displayName}</b>
+					</>
+				)}
+			</header>
+			<MessagesHistoryContainer className={styles['chat_view__container']} />
+			<footer
 				className={styles['chat_view__panel']}
 				style={{ maxHeight: 'MAX_CHAT_VIEW_PANEL_HEIGHT - calc(var(--secondary-offset) * 2)' }}
 			>
-				<TextArea
-					value={value}
-					setValue={setValue}
-					type={'transparent'}
-					resizable
-					maxHeight={MAX_CHAT_VIEW_PANEL_HEIGHT}
-				/>
-
-				<ButtonWithIcon
-					className={styles['chat_view__panel__submit']}
-					icon={<IconOfSend />}
-					onClick={handleSendMessage}
-				/>
-			</div>
+				<NewMessageViewContainer />
+			</footer>
 		</section>
 	);
 };
