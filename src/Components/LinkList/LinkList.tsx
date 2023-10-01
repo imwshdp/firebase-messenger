@@ -17,12 +17,14 @@ const LinkList: FC<PropsType> = ({ type, items, isLoading }) => {
 		<div className={styles['list']}>
 			<div className={styles['list__items']}>
 				{type === LinkListType.Chats &&
-					(items as UserChatInfo[]).map(({ id, userInfo }) => (
+					(items as UserChatInfo[]).map(({ id, userInfo, lastMessage, date }) => (
 						<ChatLinkContainer
 							key={id}
 							uid={userInfo.uid}
 							displayName={userInfo.displayName}
 							photoURL={userInfo.photoURL || null}
+							lastMessage={lastMessage}
+							date={date}
 						/>
 					))}
 

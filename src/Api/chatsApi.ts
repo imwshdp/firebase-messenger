@@ -1,9 +1,23 @@
-import { collection, doc, getDoc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
+import {
+	arrayUnion,
+	collection,
+	doc,
+	getDoc,
+	serverTimestamp,
+	setDoc,
+	updateDoc,
+} from 'firebase/firestore';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import { v4 } from 'uuid';
 
-import { db } from '@Config';
+import { db, storage } from '@Config';
 import { DATABASES } from '@Shared/content/constants';
 import { getCombinedId } from '@Shared/helpers/getCombinedId';
-import { OpenChatWithUserRequestParamsType } from '@Shared/model';
+import {
+	OpenChatWithUserRequestParamsType,
+	SendMessageRequestParamsType,
+	UpdateChatRequestParamsType,
+} from '@Shared/model';
 
 export const openChat = async ({ currentUser, chatUser }: OpenChatWithUserRequestParamsType) => {
 	const {
@@ -50,4 +64,59 @@ export const openChat = async ({ currentUser, chatUser }: OpenChatWithUserReques
 			[`${combinedId}.date`]: serverTimestamp(),
 		});
 	}
+};
+
+export const sendMessage = async ({
+	chatId,
+	messageText,
+	messageFiles,
+	senderId,
+	date,
+}: SendMessageRequestParamsType) => {
+	if (messageFiles.length) {
+		const filesURL = [];
+
+		for (const messageFile of messageFiles) {
+			const storageRef = ref(storage, v4());
+			await uploadBytesResumable(storageRef, messageFile);
+			const fileURL = await getDownloadURL(storageRef);
+			filesURL.push(fileURL);
+		}
+
+		await updateDoc(doc(db, DATABASES.chats, chatId), {
+			messages: arrayUnion({
+				uid: v4(),
+				text: messageText,
+				files: filesURL,
+				senderId,
+				date,
+			}),
+		});
+	} else {
+		await updateDoc(doc(db, DATABASES.chats, chatId), {
+			messages: arrayUnion({
+				uid: v4(),
+				text: messageText,
+				senderId,
+				date,
+			}),
+		});
+	}
+};
+
+export const updateChat = async ({
+	senderId,
+	userId,
+	chatId,
+	text,
+}: UpdateChatRequestParamsType) => {
+	await updateDoc(doc(db, DATABASES.usersChats, senderId), {
+		[`${chatId}.lastMessage`]: { text },
+		[`${chatId}.date`]: serverTimestamp(),
+	});
+
+	await updateDoc(doc(db, DATABASES.usersChats, userId), {
+		[`${chatId}.lastMessage`]: { text },
+		[`${chatId}.date`]: serverTimestamp(),
+	});
 };

@@ -7,5 +7,4 @@ export { default as FormOfRegistrationContainer } from './FormOfRegistrationCont
 export { default as HomePageContainer } from './HomePageContainer';
 export { default as MessagesHistoryContainer } from './MessagesHistoryContainer';
 export { default as NavbarContainer } from './NavbarContainer';
-export { default as NewMessageViewContainer } from './NewMessageViewContainer';
 export { default as UserListWithSearchContainer } from './UserListWithSearchContainer';

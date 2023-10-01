@@ -1,12 +1,10 @@
-// General
+// User
 
 export interface UserInfo {
 	uid: string;
 	displayName: string;
 	photoURL: string | null;
 }
-
-// User
 
 export interface User extends UserInfo {
 	email: string;
@@ -26,6 +24,9 @@ export interface UserChatInfo {
 		seconds: string;
 	};
 	userInfo: UserInfo;
+	lastMessage: {
+		text: string;
+	};
 }
 
 export interface ChatsState {
@@ -44,15 +45,25 @@ export interface UsersState {
 
 // Messages
 
+export interface Message {
+	uid: string;
+	text: string;
+	files?: string[];
+	senderId: string;
+	date: {
+		nanoseconds: string;
+		seconds: string;
+	};
+}
+
 export interface MessagesState {
 	chatId: string | null;
 	user: UserInfo | null;
-	// TODO fix any
-	messages: Array<any>;
+	messages: Array<Message>;
 	error: string | null;
 }
 
 export interface MessageState {
 	text: string;
-	images: File[];
+	files: string[];
 }

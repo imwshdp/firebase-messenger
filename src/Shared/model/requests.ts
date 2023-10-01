@@ -1,5 +1,7 @@
 // User
 
+import { Timestamp } from 'firebase/firestore';
+
 import { UserInfo } from './model';
 
 export type RegistrationRequestParamsType = {
@@ -23,4 +25,19 @@ export type FilterChatsRequestParamsType = {
 export type OpenChatWithUserRequestParamsType = {
 	currentUser: UserInfo;
 	chatUser: UserInfo;
+};
+
+export type SendMessageRequestParamsType = {
+	chatId: string;
+	messageText: string;
+	messageFiles: File[];
+	senderId: string;
+	date: Timestamp;
+};
+
+export type UpdateChatRequestParamsType = {
+	senderId: string;
+	userId: string;
+	chatId: string;
+	text: string;
 };

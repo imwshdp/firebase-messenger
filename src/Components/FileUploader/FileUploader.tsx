@@ -1,6 +1,6 @@
 import { ChangeEvent, FC } from 'react';
 
-import { IconOfFiles } from '@Shared/content/Icons';
+import { IconOfFiles } from '@Shared/content/icons';
 
 import styles from './FileUploader.module.scss';
 
@@ -10,9 +10,9 @@ interface PropsType {
 }
 
 const FileUploader: FC<PropsType> = ({ onChange, placeholder = 'Add a file' }) => {
-	const handlerFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
-		if (e.target.files && e.target.files.length > 0) {
-			const file = e.target.files[0];
+	const handlerFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
+		if (event.target.files && event.target.files.length > 0) {
+			const file = event.target.files[0];
 			onChange(file);
 		}
 	};

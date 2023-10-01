@@ -3,6 +3,8 @@
 	flex-direction: column;
 	flex: 1;
 
+	max-height: calc(100vh - 2 * var(--primary-padding-page));
+
 	gap: var(--primary-offset);
 	padding: var(--primary-offset);
 
@@ -42,6 +44,26 @@
 
 		gap: var(--primary-offset);
 		padding: var(--primary-offset);
+
+		overflow: auto;
+		scrollbar-gutter: stable;
+	}
+
+	&__files-preview {
+		display: flex;
+		flex-direction: row;
+
+		height: fit-content;
+
+		gap: var(--secondary-offset);
+		padding: var(--secondary-offset);
+
+		background-color: var(--light-2);
+		border-radius: var(--primary-border-radius);
+
+		&__file {
+			height: 50px;
+		}
 	}
 
 	&__panel {
@@ -51,7 +73,7 @@
 		height: fit-content;
 		min-height: 50px;
 
-		gap: var(--primary-offset);
+		gap: var(--secondary-offset);
 		padding: var(--secondary-offset);
 
 		background-color: var(--light-4);

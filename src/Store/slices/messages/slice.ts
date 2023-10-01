@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { MessagesState, UserInfo } from '@Shared/model';
+import { Message, MessagesSnapshotResponseType, MessagesState, UserInfo } from '@Shared/model';
 
 const initialState: MessagesState = {
 	chatId: null,
@@ -33,8 +33,27 @@ const messagesSlice = createSlice({
 			};
 		},
 
-		setMessages(state, { payload }: PayloadAction<any[]>) {
-			return { ...state, messages: payload };
+		setMessages: {
+			reducer: (state, { payload }: PayloadAction<Message[]>) => {
+				return { ...state, messages: payload };
+			},
+			prepare: (
+				messages: Array<MessagesSnapshotResponseType>,
+			): {
+				payload: Message[];
+			} => {
+				return {
+					payload: messages.map((message) => {
+						return {
+							...message,
+							date: {
+								nanoseconds: String(message.date.seconds),
+								seconds: String(message.date.seconds),
+							},
+						};
+					}),
+				};
+			},
 		},
 
 		resetChat() {

@@ -12,6 +12,14 @@ interface PropsType {
 	uid: string;
 	displayName: string;
 	photoURL: string | null;
+
+	lastMessage?: {
+		text: string;
+	};
+	date?: {
+		nanoseconds: string;
+		seconds: string;
+	};
 }
 
 const ChatLinkContainer: FC<PropsType> = (props) => {
@@ -38,9 +46,7 @@ const ChatLinkContainer: FC<PropsType> = (props) => {
 		);
 	};
 
-	return (
-		<ChatLink displayName={props.displayName} photoURL={props.photoURL} onClick={handleClick} />
-	);
+	return <ChatLink {...props} onClick={handleClick} />;
 };
 
 export default ChatLinkContainer;

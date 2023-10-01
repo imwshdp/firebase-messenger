@@ -1,0 +1,21 @@
+.message {
+	display: flex;
+	flex-direction: column;
+
+	width: fit-content;
+	max-width: 70%;
+
+	padding: var(--primary-offset);
+
+	background-color: var(--light-1);
+	border-radius: var(--primary-border-radius);
+
+	&__file {
+		max-height: 200px;
+		width: fit-content;
+
+		object-fit: contain;
+
+		border: 1px solid black;
+	}
+}

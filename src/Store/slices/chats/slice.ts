@@ -19,18 +19,21 @@ const chatsSlice = createSlice({
 			reducer: (state, { payload }: PayloadAction<UserChatInfo[]>) => {
 				return { ...state, chats: [...payload] };
 			},
-			prepare: (chats: UserChatsSnapshotResponseType[]): { payload: UserChatInfo[] } => {
+			prepare: (chats: Array<UserChatsSnapshotResponseType>): { payload: UserChatInfo[] } => {
 				return {
-					payload: chats.map(([id, chatData]) => {
-						return {
-							id,
-							date: {
-								nanoseconds: String(chatData.date.nanoseconds),
-								seconds: String(chatData.date.seconds),
-							},
-							userInfo: chatData.userInfo,
-						};
-					}),
+					payload: chats
+						.sort((first, second) => Number(second[1].date) - Number(first[1].date))
+						.map(([id, chatData]) => {
+							return {
+								id,
+								date: {
+									nanoseconds: String(chatData.date.nanoseconds),
+									seconds: String(chatData.date.seconds),
+								},
+								userInfo: chatData.userInfo,
+								lastMessage: chatData.lastMessage,
+							};
+						}),
 				};
 			},
 		},

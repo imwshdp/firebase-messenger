@@ -16,7 +16,10 @@ interface PropsType {
 
 const MessagesHistoryContainer: FC<PropsType> = ({ className }) => {
 	const dispatch = useAppDispatch();
-	const chatId = useAppSelector((state) => state.messages.chatId);
+	const messages = useAppSelector((state) => state.messages);
+
+	const chatId = messages.chatId;
+	const messagesList = messages.messages;
 
 	useEffect(() => {
 		let unsub = () => {};
@@ -33,7 +36,7 @@ const MessagesHistoryContainer: FC<PropsType> = ({ className }) => {
 		};
 	}, [chatId]);
 
-	return <MessagesHistory className={className} />;
+	return <MessagesHistory className={className} messages={messagesList} />;
 };
 
 export default MessagesHistoryContainer;

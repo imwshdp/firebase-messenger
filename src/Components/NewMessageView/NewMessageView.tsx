@@ -1,29 +1,32 @@
-import { FC } from 'react';
+import { ChangeEvent, FC } from 'react';
 
 import { MAX_CHAT_VIEW_PANEL_HEIGHT } from '@Shared/content/constants';
-import { IconOfSend } from '@Shared/content/Icons';
+import { IconOfSend } from '@Shared/content/icons';
 
-import { ButtonWithIcon, TextArea } from '@Components';
-
-import styles from './NewMessageView.module.scss';
+import { ButtonWithIcon, FileAttacher, TextArea } from '@Components';
 
 interface PropsType {
-	value: string;
-	setValue: (value: string) => void;
+	text: string;
+
+	setText: (value: string) => void;
+	setFiles: (event: ChangeEvent<HTMLInputElement>) => void;
+	onSubmit: () => void;
 }
 
-const NewMessageView: FC<PropsType> = ({ value, setValue }) => {
+const NewMessageView: FC<PropsType> = ({ text, setText, setFiles, onSubmit }) => {
 	return (
 		<>
 			<TextArea
-				value={value}
-				setValue={setValue}
+				value={text}
+				setValue={setText}
 				type={'transparent'}
 				resizable
 				maxHeight={MAX_CHAT_VIEW_PANEL_HEIGHT}
 			/>
 
-			<ButtonWithIcon className={styles['submit']} icon={<IconOfSend />} onClick={() => {}} />
+			<FileAttacher onChange={setFiles} />
+
+			<ButtonWithIcon icon={<IconOfSend />} onClick={onSubmit} />
 		</>
 	);
 };

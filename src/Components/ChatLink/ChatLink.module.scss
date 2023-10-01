@@ -32,4 +32,16 @@
 			padding: var(--secondary-offset);
 		}
 	}
+
+	&__user-info {
+		display: flex;
+		flex-direction: column;
+
+		gap: 3px;
+
+		&__message {
+			font-size: 10px;
+			font-style: normal;
+		}
+	}
 }

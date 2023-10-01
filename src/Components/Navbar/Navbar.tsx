@@ -2,7 +2,7 @@ import { FC, ReactNode, useState } from 'react';
 
 import clsx from 'clsx';
 
-import { IconOfArrow, IconOfUser } from '@Shared/content/Icons';
+import { IconOfArrow, IconOfUser } from '@Shared/content/icons';
 import { User } from '@Shared/model';
 
 import { ButtonWithIcon } from '@Components';

@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import { default as chatsReducer } from './slices/chats';
-import { default as messageReducer } from './slices/message';
 import { default as messagesReducer } from './slices/messages';
 import { default as userReducer } from './slices/user';
 import { default as usersReducer } from './slices/users';
@@ -12,7 +11,6 @@ export const store = configureStore({
 		chats: chatsReducer,
 		users: usersReducer,
 		messages: messagesReducer,
-		message: messageReducer,
 	},
 });
 

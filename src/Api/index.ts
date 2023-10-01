@@ -1,6 +1,6 @@
 import { loginWithEmailPassword, loginWithGoogle, registerNewUser } from './authorizationApi';
-import { openChat } from './chatsApi';
-import { fetchChats, searchChats } from './usersApi';
+import { openChat, sendMessage, updateChat } from './chatsApi';
+import { fetchUsers, searchUsers } from './usersApi';
 
 const ApiService = {
 	auth: {
@@ -11,11 +11,13 @@ const ApiService = {
 
 	chats: {
 		open: openChat,
+		send: sendMessage,
+		update: updateChat,
 	},
 
 	users: {
-		fetch: fetchChats,
-		search: searchChats,
+		fetch: fetchUsers,
+		search: searchUsers,
 	},
 };
 

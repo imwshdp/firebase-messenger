@@ -4,7 +4,7 @@ import { db } from '@Config';
 import { DATABASES } from '@Shared/content/constants';
 import { FilterChatsRequestParamsType } from '@Shared/model';
 
-export const fetchChats = async () => {
+export const fetchUsers = async () => {
 	const result: DocumentData[] = [];
 	const usersRef = collection(db, DATABASES.users);
 	const usersQuery = query(usersRef);
@@ -13,7 +13,7 @@ export const fetchChats = async () => {
 	return result;
 };
 
-export const searchChats = async ({ userName }: FilterChatsRequestParamsType) => {
+export const searchUsers = async ({ userName }: FilterChatsRequestParamsType) => {
 	const result: DocumentData[] = [];
 	const usersRef = collection(db, DATABASES.users);
 
