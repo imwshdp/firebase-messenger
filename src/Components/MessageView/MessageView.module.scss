@@ -1,21 +1,44 @@
-.message {
+.wrapper {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 
-	width: fit-content;
-	max-width: 70%;
+	width: inherit;
 
-	padding: var(--primary-offset);
+	&_justified-to-right {
+		& > * {
+			margin-left: auto;
+		}
+	}
 
-	background-color: var(--light-1);
-	border-radius: var(--primary-border-radius);
+	&__message {
+		display: flex;
+		flex-direction: row;
 
-	&__file {
-		max-height: 200px;
-		width: fit-content;
+		gap: var(--primary-offset);
 
-		object-fit: contain;
+		&__content {
+			display: flex;
+			flex-direction: column;
 
-		border: 1px solid black;
+			width: fit-content;
+
+			padding: var(--primary-offset);
+
+			background-color: var(--light-1);
+			border-radius: var(--primary-border-radius);
+
+			&__file {
+				max-height: 200px;
+				width: fit-content;
+
+				object-fit: contain;
+
+				border: 1px solid black;
+			}
+		}
+
+		&__profile-picture {
+			align-self: flex-end;
+		}
 	}
 }

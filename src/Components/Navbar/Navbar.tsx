@@ -2,10 +2,10 @@ import { FC, ReactNode, useState } from 'react';
 
 import clsx from 'clsx';
 
-import { IconOfArrow, IconOfUser } from '@Shared/content/icons';
+import { IconOfArrow } from '@Shared/content/icons';
 import { User } from '@Shared/model';
 
-import { ButtonWithIcon } from '@Components';
+import { ButtonWithIcon, ProfilePicture } from '@Components';
 
 import styles from './Navbar.module.scss';
 
@@ -30,20 +30,7 @@ const Navbar: FC<PropsType> = ({ children, user }) => {
 			<>
 				{children}
 				{displayName && <span>{displayName}</span>}
-				{photoURL ? (
-					<img
-						className={styles['navbar__profile-picture']}
-						src={photoURL}
-						alt='User Profile Photo'
-					/>
-				) : (
-					<IconOfUser
-						className={clsx(
-							styles['navbar__profile-picture'],
-							styles['navbar__profile-picture__icon'],
-						)}
-					/>
-				)}
+				<ProfilePicture photoURL={photoURL} title={displayName} />
 				<ButtonWithIcon
 					icon={<IconOfArrow />}
 					onClick={handleCloseClick}

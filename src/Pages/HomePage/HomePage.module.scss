@@ -1,7 +1,10 @@
 .page_wrapper {
-	display: flex;
-	flex-direction: row;
+	display: grid;
+	grid-auto-flow: column;
+	grid-template-columns: 20% 1fr;
 	flex: 1;
+
+	width: calc(100vw - 200px - var(var(--primary-gap-page)));
 
 	gap: var(--primary-gap-page);
 }

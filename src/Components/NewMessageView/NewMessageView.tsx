@@ -11,9 +11,10 @@ interface PropsType {
 	setText: (value: string) => void;
 	setFiles: (event: ChangeEvent<HTMLInputElement>) => void;
 	onSubmit: () => void;
+	isSubmitDisabled: boolean;
 }
 
-const NewMessageView: FC<PropsType> = ({ text, setText, setFiles, onSubmit }) => {
+const NewMessageView: FC<PropsType> = ({ text, setText, setFiles, onSubmit, isSubmitDisabled }) => {
 	return (
 		<>
 			<TextArea
@@ -26,7 +27,7 @@ const NewMessageView: FC<PropsType> = ({ text, setText, setFiles, onSubmit }) =>
 
 			<FileAttacher onChange={setFiles} />
 
-			<ButtonWithIcon icon={<IconOfSend />} onClick={onSubmit} />
+			<ButtonWithIcon icon={<IconOfSend />} onClick={onSubmit} disabled={isSubmitDisabled} />
 		</>
 	);
 };

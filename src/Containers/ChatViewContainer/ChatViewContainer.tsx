@@ -18,17 +18,21 @@ const ChatViewContainer: FC = () => {
 	const [messageText, setMessageText] = useState<string>('');
 	const [messageFiles, setMessageFiles] = useState<File[]>([]);
 
-	const handleMessageTextChange = (newValue: string) => {
+	const handleChangeMessageText = (newValue: string) => {
 		setMessageText(newValue);
 	};
 
-	const handleMessageFilesChange = (event: ChangeEvent<HTMLInputElement>) => {
+	const handleChangeMessageFiles = (event: ChangeEvent<HTMLInputElement>) => {
 		if (event.target.files && event.target.files.length > 0) {
 			setMessageFiles((previousMessageFiles) => [
 				...previousMessageFiles,
 				...Array.from(event.target.files || []),
 			]);
 		}
+	};
+
+	const handleDeleteMessageFile = (index: number) => {
+		setMessageFiles((previousMessageFiles) => previousMessageFiles.splice(index, 1));
 	};
 
 	const resetMessageData = () => {
@@ -70,13 +74,14 @@ const ChatViewContainer: FC = () => {
 			chatUser={chatUser}
 			text={{
 				value: messageText,
-				setValue: handleMessageTextChange,
+				setValue: handleChangeMessageText,
 			}}
 			files={{
 				value: messageFiles,
-				setValue: handleMessageFilesChange,
+				setValue: handleChangeMessageFiles,
 			}}
 			sendMessage={sendMessage}
+			deleteFile={handleDeleteMessageFile}
 		/>
 	);
 };

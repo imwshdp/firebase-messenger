@@ -20,6 +20,15 @@
 		background-color: var(--light-3);
 	}
 
+	&_disabled {
+		opacity: 0.5;
+
+		&:hover {
+			background-color: var(--light-2);
+			cursor: auto;
+		}
+	}
+
 	svg {
 		width: 16px;
 		height: 16px;

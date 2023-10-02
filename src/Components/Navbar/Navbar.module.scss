@@ -19,23 +19,6 @@
 		width: 50px;
 	}
 
-	&__profile-picture {
-		display: block;
-
-		width: 40px;
-		height: 40px;
-
-		object-fit: cover;
-
-		background-color: var(--light-1);
-		border: 1px solid var(--light-secondary-1);
-		border-radius: 50%;
-
-		&__icon {
-			padding: var(--secondary-offset);
-		}
-	}
-
 	&__button {
 		transform: rotate(180deg);
 	}

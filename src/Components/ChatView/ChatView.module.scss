@@ -23,24 +23,14 @@
 
 		background-color: var(--light-4);
 		border-radius: var(--primary-border-radius);
-
-		&__profile-picture {
-			display: block;
-
-			width: 40px;
-			height: 40px;
-
-			object-fit: cover;
-
-			border: 1px solid var(--light-secondary-1);
-			border-radius: 50%;
-		}
 	}
 
 	&__container {
 		display: flex;
 		flex-direction: column;
 		flex: 1;
+
+		height: fit-content;
 
 		gap: var(--primary-offset);
 		padding: var(--primary-offset);
@@ -54,15 +44,32 @@
 		flex-direction: row;
 
 		height: fit-content;
+		width: 100%;
 
 		gap: var(--secondary-offset);
 		padding: var(--secondary-offset);
 
-		background-color: var(--light-2);
-		border-radius: var(--primary-border-radius);
+		background-color: var(--light-1);
+		border-radius: var(--primary-border-radius) var(--primary-border-radius) 0 0;
+
+		transition: all var(--primary-animation-duration) ease;
+
+		&_empty {
+			height: 0;
+			padding: 0;
+
+			transition: all var(--primary-animation-duration) ease;
+		}
 
 		&__file {
 			height: 50px;
+			cursor: pointer;
+
+			transition: opacity var(--primary-animation-duration) ease;
+
+			&:hover {
+				opacity: 0.5;
+			}
 		}
 	}
 

@@ -7,10 +7,12 @@ import styles from './ButtonWithIcon.module.scss';
 interface PropsType {
 	icon: ReactNode;
 	onClick?: () => void;
+	disabled?: boolean;
+
 	className?: string;
 }
 
-const ButtonWithIcon: FC<PropsType> = ({ icon, onClick, className }) => {
+const ButtonWithIcon: FC<PropsType> = ({ icon, onClick, disabled, className }) => {
 	const handlePreventedClick = (event: MouseEvent) => {
 		event.preventDefault();
 		if (onClick) onClick();
@@ -19,8 +21,15 @@ const ButtonWithIcon: FC<PropsType> = ({ icon, onClick, className }) => {
 	return (
 		<button
 			type='button'
-			className={clsx(styles['button'], className)}
+			className={clsx(
+				styles['button'],
+				{
+					[styles['button_disabled']]: disabled,
+				},
+				className,
+			)}
 			onClick={handlePreventedClick}
+			disabled={disabled}
 		>
 			{icon}
 		</button>

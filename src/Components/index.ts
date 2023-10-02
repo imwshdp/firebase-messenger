@@ -14,5 +14,6 @@ export { default as MessagesHistory } from './MessagesHistory';
 export { default as MessageView } from './MessageView';
 export { default as Navbar } from './Navbar';
 export { default as NewMessageView } from './NewMessageView';
+export { default as ProfilePicture } from './ProfilePicture';
 export { default as Search } from './Search';
 export { default as TextArea } from './TextArea';
