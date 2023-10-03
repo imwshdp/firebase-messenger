@@ -39,6 +39,7 @@ const MessageView: FC<PropsType> = ({ message, isMyMessage, photoURL }) => {
 							alt='File'
 						/>
 					))}
+					<i className={styles['wrapper__message__content__date']}>{message.date}</i>
 				</div>
 
 				{isMyMessage && (

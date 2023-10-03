@@ -1,5 +1,6 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
+import { getParsedDateFromIso } from '@Shared/helpers/getParsedDateFromIso';
 import { ChatsState, UserChatInfo, UserChatsSnapshotResponseType } from '@Shared/model';
 
 import { openChat } from './thunks';
@@ -26,10 +27,7 @@ const chatsSlice = createSlice({
 						.map(([id, chatData]) => {
 							return {
 								id,
-								date: {
-									nanoseconds: String(chatData.date.nanoseconds),
-									seconds: String(chatData.date.seconds),
-								},
+								date: getParsedDateFromIso(chatData.date.toDate().toISOString()),
 								userInfo: chatData.userInfo,
 								lastMessage: chatData.lastMessage,
 							};

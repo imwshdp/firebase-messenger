@@ -14,6 +14,8 @@
 		display: flex;
 		flex-direction: row;
 
+		max-width: 70%;
+
 		gap: var(--primary-offset);
 
 		&__content {
@@ -27,6 +29,10 @@
 			background-color: var(--light-1);
 			border-radius: var(--primary-border-radius);
 
+			word-wrap: break-word;
+			white-space: pre-wrap;
+			word-break: break-word;
+
 			&__file {
 				max-height: 200px;
 				width: fit-content;
@@ -34,6 +40,19 @@
 				object-fit: contain;
 
 				border: 1px solid black;
+			}
+
+			&__date {
+				display: flex;
+				align-self: flex-end;
+
+				width: fit-content;
+
+				margin-top: 3px;
+
+				font-size: 10px;
+				font-style: italic;
+				opacity: 0.5;
 			}
 		}
 

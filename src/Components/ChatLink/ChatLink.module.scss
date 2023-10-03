@@ -1,9 +1,8 @@
 .chat {
+	position: relative;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-
-	width: 100%;
 
 	gap: var(--secondary-offset);
 	padding: var(--secondary-offset);
@@ -23,20 +22,43 @@
 		display: flex;
 		flex-direction: column;
 
+		width: calc(100% - 40px - var(--secondary-offset));
+
 		gap: 3px;
 
-		text-overflow: ellipsis;
+		&__userName {
+			display: inline-block;
+
+			max-width: 60%;
+
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
 
 		&__message {
-			width: 100%;
+			display: inline-block;
 
-			border: 1px solid #000;
+			max-width: 100%;
 
 			font-size: 10px;
 			font-style: normal;
-			text-overflow: ellipsis;
+
 			white-space: nowrap;
 			overflow: hidden;
+			text-overflow: ellipsis;
 		}
+	}
+
+	&__date {
+		position: absolute;
+
+		top: var(--secondary-offset);
+		right: var(--secondary-offset);
+
+		font-size: 10px;
+		font-style: italic;
+
+		opacity: 0.5;
 	}
 }

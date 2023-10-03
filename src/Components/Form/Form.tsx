@@ -1,6 +1,6 @@
 import { FC, ReactNode, useState } from 'react';
 
-import { FORM_TYPE } from '@Shared/content/constants';
+import { FORM_TYPES } from '@Shared/content/constants';
 import { RegistrationRequestParamsType } from '@Shared/model';
 
 import { Button, FileUploader, Input } from '@Components';
@@ -12,7 +12,7 @@ interface PropsType {
 	handleLogin?: (email: string, password: string) => void;
 	handleRegister?: (data: RegistrationRequestParamsType) => void;
 	handleAlternativeLogin?: () => void;
-	type: FORM_TYPE;
+	type: FORM_TYPES;
 	children?: ReactNode;
 }
 const Form: FC<PropsType> = ({
@@ -41,14 +41,15 @@ const Form: FC<PropsType> = ({
 		handleRegister({ email, password, displayName, profilePicture });
 	};
 
-	const handleSubmitButtonClick = type === FORM_TYPE.login ? handleLoginClick : handleRegisterClick;
+	const handleSubmitButtonClick =
+		type === FORM_TYPES.login ? handleLoginClick : handleRegisterClick;
 
 	return (
 		<form className={styles['form']}>
 			<Input type='email' value={email} setValue={setEmail} placeholder='Введите почту' />
 			<Input type='password' value={password} setValue={setPassword} placeholder='Введите пароль' />
 
-			{type === FORM_TYPE.register && (
+			{type === FORM_TYPES.register && (
 				<>
 					<Input
 						type='displayName'
@@ -62,7 +63,7 @@ const Form: FC<PropsType> = ({
 
 			<Button onClick={handleSubmitButtonClick} title={buttonTitle} />
 
-			{type === FORM_TYPE.login && (
+			{type === FORM_TYPES.login && (
 				<>
 					<b className={styles['form__text']}>или</b>
 					<Button onClick={handleAlternativeLogin} title='Войти с помощью Google' />

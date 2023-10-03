@@ -37,7 +37,6 @@ const UserListWithSearchContainer: FC = () => {
 			<Search
 				value={searchValue}
 				setValue={handleSearch}
-				disabled={isLoading}
 				ref={inputRef}
 				placeholder='Найти пользователей...'
 			/>

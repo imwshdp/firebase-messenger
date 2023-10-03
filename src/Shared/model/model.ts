@@ -19,10 +19,7 @@ export interface UserState extends User {
 
 export interface UserChatInfo {
 	id: string;
-	date: {
-		nanoseconds: string;
-		seconds: string;
-	};
+	date: string;
 	userInfo: UserInfo;
 	lastMessage: {
 		text: string;
@@ -50,10 +47,7 @@ export interface Message {
 	text: string;
 	files?: string[];
 	senderId: string;
-	date: {
-		nanoseconds: string;
-		seconds: string;
-	};
+	date: string;
 }
 
 export interface MessagesState {

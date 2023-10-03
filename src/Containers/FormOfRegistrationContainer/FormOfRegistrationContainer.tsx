@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { RoutesLinks } from '@Router';
-import { FORM_TYPE } from '@Shared/content/constants';
+import { FORM_TYPES } from '@Shared/content/constants';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import { RegistrationRequestParamsType } from '@Shared/model';
 import { registerUser } from '@Store/slices/user';
@@ -27,7 +27,7 @@ const FormOfRegistrationContainer: FC = () => {
 			<Form
 				buttonTitle='Зарегистрироваться'
 				handleRegister={handleRegister}
-				type={FORM_TYPE.register}
+				type={FORM_TYPES.register}
 			>
 				<span>
 					Уже есть запись? <Link to='/login'>Войти</Link>

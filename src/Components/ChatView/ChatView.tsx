@@ -32,15 +32,13 @@ const ChatView: FC<PropsType> = ({ chatUser, text, files, sendMessage, deleteFil
 
 	return (
 		<section className={styles['chat_view']}>
-			<header className={styles['chat_view__header']}>
-				{chatUser && (
-					<>
-						<ProfilePicture photoURL={chatUser.photoURL} title={chatUser.displayName} />
-						<h1>Conversation with</h1>
-						<b>{chatUser.displayName}</b>
-					</>
-				)}
-			</header>
+			{chatUser && (
+				<header className={styles['chat_view__header']}>
+					<ProfilePicture photoURL={chatUser.photoURL} title={chatUser.displayName} />
+					<h1>Conversation with</h1>
+					<b>{chatUser.displayName}</b>
+				</header>
+			)}
 
 			<MessagesHistoryContainer className={styles['chat_view__container']} />
 

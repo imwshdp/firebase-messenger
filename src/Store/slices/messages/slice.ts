@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { getParsedDateFromIso } from '@Shared/helpers/getParsedDateFromIso';
 import { Message, MessagesSnapshotResponseType, MessagesState, UserInfo } from '@Shared/model';
 
 const initialState: MessagesState = {
@@ -46,10 +47,7 @@ const messagesSlice = createSlice({
 					payload: messages.map((message) => {
 						return {
 							...message,
-							date: {
-								nanoseconds: String(message.date.seconds),
-								seconds: String(message.date.seconds),
-							},
+							date: getParsedDateFromIso(message.date.toDate().toISOString()),
 						};
 					}),
 				};

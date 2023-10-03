@@ -16,10 +16,7 @@ interface PropsType {
 	lastMessage?: {
 		text: string;
 	};
-	date?: {
-		nanoseconds: string;
-		seconds: string;
-	};
+	date?: string;
 }
 
 const ChatLinkContainer: FC<PropsType> = (props) => {

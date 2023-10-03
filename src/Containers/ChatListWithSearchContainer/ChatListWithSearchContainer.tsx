@@ -18,7 +18,6 @@ const ChatListWithSearchContainer: FC = () => {
 	const debouncedSearch = useDebounce(searchValue);
 
 	useEffect(() => {
-		// TODO add filter
 		// dispatch(
 		// 	searchUsers({
 		// 		userName: debouncedSearch,
@@ -30,36 +29,6 @@ const ChatListWithSearchContainer: FC = () => {
 		setSearchValue(value);
 	};
 
-	// TODO memo
-	// const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
-	// const handleFocus = () => setIsInputFocused(true);
-	// const handleBlur = () => {
-	// 	console.log('blured');
-	// 	setIsInputFocused(false);
-	// };
-
-	// useEffect(() => {
-	// 	console.log('rerender');
-
-	// 	inputRef.current?.addEventListener('focus', handleFocus);
-	// 	inputRef.current?.addEventListener('blur', handleBlur);
-
-	// 	return () => {
-	// 		inputRef.current?.removeEventListener('focus', handleFocus);
-	// 		inputRef.current?.removeEventListener('blur', handleBlur);
-	// 	};
-	// }, []);
-
-	// useEffect(() => {
-	// 	// console.log('isInputFocused', isInputFocused);
-	// 	if (
-	// 		!isLoading
-	// 		// && isInputFocused
-	// 	) {
-	// 		inputRef.current?.focus();
-	// 	}
-	// }, [isLoading]);
-
 	const inputRef = useRef<HTMLInputElement | null>(null);
 
 	return (
@@ -67,7 +36,6 @@ const ChatListWithSearchContainer: FC = () => {
 			<Search
 				value={searchValue}
 				setValue={handleSearch}
-				disabled={isLoading}
 				ref={inputRef}
 				placeholder='Найти чат...'
 			/>

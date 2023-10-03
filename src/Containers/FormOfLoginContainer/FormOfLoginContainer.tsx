@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { RoutesLinks } from '@Router';
-import { FORM_TYPE } from '@Shared/content/constants';
+import { FORM_TYPES } from '@Shared/content/constants';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import { loginWithEmailPassword, loginWithGoogle } from '@Store/slices/user';
 
@@ -30,7 +30,7 @@ const FormOfLoginContainer: FC = () => {
 				buttonTitle='Залогиниться'
 				handleLogin={handleLogin}
 				handleAlternativeLogin={handleGoogleLogin}
-				type={FORM_TYPE.login}
+				type={FORM_TYPES.login}
 			>
 				<span>
 					Впервые здесь? <Link to='/registration'>Зарегистрироваться</Link>
