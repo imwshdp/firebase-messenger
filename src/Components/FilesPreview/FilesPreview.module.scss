@@ -1,0 +1,24 @@
+.files-preview {
+	display: flex;
+	flex-direction: row;
+
+	height: fit-content;
+	width: 100%;
+
+	gap: var(--secondary-offset);
+	padding: var(--secondary-offset);
+
+	background-color: var(--color-1);
+	border-radius: var(--primary-border-radius);
+
+	&__file {
+		height: 50px;
+		cursor: pointer;
+
+		transition: opacity var(--primary-animation-duration) ease;
+
+		&:hover {
+			opacity: 0.5;
+		}
+	}
+}

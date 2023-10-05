@@ -9,7 +9,7 @@ export type LoginResponseType = {
 	profilePicture: File | null;
 };
 
-type UserChatSnapshotInfo = {
+export type UserChatSnapshotInfo = {
 	date: Timestamp;
 	userInfo: UserInfo;
 	lastMessage: {
@@ -17,12 +17,18 @@ type UserChatSnapshotInfo = {
 	};
 };
 
-export type UserChatsSnapshotResponseType = [string, UserChatSnapshotInfo];
+export type UserChatsSnapshotResponseType = {
+	[key: string]: UserChatSnapshotInfo;
+};
 
-export type MessagesSnapshotResponseType = {
+export type MessageSnapshotResponseType = {
 	uid: string;
 	text: string;
 	files?: string[];
 	senderId: string;
 	date: Timestamp;
+};
+
+export type MessagesSnapshotResponseType = {
+	messages: Array<MessageSnapshotResponseType>;
 };

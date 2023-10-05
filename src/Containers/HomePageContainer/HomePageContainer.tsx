@@ -5,8 +5,10 @@ import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '@Config';
 import { HomePage } from '@Pages';
 import { DATABASES } from '@Shared/content/constants';
+import { converter } from '@Shared/helpers/typesConverter';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import useAppSelector from '@Shared/hooks/useAppSelector';
+import { UserChatsSnapshotResponseType } from '@Shared/model';
 import { setChats } from '@Store/slices/chats';
 import { resetChat } from '@Store/slices/messages';
 import { fetchUsers } from '@Store/slices/users';
@@ -17,10 +19,16 @@ const HomePageContainer: FC = () => {
 
 	useEffect(() => {
 		const getChats = () => {
-			const unsub = onSnapshot(doc(db, DATABASES.usersChats, currentUserId), (doc) => {
-				const response = doc.data() as object | undefined;
-				dispatch(setChats(response ? Object.entries(response) : []));
-			});
+			const unsub = onSnapshot(
+				doc(db, DATABASES.usersChats, currentUserId).withConverter(
+					converter<UserChatsSnapshotResponseType>(),
+				),
+				(doc) => {
+					const response = doc.data();
+					const data = response ? Object.entries(response) : [];
+					dispatch(setChats(data));
+				},
+			);
 
 			return () => {
 				unsub();

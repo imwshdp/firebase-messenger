@@ -3,7 +3,7 @@
 	transition: all var(--animation-duration);
 
 	color: var();
-	background-color: var(--light-1);
+	background-color: var(--color-1);
 	border-radius: var(--primary-border-radius);
 
 	-webkit-box-shadow: none;
@@ -13,16 +13,16 @@
 	resize: none;
 
 	&::placeholder {
-		color: var(--light-secondary-1);
+		color: var(--color-secondary-1);
 		opacity: 1; /* Firefox */
 	}
 
 	&:-ms-input-placeholder {
-		color: var(--light-secondary-1);
+		color: var(--color-secondary-1);
 	}
 
 	&::-ms-input-placeholder {
-		color: var(--light-secondary-1);
+		color: var(--color-secondary-1);
 	}
 
 	&:focus,
@@ -35,7 +35,7 @@
 
 	&:disabled,
 	&[disabled] {
-		color: var(--light-secondary-1);
+		color: var(--color-secondary-1);
 
 		&::placeholder {
 			opacity: 0.5;

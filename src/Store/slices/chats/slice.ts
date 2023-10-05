@@ -1,7 +1,7 @@
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import { getParsedDateFromIso } from '@Shared/helpers/getParsedDateFromIso';
-import { ChatsState, UserChatInfo, UserChatsSnapshotResponseType } from '@Shared/model';
+import { ChatsState, UserChatInfo, UserChatsSnapshotTupleType } from '@Shared/model';
 
 import { openChat } from './thunks';
 
@@ -20,7 +20,7 @@ const chatsSlice = createSlice({
 			reducer: (state, { payload }: PayloadAction<UserChatInfo[]>) => {
 				return { ...state, chats: [...payload] };
 			},
-			prepare: (chats: Array<UserChatsSnapshotResponseType>): { payload: UserChatInfo[] } => {
+			prepare: (chats: Array<UserChatsSnapshotTupleType>): { payload: UserChatInfo[] } => {
 				return {
 					payload: chats
 						.sort((first, second) => Number(second[1].date) - Number(first[1].date))

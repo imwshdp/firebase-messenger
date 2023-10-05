@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getParsedDateFromIso } from '@Shared/helpers/getParsedDateFromIso';
-import { Message, MessagesSnapshotResponseType, MessagesState, UserInfo } from '@Shared/model';
+import { Message, MessageSnapshotResponseType, MessagesState, UserInfo } from '@Shared/model';
 
 const initialState: MessagesState = {
 	chatId: null,
@@ -39,7 +39,7 @@ const messagesSlice = createSlice({
 				return { ...state, messages: payload };
 			},
 			prepare: (
-				messages: Array<MessagesSnapshotResponseType>,
+				messages: Array<MessageSnapshotResponseType>,
 			): {
 				payload: Message[];
 			} => {

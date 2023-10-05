@@ -35,19 +35,29 @@ html {
 	--primary-border-radius: 10px;
 	--primary-animation-duration: 0.3s;
 
-	--light-1: #f8f9fa;
-	--light-2: #e9ecef;
-	--light-3: #dee2e6;
-	--light-4: #ced4da;
-	--light-secondary-1: rgb(0, 0, 0, 0.3);
-
-	--dark-1: #212529;
-	--dark-2: #343a40;
-	--dark-3: #495057;
-	--dark-4: #6c757d;
-	--dark-secondary-1: rgba(255, 255, 255, 0.3);
-
 	--accent-1: #ee6c4d;
+}
+
+.light-theme {
+	color-scheme: light;
+
+	--color-1: #f8f9fa;
+	--color-2: #e9ecef;
+	--color-3: #dee2e6;
+	--color-4: #ced4da;
+	--color-secondary-1: rgb(0, 0, 0, 0.3);
+	--text-color: #212529;
+}
+
+.dark-theme {
+	color-scheme: dark;
+
+	--color-1: #212529;
+	--color-2: #343a40;
+	--color-3: #495057;
+	--color-4: #6c757d;
+	--color-secondary-1: rgba(255, 255, 255, 0.3);
+	--text-color: #f8f9fa;
 }
 
 body {
@@ -55,6 +65,7 @@ body {
 	top: 0;
 	left: 0;
 	overflow: hidden;
+	color: var(--text-color);
 }
 
 .h1 {
@@ -87,4 +98,11 @@ body {
 a {
 	text-decoration: underline;
 	color: var(--accent-1);
+}
+
+svg {
+	fill: var(--text-color);
+	path {
+		fill: var(--text-color);
+	}
 }

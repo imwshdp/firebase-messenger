@@ -4,8 +4,10 @@ import { doc, onSnapshot } from 'firebase/firestore';
 
 import { db } from '@Config';
 import { DATABASES } from '@Shared/content/constants';
+import { converter } from '@Shared/helpers/typesConverter';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import useAppSelector from '@Shared/hooks/useAppSelector';
+import { MessagesSnapshotResponseType } from '@Shared/model';
 import { setMessages } from '@Store/slices/messages';
 
 import { MessagesHistory } from '@Components';
@@ -32,10 +34,15 @@ const MessagesHistoryContainer: FC<PropsType> = ({ className }) => {
 		let unsub = () => {};
 
 		if (chatId) {
-			unsub = onSnapshot(doc(db, DATABASES.chats, chatId), (doc) => {
-				const response = doc.data() as { messages: [] };
-				doc.exists() && dispatch(setMessages(response.messages));
-			});
+			unsub = onSnapshot(
+				doc(db, DATABASES.chats, chatId).withConverter(converter<MessagesSnapshotResponseType>()),
+				(doc) => {
+					const response = doc.data();
+					if (doc.exists() && response) {
+						dispatch(setMessages(response.messages));
+					}
+				},
+			);
 		}
 
 		return () => {

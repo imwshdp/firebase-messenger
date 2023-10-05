@@ -1,11 +1,9 @@
-import { ChangeEvent, FC } from 'react';
-
-import clsx from 'clsx';
+import { FC, useCallback } from 'react';
 
 import { MessagesHistoryContainer } from '@Containers';
 import { UserInfo } from '@Shared/model';
 
-import { NewMessageView, ProfilePicture } from '@Components';
+import { FilesPreview, NewMessageView, ProfilePicture } from '@Components';
 
 import styles from './ChatView.module.scss';
 
@@ -19,7 +17,7 @@ interface PropsType {
 
 	files: {
 		value: File[];
-		setValue: (event: ChangeEvent<HTMLInputElement>) => void;
+		setValue: (files: FileList | null) => void;
 	};
 
 	sendMessage: () => void;
@@ -29,6 +27,8 @@ interface PropsType {
 const ChatView: FC<PropsType> = ({ chatUser, text, files, sendMessage, deleteFile }) => {
 	const urls = files.value.map((file) => URL.createObjectURL(file));
 	const isSubmitDisabled = !text.value.length && !files.value.length;
+
+	const memoDeleteFile = useCallback((index: number) => deleteFile(index), []);
 
 	return (
 		<section className={styles['chat_view']}>
@@ -42,40 +42,19 @@ const ChatView: FC<PropsType> = ({ chatUser, text, files, sendMessage, deleteFil
 
 			<MessagesHistoryContainer className={styles['chat_view__container']} />
 
-			<div>
-				<div
-					className={clsx(styles['chat_view__files-preview'], {
-						[styles['chat_view__files-preview_empty']]: urls.length === 0,
-					})}
-				>
-					{urls.map((url, index) => {
-						const filename = files.value[index].name;
-						return (
-							<img
-								className={styles['chat_view__files-preview__file']}
-								src={url}
-								key={index}
-								alt={filename}
-								title={filename}
-								onClick={() => deleteFile(index)}
-							/>
-						);
-					})}
-				</div>
+			<footer className={styles['chat_view__message']}>
+				<FilesPreview files={files.value} urls={urls} deleteFile={memoDeleteFile} />
 
-				<footer
+				<NewMessageView
+					text={text.value}
+					setText={text.setValue}
+					setFiles={files.setValue}
+					onSubmit={sendMessage}
+					isSubmitDisabled={isSubmitDisabled}
 					className={styles['chat_view__panel']}
 					style={{ maxHeight: 'MAX_CHAT_VIEW_PANEL_HEIGHT - calc(var(--secondary-offset) * 2)' }}
-				>
-					<NewMessageView
-						text={text.value}
-						setText={text.setValue}
-						setFiles={files.setValue}
-						onSubmit={sendMessage}
-						isSubmitDisabled={isSubmitDisabled}
-					/>
-				</footer>
-			</div>
+				/>
+			</footer>
 		</section>
 	);
 };

@@ -1,5 +1,7 @@
 // User
 
+import { UserChatSnapshotInfo } from './responses';
+
 export interface UserInfo {
 	uid: string;
 	displayName: string;
@@ -31,6 +33,8 @@ export interface ChatsState {
 	loading: boolean;
 	error: string | null;
 }
+
+export type UserChatsSnapshotTupleType = [string, UserChatSnapshotInfo];
 
 // Users
 

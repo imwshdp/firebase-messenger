@@ -21,3 +21,8 @@ export enum LinkListType {
 	Users,
 	Chats,
 }
+
+export enum ColorSchemes {
+	light = 'light-theme',
+	dark = 'dark-theme',
+}

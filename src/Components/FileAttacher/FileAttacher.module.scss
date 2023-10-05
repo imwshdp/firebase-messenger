@@ -13,13 +13,13 @@
 	border-radius: 50%;
 
 	transition: all var(--primary-animation-duration) ease-in-out;
-	background-color: var(--light-2);
+	background-color: var(--color-2);
 
 	cursor: pointer;
 
 	&:hover {
 		transition: all var(--primary-animation-duration) ease-in-out;
-		background-color: var(--light-3);
+		background-color: var(--color-3);
 	}
 
 	svg {

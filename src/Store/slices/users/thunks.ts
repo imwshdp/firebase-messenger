@@ -15,7 +15,7 @@ export const fetchUsers = createAsyncThunk<UserInfo[], void, RejectWithValueType
 			);
 		}
 
-		return response as UserInfo[];
+		return response;
 	},
 );
 
@@ -30,5 +30,5 @@ export const searchUsers = createAsyncThunk<
 		rejectWithValue(`${ERROR_CODES.internal}: Unable to load chats data. Please try again later.`);
 	}
 
-	return response as UserInfo[];
+	return response;
 });

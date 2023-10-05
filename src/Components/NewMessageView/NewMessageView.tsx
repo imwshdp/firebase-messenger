@@ -1,4 +1,4 @@
-import { ChangeEvent, FC } from 'react';
+import { ChangeEvent, CSSProperties, FC } from 'react';
 
 import { MAX_CHAT_VIEW_PANEL_HEIGHT } from '@Shared/content/constants';
 import { IconOfSend } from '@Shared/content/icons';
@@ -7,16 +7,31 @@ import { ButtonWithIcon, FileAttacher, TextArea } from '@Components';
 
 interface PropsType {
 	text: string;
-
 	setText: (value: string) => void;
-	setFiles: (event: ChangeEvent<HTMLInputElement>) => void;
+	setFiles: (files: FileList | null) => void;
+
 	onSubmit: () => void;
 	isSubmitDisabled: boolean;
+
+	className?: string;
+	style?: CSSProperties;
 }
 
-const NewMessageView: FC<PropsType> = ({ text, setText, setFiles, onSubmit, isSubmitDisabled }) => {
+const NewMessageView: FC<PropsType> = ({
+	text,
+	setText,
+	setFiles,
+	onSubmit,
+	isSubmitDisabled,
+	className,
+	style,
+}) => {
+	const handleFilesChange = (event: ChangeEvent<HTMLInputElement>) => {
+		setFiles(event.target.files);
+	};
+
 	return (
-		<>
+		<div className={className} style={style}>
 			<TextArea
 				value={text}
 				setValue={setText}
@@ -25,10 +40,10 @@ const NewMessageView: FC<PropsType> = ({ text, setText, setFiles, onSubmit, isSu
 				maxHeight={MAX_CHAT_VIEW_PANEL_HEIGHT}
 			/>
 
-			<FileAttacher onChange={setFiles} />
+			<FileAttacher onChange={handleFilesChange} />
 
 			<ButtonWithIcon icon={<IconOfSend />} onClick={onSubmit} disabled={isSubmitDisabled} />
-		</>
+		</div>
 	);
 };
 

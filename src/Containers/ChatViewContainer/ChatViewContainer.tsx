@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import { Timestamp } from 'firebase/firestore';
 
@@ -22,17 +22,16 @@ const ChatViewContainer: FC = () => {
 		setMessageText(newValue);
 	};
 
-	const handleChangeMessageFiles = (event: ChangeEvent<HTMLInputElement>) => {
-		if (event.target.files && event.target.files.length > 0) {
-			setMessageFiles((previousMessageFiles) => [
-				...previousMessageFiles,
-				...Array.from(event.target.files || []),
-			]);
-		}
+	const handleChangeMessageFiles = (files: FileList | null) => {
+		setMessageFiles((previousMessageFiles) =>
+			files ? [...previousMessageFiles, ...Array.from(files)] : previousMessageFiles,
+		);
 	};
 
 	const handleDeleteMessageFile = (index: number) => {
-		setMessageFiles((previousMessageFiles) => previousMessageFiles.splice(index, 1));
+		setMessageFiles((previousMessageFiles) =>
+			previousMessageFiles.filter((_, fileIndex) => fileIndex !== index),
+		);
 	};
 
 	const resetMessageData = () => {

@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { IconOfArrow } from '@Shared/content/icons';
 import { User } from '@Shared/model';
 
-import { ButtonWithIcon, ProfilePicture } from '@Components';
+import { ButtonWithIcon, ProfilePicture, ThemeSwitcher } from '@Components';
 
 import styles from './Navbar.module.scss';
 
@@ -38,6 +38,8 @@ const Navbar: FC<PropsType> = ({ children, user }) => {
 						[styles['navbar__button-rotated']]: isCollapsed,
 					})}
 				/>
+
+				<ThemeSwitcher />
 			</>
 		</nav>
 	);

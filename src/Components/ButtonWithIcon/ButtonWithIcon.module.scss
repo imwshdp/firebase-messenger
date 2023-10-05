@@ -13,18 +13,18 @@
 	border-radius: 50%;
 
 	transition: all var(--primary-animation-duration) ease-in-out;
-	background-color: var(--light-2);
+	background-color: var(--color-2);
 
 	&:hover {
 		transition: all var(--primary-animation-duration) ease-in-out;
-		background-color: var(--light-3);
+		background-color: var(--color-3);
 	}
 
 	&_disabled {
 		opacity: 0.5;
 
 		&:hover {
-			background-color: var(--light-2);
+			background-color: var(--color-2);
 			cursor: auto;
 		}
 	}

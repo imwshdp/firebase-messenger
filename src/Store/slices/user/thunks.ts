@@ -24,7 +24,14 @@ export const loginWithEmailPassword = createAsyncThunk<
 
 	const { user } = response;
 	const { email, uid, displayName, photoURL } = user;
-	return { email, uid, displayName, photoURL } as User;
+
+	// TODO handle later
+	return {
+		email: email!,
+		uid,
+		displayName: displayName!,
+		photoURL,
+	};
 });
 
 export const loginWithGoogle = createAsyncThunk<User, void, RejectWithValueType>(
@@ -38,6 +45,13 @@ export const loginWithGoogle = createAsyncThunk<User, void, RejectWithValueType>
 
 		const { user } = response;
 		const { email, uid, displayName, photoURL } = user;
-		return { email, uid, displayName, photoURL } as User;
+
+		// TODO handle later
+		return {
+			email: email!,
+			uid,
+			displayName: displayName!,
+			photoURL,
+		};
 	},
 );

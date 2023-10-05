@@ -8,7 +8,7 @@
 	gap: var(--primary-offset);
 	padding: var(--primary-offset);
 
-	background-color: var(--light-3);
+	background-color: var(--color-3);
 	border-radius: var(--primary-border-radius);
 
 	&__header {
@@ -21,7 +21,7 @@
 		padding: 0 var(--secondary-offset);
 		gap: var(--secondary-offset);
 
-		background-color: var(--light-4);
+		background-color: var(--color-4);
 		border-radius: var(--primary-border-radius);
 	}
 
@@ -39,38 +39,11 @@
 		scrollbar-gutter: stable;
 	}
 
-	&__files-preview {
+	&__message {
 		display: flex;
-		flex-direction: row;
-
-		height: fit-content;
-		width: 100%;
+		flex-direction: column;
 
 		gap: var(--secondary-offset);
-		padding: var(--secondary-offset);
-
-		background-color: var(--light-1);
-		border-radius: var(--primary-border-radius) var(--primary-border-radius) 0 0;
-
-		transition: all var(--primary-animation-duration) ease;
-
-		&_empty {
-			height: 0;
-			padding: 0;
-
-			transition: all var(--primary-animation-duration) ease;
-		}
-
-		&__file {
-			height: 50px;
-			cursor: pointer;
-
-			transition: opacity var(--primary-animation-duration) ease;
-
-			&:hover {
-				opacity: 0.5;
-			}
-		}
 	}
 
 	&__panel {
@@ -83,10 +56,10 @@
 		gap: var(--secondary-offset);
 		padding: var(--secondary-offset);
 
-		background-color: var(--light-4);
+		background-color: var(--color-4);
 		border-radius: var(--primary-border-radius);
 
-		& > * {
+		& > *:first-of-type {
 			display: flex;
 			flex: 1;
 		}

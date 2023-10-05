@@ -74,5 +74,6 @@ export const loginWithEmailPassword = async ({
 };
 
 export const loginWithGoogle = async (): Promise<UserCredential> => {
-	return await signInWithPopup(auth, new GoogleAuthProvider());
+	const result = await signInWithPopup(auth, new GoogleAuthProvider());
+	return result;
 };
