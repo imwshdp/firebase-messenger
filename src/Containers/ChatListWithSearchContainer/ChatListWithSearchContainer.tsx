@@ -10,9 +10,8 @@ import { LinkList, Search } from '@Components';
 const ChatListWithSearchContainer: FC = () => {
 	// const dispatch = useAppDispatch();
 
-	const chats = useAppSelector((state) => state.chats);
-	const chatList = chats.chats;
-	const isLoading = chats.loading;
+	const chatList = useAppSelector((state) => state.chats.chats);
+	const isLoading = useAppSelector((state) => state.chats.loading);
 
 	const [searchValue, setSearchValue] = useState('');
 	const debouncedSearch = useDebounce(searchValue);

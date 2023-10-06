@@ -5,14 +5,18 @@ import App from '@App';
 import { auth } from '@Config';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import useAppSelector from '@Shared/hooks/useAppSelector';
+import { getLocalStorageConfig } from '@Store/slices/config';
 import { setUser } from '@Store/slices/user';
 
 import { Loader } from '@Components';
 
 const AppContainer: FC = () => {
 	const dispatch = useAppDispatch();
-
 	const isLoadingViaLogin = useAppSelector((state) => state.user.loading);
+
+	useEffect(() => {
+		dispatch(getLocalStorageConfig());
+	}, []);
 
 	const [user, loading] = useAuthState(auth);
 	const isLoading = loading || isLoadingViaLogin;

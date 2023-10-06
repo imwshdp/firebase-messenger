@@ -11,9 +11,8 @@ import { LinkList, Search } from '@Components';
 const UserListWithSearchContainer: FC = () => {
 	const dispatch = useAppDispatch();
 
-	const users = useAppSelector((state) => state.users);
-	const userList = users.users;
-	const isLoading = users.loading;
+	const userList = useAppSelector((state) => state.users.users);
+	const isLoading = useAppSelector((state) => state.users.loading);
 
 	const [searchValue, setSearchValue] = useState('');
 	const debouncedSearch = useDebounce(searchValue);

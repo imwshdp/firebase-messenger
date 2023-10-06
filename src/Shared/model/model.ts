@@ -1,5 +1,7 @@
 // User
 
+import { ColorSchemes } from '@Shared/content/constants';
+
 import { UserChatSnapshotInfo } from './responses';
 
 export interface UserInfo {
@@ -64,4 +66,11 @@ export interface MessagesState {
 export interface MessageState {
 	text: string;
 	files: string[];
+}
+
+// Config
+
+export interface ConfigState {
+	colorScheme: ColorSchemes;
+	isNavbarCollapsed: boolean;
 }

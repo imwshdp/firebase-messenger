@@ -12,6 +12,7 @@ interface PropsType {
 
 	onSubmit: () => void;
 	isSubmitDisabled: boolean;
+	isAttachFileDisabled: boolean;
 
 	className?: string;
 	style?: CSSProperties;
@@ -23,6 +24,7 @@ const NewMessageView: FC<PropsType> = ({
 	setFiles,
 	onSubmit,
 	isSubmitDisabled,
+	isAttachFileDisabled,
 	className,
 	style,
 }) => {
@@ -40,7 +42,7 @@ const NewMessageView: FC<PropsType> = ({
 				maxHeight={MAX_CHAT_VIEW_PANEL_HEIGHT}
 			/>
 
-			<FileAttacher onChange={handleFilesChange} />
+			<FileAttacher onChange={handleFilesChange} disabled={isAttachFileDisabled} />
 
 			<ButtonWithIcon icon={<IconOfSend />} onClick={onSubmit} disabled={isSubmitDisabled} />
 		</div>

@@ -18,17 +18,15 @@ interface PropsType {
 
 const MessagesHistoryContainer: FC<PropsType> = ({ className }) => {
 	const dispatch = useAppDispatch();
-	const currentUser = useAppSelector((state) => state.user);
-	const messages = useAppSelector((state) => state.messages);
 
-	const messagesList = messages.messages;
-	const chatId = messages.chatId;
+	const messagesList = useAppSelector((state) => state.messages.messages);
+	const chatId = useAppSelector((state) => state.messages.chatId);
 
-	const chatUserId = messages.user?.uid;
-	const chatUserPhotoURL = messages.user?.photoURL;
+	const chatUserId = useAppSelector((state) => state.messages.user?.uid);
+	const chatUserPhotoURL = useAppSelector((state) => state.messages.user?.photoURL);
 
-	const currentUserId = currentUser.uid;
-	const currentUserPhotoURL = currentUser.photoURL;
+	const currentUserId = useAppSelector((state) => state.user.uid);
+	const currentUserPhotoURL = useAppSelector((state) => state.user.photoURL);
 
 	useEffect(() => {
 		let unsub = () => {};

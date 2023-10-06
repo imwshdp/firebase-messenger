@@ -26,3 +26,8 @@ export enum ColorSchemes {
 	light = 'light-theme',
 	dark = 'dark-theme',
 }
+
+export const localStorageKeys = {
+	colorScheme: 'colorScheme',
+	navbarCollapsedStatus: 'navbarCollapsedStatus',
+};

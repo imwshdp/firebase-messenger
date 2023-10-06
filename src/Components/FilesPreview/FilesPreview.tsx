@@ -2,6 +2,8 @@ import { FC, useEffect, useState } from 'react';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
+import { FileThumbnail } from '@Components';
+
 import styles from './FilesPreview.module.scss';
 
 interface PropsType {
@@ -17,16 +19,14 @@ const FilesPreview: FC<PropsType> = ({ files, urls, deleteFile }) => {
 		setIsVisible(files.length > 0);
 	}, [files]);
 
-	const imageList = urls.map((url, index) => {
+	const imageList: Array<JSX.Element> = urls.map((url, index) => {
 		const filename = files[index].name;
 		return (
-			<img
-				className={styles['files-preview__file']}
-				src={url}
+			<FileThumbnail
+				url={url}
 				key={index}
-				alt={filename}
-				title={filename}
-				onClick={() => deleteFile(index)}
+				filename={filename}
+				deleteFile={() => deleteFile(index)}
 			/>
 		);
 	});

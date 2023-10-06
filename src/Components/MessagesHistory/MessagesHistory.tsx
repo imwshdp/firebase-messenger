@@ -23,7 +23,7 @@ const MessagesHistory: FC<PropsType> = ({
 	chatUserId,
 	chatUserPhotoURL,
 }) => {
-	const containerRef = useScrollToEnd(messages, chatUserId);
+	const [containerRef] = useScrollToEnd(messages, chatUserId);
 
 	return (
 		<div className={className} ref={containerRef}>

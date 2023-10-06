@@ -23,5 +23,12 @@ export function useScrollToEnd<T, D>(items: T, dependency: D) {
 		}
 	}, [items]);
 
-	return containerRef;
+	const triggerManually = () => {
+		containerRef.current?.scrollTo({
+			top: containerRef.current.scrollHeight,
+			behavior: 'smooth',
+		});
+	};
+
+	return [containerRef, triggerManually];
 }

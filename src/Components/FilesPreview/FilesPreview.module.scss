@@ -10,15 +10,4 @@
 
 	background-color: var(--color-1);
 	border-radius: var(--primary-border-radius);
-
-	&__file {
-		height: 50px;
-		cursor: pointer;
-
-		transition: opacity var(--primary-animation-duration) ease;
-
-		&:hover {
-			opacity: 0.5;
-		}
-	}
 }

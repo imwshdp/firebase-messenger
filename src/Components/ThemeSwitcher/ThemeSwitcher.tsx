@@ -1,19 +1,16 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 
 import { ColorSchemes } from '@Shared/content/constants';
 import { IconOfUser } from '@Shared/content/icons';
 
 import { ButtonWithIcon } from '@Components';
 
-const ThemeSwitcher: FC = () => {
-	const [colorScheme, setColorScheme] = useState<ColorSchemes>(ColorSchemes.light);
+interface PropsType {
+	colorScheme: ColorSchemes;
+	toggleColorScheme: () => void;
+}
 
-	const toggleColorTheme = () => {
-		setColorScheme((previousColorScheme) =>
-			previousColorScheme === ColorSchemes.light ? ColorSchemes.dark : ColorSchemes.light,
-		);
-	};
-
+const ThemeSwitcher: FC<PropsType> = ({ colorScheme, toggleColorScheme }) => {
 	const bodyElement = document.body;
 
 	useEffect(() => {
@@ -30,7 +27,7 @@ const ThemeSwitcher: FC = () => {
 		}
 	}, [colorScheme]);
 
-	return <ButtonWithIcon icon={<IconOfUser />} onClick={toggleColorTheme} />;
+	return <ButtonWithIcon icon={<IconOfUser />} onClick={toggleColorScheme} />;
 };
 
 export default ThemeSwitcher;
