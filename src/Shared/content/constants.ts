@@ -13,21 +13,43 @@ export const DATABASES = {
 	chats: 'chats',
 };
 
-export const ERROR_CODES = {
-	internal: 500,
-};
-
-export enum LinkListType {
+export enum LIST_LINK_TYPES {
 	Users,
 	Chats,
 }
 
-export enum ColorSchemes {
+export enum COLOR_SCHEMES {
 	light = 'light-theme',
 	dark = 'dark-theme',
 }
 
-export const localStorageKeys = {
+export const LOCAL_STORAGE_KEYS = {
 	colorScheme: 'colorScheme',
 	navbarCollapsedStatus: 'navbarCollapsedStatus',
+};
+
+export const VISIBLE_NOTIFICATIONS_NUMBER = 4;
+
+export const ERRNO = {
+	internal: [
+		500,
+		'We are sorry, but service is not available at this moment. Please try again later!',
+	],
+};
+
+export const firebaseErrors = {
+	// Auth
+	userNotFound: 'auth/user-not-found',
+	emailAlreadyExists: 'auth/email-already-exists',
+	emailAlreadyUsed: 'auth/email-already-in-use',
+	tokenExpired: 'auth/id-token-expired',
+	internal: 'auth/internal-error',
+	invalidPassword: 'auth/invalid-password',
+	stackOverflow: 'auth/too-many-requests',
+
+	// Storage
+	unknown: 'storage/unknown',
+	quotaExceeded: 'storage/quota-exceeded',
+	blobSlice: 'storage/cannot-slice-blob',
+	fileSize: 'storage/server-file-wrong-size',
 };

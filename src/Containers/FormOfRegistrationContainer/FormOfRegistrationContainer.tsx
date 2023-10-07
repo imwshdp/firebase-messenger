@@ -14,12 +14,7 @@ const FormOfRegistrationContainer: FC = () => {
 	const dispatch = useAppDispatch();
 
 	const handleRegister = (data: RegistrationRequestParamsType) => {
-		dispatch(registerUser(data))
-			.then(() => {
-				alert('Успешная регистрация');
-			})
-			.then(() => navigate(RoutesLinks.login, { replace: true }))
-			.catch(alert);
+		dispatch(registerUser(data)).then(() => navigate(RoutesLinks.login, { replace: true }));
 	};
 
 	return (

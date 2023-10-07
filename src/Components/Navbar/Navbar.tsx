@@ -2,7 +2,7 @@ import { FC, ReactNode } from 'react';
 
 import clsx from 'clsx';
 
-import { ColorSchemes } from '@Shared/content/constants';
+import { COLOR_SCHEMES } from '@Shared/content/constants';
 import { IconOfArrow } from '@Shared/content/icons';
 import { User } from '@Shared/model';
 
@@ -17,7 +17,7 @@ interface PropsType {
 	isNavbarCollapsed: boolean;
 	toggleNavbar: () => void;
 
-	colorScheme: ColorSchemes;
+	colorScheme: COLOR_SCHEMES;
 	toggleColorScheme: () => void;
 }
 

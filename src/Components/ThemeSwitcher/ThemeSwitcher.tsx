@@ -1,12 +1,12 @@
 import { FC, useEffect } from 'react';
 
-import { ColorSchemes } from '@Shared/content/constants';
-import { IconOfUser } from '@Shared/content/icons';
+import { COLOR_SCHEMES } from '@Shared/content/constants';
+import { IconOfMoon, IconOfSun } from '@Shared/content/icons';
 
 import { ButtonWithIcon } from '@Components';
 
 interface PropsType {
-	colorScheme: ColorSchemes;
+	colorScheme: COLOR_SCHEMES;
 	toggleColorScheme: () => void;
 }
 
@@ -15,19 +15,24 @@ const ThemeSwitcher: FC<PropsType> = ({ colorScheme, toggleColorScheme }) => {
 
 	useEffect(() => {
 		switch (colorScheme) {
-			case ColorSchemes.light:
-				bodyElement.classList.remove(ColorSchemes.dark);
-				bodyElement.classList.add(ColorSchemes.light);
+			case COLOR_SCHEMES.light:
+				bodyElement.classList.remove(COLOR_SCHEMES.dark);
+				bodyElement.classList.add(COLOR_SCHEMES.light);
 				break;
 
-			case ColorSchemes.dark:
-				bodyElement.classList.remove(ColorSchemes.light);
-				bodyElement.classList.add(ColorSchemes.dark);
+			case COLOR_SCHEMES.dark:
+				bodyElement.classList.remove(COLOR_SCHEMES.light);
+				bodyElement.classList.add(COLOR_SCHEMES.dark);
 				break;
 		}
 	}, [colorScheme]);
 
-	return <ButtonWithIcon icon={<IconOfUser />} onClick={toggleColorScheme} />;
+	return (
+		<ButtonWithIcon
+			icon={colorScheme === COLOR_SCHEMES.light ? <IconOfSun /> : <IconOfMoon />}
+			onClick={toggleColorScheme}
+		/>
+	);
 };
 
 export default ThemeSwitcher;

@@ -14,14 +14,14 @@ const FormOfLoginContainer: FC = () => {
 
 	const handleLogin = (email: string, password: string) => {
 		dispatch(loginWithEmailPassword({ email, password }))
-			.then(() => navigate(RoutesLinks.root, { replace: true }))
-			.catch(alert);
+			.unwrap()
+			.then(() => navigate(RoutesLinks.root, { replace: true }));
 	};
 
 	const handleGoogleLogin = () => {
 		dispatch(loginWithGoogle())
-			.then(() => navigate(RoutesLinks.root))
-			.catch(alert);
+			.unwrap()
+			.then(() => navigate(RoutesLinks.root));
 	};
 
 	return (

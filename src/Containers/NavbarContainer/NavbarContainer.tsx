@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import { auth } from '@Config';
-import { ColorSchemes } from '@Shared/content/constants';
+import { COLOR_SCHEMES } from '@Shared/content/constants';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import useAppSelector from '@Shared/hooks/useAppSelector';
 import { useAuth } from '@Shared/hooks/useAuth';
@@ -21,7 +21,7 @@ const NavbarContainer: FC = () => {
 	const colorScheme = useAppSelector((state) => state.config.colorScheme);
 	const toggleColorScheme = () =>
 		dispatch(
-			setColorScheme(colorScheme === ColorSchemes.dark ? ColorSchemes.light : ColorSchemes.dark),
+			setColorScheme(colorScheme === COLOR_SCHEMES.dark ? COLOR_SCHEMES.light : COLOR_SCHEMES.dark),
 		);
 
 	const { isAuth } = useAuth();

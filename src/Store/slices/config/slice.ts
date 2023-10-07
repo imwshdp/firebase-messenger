@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ColorSchemes, localStorageKeys } from '@Shared/content/constants';
+import { COLOR_SCHEMES, LOCAL_STORAGE_KEYS } from '@Shared/content/constants';
 import { ConfigState } from '@Shared/model';
 
 const initialState: ConfigState = {
-	colorScheme: ColorSchemes.light,
+	colorScheme: COLOR_SCHEMES.light,
 	isNavbarCollapsed: false,
 };
 
@@ -12,11 +12,11 @@ const configSlice = createSlice({
 	initialState,
 	reducers: {
 		getLocalStorageConfig(state) {
-			const colorScheme = localStorage.getItem(localStorageKeys.colorScheme);
-			const navbarState = localStorage.getItem(localStorageKeys.navbarCollapsedStatus);
+			const colorScheme = localStorage.getItem(LOCAL_STORAGE_KEYS.colorScheme);
+			const navbarState = localStorage.getItem(LOCAL_STORAGE_KEYS.navbarCollapsedStatus);
 
 			const themeFromColorSchemes = () =>
-				Object.values(ColorSchemes).filter((value) => {
+				Object.values(COLOR_SCHEMES).filter((value) => {
 					return value === colorScheme;
 				})[0];
 
@@ -27,8 +27,8 @@ const configSlice = createSlice({
 			};
 		},
 
-		setColorScheme(state, { payload }: PayloadAction<ColorSchemes>) {
-			localStorage.setItem(localStorageKeys.colorScheme, payload);
+		setColorScheme(state, { payload }: PayloadAction<COLOR_SCHEMES>) {
+			localStorage.setItem(LOCAL_STORAGE_KEYS.colorScheme, payload);
 			return {
 				...state,
 				colorScheme: payload,
@@ -36,7 +36,7 @@ const configSlice = createSlice({
 		},
 
 		setNavbarStatus(state, { payload }: PayloadAction<boolean>) {
-			localStorage.setItem(localStorageKeys.navbarCollapsedStatus, String(payload));
+			localStorage.setItem(LOCAL_STORAGE_KEYS.navbarCollapsedStatus, String(payload));
 			return {
 				...state,
 				isNavbarCollapsed: payload,

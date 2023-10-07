@@ -1,6 +1,6 @@
 // User
 
-import { ColorSchemes } from '@Shared/content/constants';
+import { COLOR_SCHEMES } from '@Shared/content/constants';
 
 import { UserChatSnapshotInfo } from './responses';
 
@@ -16,7 +16,6 @@ export interface User extends UserInfo {
 
 export interface UserState extends User {
 	loading: boolean;
-	error: string | null;
 }
 
 // Chats
@@ -33,7 +32,7 @@ export interface UserChatInfo {
 export interface ChatsState {
 	chats: UserChatInfo[];
 	loading: boolean;
-	error: string | null;
+	error: boolean;
 }
 
 export type UserChatsSnapshotTupleType = [string, UserChatSnapshotInfo];
@@ -43,7 +42,7 @@ export type UserChatsSnapshotTupleType = [string, UserChatSnapshotInfo];
 export interface UsersState {
 	users: UserInfo[];
 	loading: boolean;
-	error: string | null;
+	error: boolean;
 }
 
 // Messages
@@ -60,7 +59,6 @@ export interface MessagesState {
 	chatId: string | null;
 	user: UserInfo | null;
 	messages: Array<Message>;
-	error: string | null;
 }
 
 export interface MessageState {
@@ -71,6 +69,13 @@ export interface MessageState {
 // Config
 
 export interface ConfigState {
-	colorScheme: ColorSchemes;
+	colorScheme: COLOR_SCHEMES;
 	isNavbarCollapsed: boolean;
+}
+
+// Error
+
+export interface ErrorState {
+	code: number;
+	message: string;
 }

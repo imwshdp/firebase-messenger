@@ -17,6 +17,7 @@ export { default as MessageView } from './MessageView';
 export { default as Navbar } from './Navbar';
 export { default as NewMessageSection } from './NewMessageSection';
 export { default as NewMessageView } from './NewMessageView';
+export { default as NotificationsWidget } from './NotificationsWidget';
 export { default as ProfilePicture } from './ProfilePicture';
 export { default as Search } from './Search';
 export { default as TextArea } from './TextArea';

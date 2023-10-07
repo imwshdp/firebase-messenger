@@ -1,13 +1,25 @@
+import { FirebaseError } from 'firebase/app';
+
 import ApiService from '@Api';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ERROR_CODES } from '@Shared/content/constants';
+import { ERRNO } from '@Shared/content/constants';
+import { firebaseErrorParser } from '@Shared/helpers/firebaseErrorParser';
 import { LoginRequestParamsType, RegistrationRequestParamsType, User } from '@Shared/model';
 import { RejectWithValueType } from '@Store';
 
 export const registerUser = createAsyncThunk<void, RegistrationRequestParamsType>(
 	'user/register',
-	async (data) => {
-		await ApiService.auth.register(data);
+	async (data, { rejectWithValue }) => {
+		try {
+			await ApiService.auth.register(data);
+		} catch (error: unknown) {
+			if (error instanceof FirebaseError) {
+				return rejectWithValue(firebaseErrorParser(error.code, error.message));
+			} else {
+				const [code, message] = ERRNO.internal;
+				return rejectWithValue(`${code}: ${message}`);
+			}
+		}
 	},
 );
 
@@ -16,42 +28,52 @@ export const loginWithEmailPassword = createAsyncThunk<
 	LoginRequestParamsType,
 	RejectWithValueType
 >('user/loginWithEmailPassword', async (data, { rejectWithValue }) => {
-	const response = await ApiService.auth.login(data);
-
-	if (!response) {
-		rejectWithValue(`${ERROR_CODES.internal}: Unable to log in. Please try again later.`);
-	}
-
-	const { user } = response;
-	const { email, uid, displayName, photoURL } = user;
-
-	// TODO handle later
-	return {
-		email: email!,
-		uid,
-		displayName: displayName!,
-		photoURL,
-	};
-});
-
-export const loginWithGoogle = createAsyncThunk<User, void, RejectWithValueType>(
-	'user/loginWithGoogle',
-	async (_, { rejectWithValue }) => {
-		const response = await ApiService.auth.loginByGoogle();
-
-		if (!response) {
-			rejectWithValue(`${ERROR_CODES.internal}: Unable to log in. Please try again later.`);
-		}
-
+	try {
+		const response = await ApiService.auth.login(data);
 		const { user } = response;
+
 		const { email, uid, displayName, photoURL } = user;
 
-		// TODO handle later
 		return {
 			email: email!,
 			uid,
 			displayName: displayName!,
 			photoURL,
 		};
+	} catch (error: unknown) {
+		if (error instanceof FirebaseError) {
+			console.log('code :>> ', error.code);
+			console.log('error :>> ', error.message);
+			return rejectWithValue(firebaseErrorParser(error.code, error.message));
+		} else {
+			const [code, message] = ERRNO.internal;
+			return rejectWithValue(`${code}: ${message}`);
+		}
+	}
+});
+
+export const loginWithGoogle = createAsyncThunk<User, void, RejectWithValueType>(
+	'user/loginWithGoogle',
+	async (_, { rejectWithValue }) => {
+		try {
+			const response = await ApiService.auth.loginByGoogle();
+
+			const { user } = response;
+			const { email, uid, displayName, photoURL } = user;
+
+			return {
+				email: email!,
+				uid,
+				displayName: displayName!,
+				photoURL,
+			};
+		} catch (error: unknown) {
+			if (error instanceof FirebaseError) {
+				return rejectWithValue(firebaseErrorParser(error.code, error.message));
+			} else {
+				const [code, message] = ERRNO.internal;
+				return rejectWithValue(`${code}: ${message}`);
+			}
+		}
 	},
 );

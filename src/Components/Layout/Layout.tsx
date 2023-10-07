@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import { NavbarContainer } from '@Containers';
+import { NavbarContainer, NotificationsWidgetContainer } from '@Containers';
 
 import styles from './Layout.module.scss';
 
@@ -14,6 +14,8 @@ const Layout: FC = () => {
 			<main className={styles['app__main']}>
 				<Outlet />
 			</main>
+
+			<NotificationsWidgetContainer />
 		</div>
 	);
 };

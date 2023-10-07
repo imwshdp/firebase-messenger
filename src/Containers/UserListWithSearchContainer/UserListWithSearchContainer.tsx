@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef, useState } from 'react';
 
-import { LinkListType } from '@Shared/content/constants';
+import { LIST_LINK_TYPES } from '@Shared/content/constants';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import useAppSelector from '@Shared/hooks/useAppSelector';
 import useDebounce from '@Shared/hooks/useDebounce';
@@ -39,7 +39,7 @@ const UserListWithSearchContainer: FC = () => {
 				ref={inputRef}
 				placeholder='Найти пользователей...'
 			/>
-			<LinkList type={LinkListType.Users} items={userList} isLoading={isLoading} />
+			<LinkList type={LIST_LINK_TYPES.Users} items={userList} isLoading={isLoading} />
 		</>
 	);
 };

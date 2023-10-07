@@ -3,7 +3,11 @@ import { FC } from 'react';
 import styles from './Loader.module.scss';
 
 const Loader: FC = () => {
-	return <span className={styles['loader']}>Загрузка ...</span>;
+	return (
+		<div className={styles['wrapper']}>
+			<span className={styles['wrapper__loader']}>Загрузка ...</span>
+		</div>
+	);
 };
 
 export default Loader;

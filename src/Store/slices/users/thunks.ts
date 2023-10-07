@@ -1,21 +1,24 @@
+import { FirebaseError } from 'firebase/app';
+
 import ApiService from '@Api';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ERROR_CODES } from '@Shared/content/constants';
+import { ERRNO } from '@Shared/content/constants';
 import { FilterChatsRequestParamsType, UserInfo } from '@Shared/model';
 import { RejectWithValueType } from '@Store';
 
 export const fetchUsers = createAsyncThunk<UserInfo[], void, RejectWithValueType>(
 	'users/fetchUsers',
 	async (_, { rejectWithValue }) => {
-		const response = await ApiService.users.fetch();
-
-		if (!response) {
-			rejectWithValue(
-				`${ERROR_CODES.internal}: Unable to load chats data. Please try again later.`,
-			);
+		try {
+			return await ApiService.users.fetch();
+		} catch (error: unknown) {
+			if (error instanceof FirebaseError) {
+				return rejectWithValue(`${error.code}: ${error.message}`);
+			} else {
+				const [code, message] = ERRNO.internal;
+				return rejectWithValue(`${code}: ${message}`);
+			}
 		}
-
-		return response;
 	},
 );
 
@@ -24,11 +27,14 @@ export const searchUsers = createAsyncThunk<
 	FilterChatsRequestParamsType,
 	RejectWithValueType
 >('users/searchUsers', async (data, { rejectWithValue }) => {
-	const response = await ApiService.users.search(data);
-
-	if (!response) {
-		rejectWithValue(`${ERROR_CODES.internal}: Unable to load chats data. Please try again later.`);
+	try {
+		return await ApiService.users.search(data);
+	} catch (error: unknown) {
+		if (error instanceof FirebaseError) {
+			return rejectWithValue(`${error.code}: ${error.message}`);
+		} else {
+			const [code, message] = ERRNO.internal;
+			return rejectWithValue(`${code}: ${message}`);
+		}
 	}
-
-	return response;
 });

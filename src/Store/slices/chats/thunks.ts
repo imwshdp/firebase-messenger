@@ -1,6 +1,8 @@
+import { FirebaseError } from 'firebase/app';
+
 import ApiService from '@Api';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ERROR_CODES } from '@Shared/content/constants';
+import { ERRNO } from '@Shared/content/constants';
 import { OpenChatWithUserRequestParamsType, UpdateChatRequestParamsType } from '@Shared/model';
 import { RejectWithValueType } from '@Store';
 
@@ -11,8 +13,13 @@ export const openChat = createAsyncThunk<
 >('chats/openChat', async (data, { rejectWithValue }) => {
 	try {
 		await ApiService.chats.open(data);
-	} catch (error) {
-		rejectWithValue(`${ERROR_CODES.internal}: Unable to load chat data. Please try again later.`);
+	} catch (error: unknown) {
+		if (error instanceof FirebaseError) {
+			return rejectWithValue(`${error.code}: ${error.message}`);
+		} else {
+			const [code, message] = ERRNO.internal;
+			return rejectWithValue(`${code}: ${message}`);
+		}
 	}
 });
 
@@ -21,8 +28,13 @@ export const updateChat = createAsyncThunk<void, UpdateChatRequestParamsType, Re
 	async (data, { rejectWithValue }) => {
 		try {
 			await ApiService.chats.update(data);
-		} catch (error) {
-			rejectWithValue(`${ERROR_CODES.internal}: Unable to send message. Please try again later.`);
+		} catch (error: unknown) {
+			if (error instanceof FirebaseError) {
+				return rejectWithValue(`${error.code}: ${error.message}`);
+			} else {
+				const [code, message] = ERRNO.internal;
+				return rejectWithValue(`${code}: ${message}`);
+			}
 		}
 	},
 );

@@ -1,0 +1,64 @@
+.container {
+	position: fixed;
+	top: 0;
+	right: 0;
+
+	display: flex;
+	flex-direction: column;
+
+	gap: var(--secondary-offset);
+
+	&:has(> *) {
+		padding: var(--primary-offset);
+	}
+
+	&__notification {
+		display: flex;
+
+		border: 1px solid var(--color-4);
+		border-radius: var(--primary-border-radius);
+		overflow: hidden;
+
+		box-shadow: 0px 0px 8px 2px rgba(247, 134, 134, 0.3);
+
+		&__aside {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			width: 60px;
+			height: inherit;
+
+			background: rgba(247, 134, 134, 0.2);
+			backdrop-filter: blur(5px);
+
+			svg {
+				opacity: 0.8;
+			}
+		}
+
+		&__content {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			width: 600px;
+
+			gap: var(--secondary-offset);
+			padding: var(--secondary-offset);
+
+			background-color: var(--color-2);
+
+			&__text {
+				display: flex;
+				flex-direction: column;
+
+				gap: var(--additional-offset);
+
+				&__message {
+					font-size: 14px;
+				}
+			}
+		}
+	}
+}

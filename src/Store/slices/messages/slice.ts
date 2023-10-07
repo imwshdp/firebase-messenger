@@ -6,7 +6,6 @@ const initialState: MessagesState = {
 	chatId: null,
 	user: null,
 	messages: [],
-	error: null,
 };
 
 const messagesSlice = createSlice({

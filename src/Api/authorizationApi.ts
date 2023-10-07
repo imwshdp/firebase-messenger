@@ -28,7 +28,6 @@ export const registerNewUser = async ({
 }: RegistrationRequestParamsType): Promise<void> => {
 	const response = await createUserWithEmailAndPassword(auth, email, password);
 
-	// TODO handle errors
 	const { user } = response;
 
 	const userData: SetDocUser = {

@@ -1,6 +1,6 @@
 import { FC, useEffect, useRef, useState } from 'react';
 
-import { LinkListType } from '@Shared/content/constants';
+import { LIST_LINK_TYPES } from '@Shared/content/constants';
 // import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import useAppSelector from '@Shared/hooks/useAppSelector';
 import useDebounce from '@Shared/hooks/useDebounce';
@@ -38,7 +38,7 @@ const ChatListWithSearchContainer: FC = () => {
 				ref={inputRef}
 				placeholder='Найти чат...'
 			/>
-			<LinkList type={LinkListType.Chats} items={chatList} isLoading={isLoading} />
+			<LinkList type={LIST_LINK_TYPES.Chats} items={chatList} isLoading={isLoading} />
 		</>
 	);
 };
