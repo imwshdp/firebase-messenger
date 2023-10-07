@@ -6,18 +6,16 @@ import styles from './ChatsPanel.module.scss';
 
 const ChatsPanel: FC = () => {
 	return (
-		<aside className={styles['chats']}>
-			<section className={styles['chats__list']}>
-				<div className={styles['chats__list__chats']}>
-					<ChatListWithSearchContainer />
-				</div>
+		<aside className={styles['aside']}>
+			<div className={styles['aside__chats']}>
+				<ChatListWithSearchContainer />
+			</div>
 
-				<div className={styles['chats__list__separator']} />
+			<div className={styles['aside__separator']} />
 
-				<div className={styles['chats__list__users']}>
-					<UserListWithSearchContainer />
-				</div>
-			</section>
+			<div className={styles['aside__users']}>
+				<UserListWithSearchContainer />
+			</div>
 		</aside>
 	);
 };

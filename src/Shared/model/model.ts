@@ -31,6 +31,7 @@ export interface UserChatInfo {
 
 export interface ChatsState {
 	chats: UserChatInfo[];
+	filteredChats: UserChatInfo[];
 	loading: boolean;
 	error: boolean;
 }

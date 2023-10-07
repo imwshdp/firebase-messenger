@@ -9,6 +9,7 @@ import { openChat } from './thunks';
 const sliceName = 'chats';
 const initialState: ChatsState = {
 	chats: [],
+	filteredChats: [],
 	loading: false,
 	error: false,
 };
@@ -19,7 +20,7 @@ const chatsSlice = createSlice({
 	reducers: {
 		setChats: {
 			reducer: (state, { payload }: PayloadAction<UserChatInfo[]>) => {
-				return { ...state, chats: [...payload] };
+				return { ...state, chats: payload, filteredChats: payload };
 			},
 			prepare: (chats: Array<UserChatsSnapshotTupleType>): { payload: UserChatInfo[] } => {
 				return {
@@ -35,6 +36,28 @@ const chatsSlice = createSlice({
 						}),
 				};
 			},
+		},
+
+		filterChats(state, { payload }: PayloadAction<string>) {
+			const newState = {
+				...state,
+				chats: [...state.chats],
+				filteredChats:
+					payload.length > 0
+						? [...state.chats.filter((chat) => chat.userInfo.displayName === payload)]
+						: [...state.chats],
+			};
+
+			return newState;
+		},
+
+		setLoadingManually(state, { payload }: PayloadAction<boolean>) {
+			return {
+				...state,
+				chats: [...state.chats],
+				filteredChats: [...state.filteredChats],
+				loading: payload,
+			};
 		},
 	},
 	extraReducers: (builder) => {
@@ -59,5 +82,5 @@ const chatsSlice = createSlice({
 	},
 });
 
-export const { setChats } = chatsSlice.actions;
+export const { setChats, filterChats, setLoadingManually } = chatsSlice.actions;
 export default chatsSlice.reducer;

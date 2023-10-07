@@ -1,17 +1,18 @@
 .list {
 	position: relative;
 	display: flex;
-	flex: 1;
+
+	overflow-y: scroll;
+	scrollbar-gutter: stable;
 
 	&__items {
 		display: flex;
 		flex-direction: column;
 		flex: 1;
 
-		gap: var(--secondary-offset);
+		height: fit-content;
 
-		overflow: auto;
-		scrollbar-gutter: stable;
+		gap: var(--secondary-offset);
 	}
 
 	&__overlay {
@@ -22,6 +23,6 @@
 		width: 100%;
 		height: 100%;
 
-		backdrop-filter: blur(5px);
+		backdrop-filter: blur(3px);
 	}
 }
