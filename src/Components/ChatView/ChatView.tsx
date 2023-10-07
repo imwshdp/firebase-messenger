@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { forwardRef } from 'react';
 
 import { MessagesHistoryContainer, NewMessageSectionContainer } from '@Containers';
 import { UserInfo } from '@Shared/model';
@@ -9,9 +9,13 @@ import styles from './ChatView.module.scss';
 
 interface PropsType {
 	chatUser: UserInfo | null;
+	triggerScroll: () => void;
 }
 
-const ChatView: FC<PropsType> = ({ chatUser }) => {
+const ChatView = forwardRef<HTMLDivElement, PropsType>(function ChatView(
+	{ chatUser, triggerScroll },
+	ref,
+) {
 	return (
 		<section className={styles['chat_view']}>
 			{chatUser && (
@@ -22,11 +26,11 @@ const ChatView: FC<PropsType> = ({ chatUser }) => {
 				</header>
 			)}
 
-			<MessagesHistoryContainer className={styles['chat_view__container']} />
+			<MessagesHistoryContainer className={styles['chat_view__container']} ref={ref} />
 
-			<NewMessageSectionContainer />
+			<NewMessageSectionContainer triggerScroll={triggerScroll} />
 		</section>
 	);
-};
+});
 
 export default ChatView;

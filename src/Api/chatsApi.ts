@@ -43,7 +43,7 @@ export const openChat = async ({ currentUser, chatUser }: OpenChatWithUserReques
 			messages: [],
 		});
 
-		const userChatsRef = collection(db, DATABASES.usersChats);
+		const userChatsRef = collection(db, DATABASES.userChats);
 		await updateDoc(doc(userChatsRef, currentUserId), {
 			[`${combinedId}.userInfo`]: {
 				uid: chatUserId,
@@ -110,12 +110,12 @@ export const updateChat = async ({
 	chatId,
 	text,
 }: UpdateChatRequestParamsType) => {
-	await updateDoc(doc(db, DATABASES.usersChats, senderId), {
+	await updateDoc(doc(db, DATABASES.userChats, senderId), {
 		[`${chatId}.lastMessage`]: { text },
 		[`${chatId}.date`]: serverTimestamp(),
 	});
 
-	await updateDoc(doc(db, DATABASES.usersChats, userId), {
+	await updateDoc(doc(db, DATABASES.userChats, userId), {
 		[`${chatId}.lastMessage`]: { text },
 		[`${chatId}.date`]: serverTimestamp(),
 	});

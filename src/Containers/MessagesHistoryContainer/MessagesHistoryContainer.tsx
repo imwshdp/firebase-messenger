@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { forwardRef, useEffect } from 'react';
 
 import { doc, onSnapshot } from 'firebase/firestore';
 
@@ -16,48 +16,49 @@ interface PropsType {
 	className?: string;
 }
 
-const MessagesHistoryContainer: FC<PropsType> = ({ className }) => {
-	const dispatch = useAppDispatch();
+const MessagesHistoryContainer = forwardRef<HTMLDivElement, PropsType>(
+	function MessagesHistoryContainer({ className }, ref) {
+		const dispatch = useAppDispatch();
 
-	const messagesList = useAppSelector((state) => state.messages.messages);
-	const chatId = useAppSelector((state) => state.messages.chatId);
+		const messagesList = useAppSelector((state) => state.messages.messages);
+		const chatId = useAppSelector((state) => state.messages.chatId);
 
-	const chatUserId = useAppSelector((state) => state.messages.user?.uid);
-	const chatUserPhotoURL = useAppSelector((state) => state.messages.user?.photoURL);
+		const chatUserPhotoURL = useAppSelector((state) => state.messages.user?.photoURL);
 
-	const currentUserId = useAppSelector((state) => state.user.uid);
-	const currentUserPhotoURL = useAppSelector((state) => state.user.photoURL);
+		const currentUserId = useAppSelector((state) => state.user.uid);
+		const currentUserPhotoURL = useAppSelector((state) => state.user.photoURL);
 
-	useEffect(() => {
-		let unsub = () => {};
+		useEffect(() => {
+			let unsub = () => {};
 
-		if (chatId) {
-			unsub = onSnapshot(
-				doc(db, DATABASES.chats, chatId).withConverter(converter<MessagesSnapshotResponseType>()),
-				(doc) => {
-					const response = doc.data();
-					if (doc.exists() && response) {
-						dispatch(setMessages(response.messages));
-					}
-				},
-			);
-		}
+			if (chatId) {
+				unsub = onSnapshot(
+					doc(db, DATABASES.chats, chatId).withConverter(converter<MessagesSnapshotResponseType>()),
+					(doc) => {
+						const response = doc.data();
+						if (doc.exists() && response) {
+							dispatch(setMessages(response.messages));
+						}
+					},
+				);
+			}
 
-		return () => {
-			unsub();
-		};
-	}, [chatId]);
+			return () => {
+				unsub();
+			};
+		}, [chatId]);
 
-	return (
-		<MessagesHistory
-			className={className}
-			messages={messagesList}
-			chatUserId={chatUserId}
-			chatUserPhotoURL={chatUserPhotoURL}
-			currentUserId={currentUserId}
-			currentUserPhotoURL={currentUserPhotoURL}
-		/>
-	);
-};
+		return (
+			<MessagesHistory
+				className={className}
+				messages={messagesList}
+				chatUserPhotoURL={chatUserPhotoURL}
+				currentUserId={currentUserId}
+				currentUserPhotoURL={currentUserPhotoURL}
+				ref={ref}
+			/>
+		);
+	},
+);
 
 export default MessagesHistoryContainer;

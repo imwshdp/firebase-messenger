@@ -1,6 +1,5 @@
-import { FC } from 'react';
+import { forwardRef } from 'react';
 
-import { useScrollToEnd } from '@Shared/hooks/useScrollToEnd';
 import { Message } from '@Shared/model';
 
 import { MessageView } from '@Components';
@@ -9,24 +8,17 @@ interface PropsType {
 	className?: string;
 	messages: Message[];
 
-	chatUserId?: string;
 	chatUserPhotoURL?: string | null;
 	currentUserId: string;
 	currentUserPhotoURL: string | null;
 }
 
-const MessagesHistory: FC<PropsType> = ({
-	className,
-	messages,
-	currentUserId,
-	currentUserPhotoURL,
-	chatUserId,
-	chatUserPhotoURL,
-}) => {
-	const [containerRef] = useScrollToEnd(messages, chatUserId);
-
+const MessagesHistory = forwardRef<HTMLDivElement, PropsType>(function MessagesHistory(
+	{ className, messages, currentUserId, currentUserPhotoURL, chatUserPhotoURL },
+	ref,
+) {
 	return (
-		<div className={className} ref={containerRef}>
+		<div className={className} ref={ref}>
 			{messages.map((message, index) => {
 				const isMessageByCurrentUser = message.senderId === currentUserId;
 
@@ -41,6 +33,6 @@ const MessagesHistory: FC<PropsType> = ({
 			})}
 		</div>
 	);
-};
+});
 
 export default MessagesHistory;

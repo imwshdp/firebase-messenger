@@ -61,7 +61,7 @@ export const registerNewUser = async ({
 	await setDoc(doc(usersRef, user.uid), userData);
 
 	// create empty user chats in firestore
-	const userChatsRef = collection(db, DATABASES.usersChats);
+	const userChatsRef = collection(db, DATABASES.userChats);
 	await setDoc(doc(userChatsRef, user.uid), {});
 };
 

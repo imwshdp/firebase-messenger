@@ -20,7 +20,7 @@ const HomePageContainer: FC = () => {
 	useEffect(() => {
 		const getChats = () => {
 			const unsub = onSnapshot(
-				doc(db, DATABASES.usersChats, currentUserId).withConverter(
+				doc(db, DATABASES.userChats, currentUserId).withConverter(
 					converter<UserChatsSnapshotResponseType>(),
 				),
 				(doc) => {

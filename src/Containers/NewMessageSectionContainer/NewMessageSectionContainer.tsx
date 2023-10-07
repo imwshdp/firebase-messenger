@@ -9,7 +9,11 @@ import { updateChat } from '@Store/slices/chats';
 
 import { NewMessageSection } from '@Components';
 
-const NewMessageSectionContainer: FC = () => {
+interface PropsType {
+	triggerScroll: () => void;
+}
+
+const NewMessageSectionContainer: FC<PropsType> = ({ triggerScroll }) => {
 	const dispatch = useAppDispatch();
 	const currentUserId = useAppSelector((state) => state.user.uid);
 	const chatUser = useAppSelector((state) => state.messages.user);
@@ -47,6 +51,12 @@ const NewMessageSectionContainer: FC = () => {
 	useEffect(() => {
 		resetMessageData();
 	}, [chatId]);
+
+	useEffect(() => {
+		if (messageFiles.length === 1) {
+			setTimeout(() => triggerScroll(), 300);
+		}
+	}, [messageFiles]);
 
 	const sendMessage = () => {
 		chatId &&

@@ -9,7 +9,7 @@ export const DEBOUNCE_DELAY = 1000;
 
 export const DATABASES = {
 	users: 'users',
-	usersChats: 'userChats',
+	userChats: 'userChats',
 	chats: 'chats',
 };
 
