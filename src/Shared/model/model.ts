@@ -80,3 +80,11 @@ export interface ErrorState {
 	code: number;
 	message: string;
 }
+
+// Modal
+
+export interface ModalState {
+	isModalOpen: boolean;
+	urls: Array<string>;
+	activeUrlIndex: number;
+}

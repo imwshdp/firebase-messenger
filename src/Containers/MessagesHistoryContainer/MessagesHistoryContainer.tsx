@@ -29,19 +29,17 @@ const MessagesHistoryContainer = forwardRef<HTMLDivElement, PropsType>(
 		const currentUserPhotoURL = useAppSelector((state) => state.user.photoURL);
 
 		useEffect(() => {
-			let unsub = () => {};
+			if (!chatId) return;
 
-			if (chatId) {
-				unsub = onSnapshot(
-					doc(db, DATABASES.chats, chatId).withConverter(converter<MessagesSnapshotResponseType>()),
-					(doc) => {
-						const response = doc.data();
-						if (doc.exists() && response) {
-							dispatch(setMessages(response.messages));
-						}
-					},
-				);
-			}
+			const unsub = onSnapshot(
+				doc(db, DATABASES.chats, chatId).withConverter(converter<MessagesSnapshotResponseType>()),
+				(doc) => {
+					const response = doc.data();
+					if (doc.exists() && response) {
+						dispatch(setMessages(response.messages));
+					}
+				},
+			);
 
 			return () => {
 				unsub();

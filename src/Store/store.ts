@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { ErrorState } from '@Shared/model';
 
 import { default as chatsReducer } from './slices/chats';
 import { default as configReducer } from './slices/config';
 import { default as errorsReducer } from './slices/errors';
 import { default as messagesReducer } from './slices/messages';
+import { default as modalReducer } from './slices/modal';
 import { default as userReducer } from './slices/user';
 import { default as usersReducer } from './slices/users';
 
@@ -15,6 +17,7 @@ export const store = configureStore({
 		messages: messagesReducer,
 		config: configReducer,
 		errors: errorsReducer,
+		modal: modalReducer,
 	},
 });
 
@@ -22,5 +25,5 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
 export type RejectWithValueType = {
-	rejectValue: string;
+	rejectValue: ErrorState;
 };

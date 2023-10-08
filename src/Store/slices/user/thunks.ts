@@ -16,8 +16,11 @@ export const registerUser = createAsyncThunk<void, RegistrationRequestParamsType
 			if (error instanceof FirebaseError) {
 				return rejectWithValue(firebaseErrorParser(error.code, error.message));
 			} else {
-				const [code, message] = ERRNO.internal;
-				return rejectWithValue(`${code}: ${message}`);
+				const [code, message] = ERRNO;
+				return rejectWithValue({
+					code,
+					message,
+				});
 			}
 		}
 	},
@@ -42,12 +45,13 @@ export const loginWithEmailPassword = createAsyncThunk<
 		};
 	} catch (error: unknown) {
 		if (error instanceof FirebaseError) {
-			console.log('code :>> ', error.code);
-			console.log('error :>> ', error.message);
 			return rejectWithValue(firebaseErrorParser(error.code, error.message));
 		} else {
-			const [code, message] = ERRNO.internal;
-			return rejectWithValue(`${code}: ${message}`);
+			const [code, message] = ERRNO;
+			return rejectWithValue({
+				code,
+				message,
+			});
 		}
 	}
 });
@@ -56,23 +60,16 @@ export const loginWithGoogle = createAsyncThunk<User, void, RejectWithValueType>
 	'user/loginWithGoogle',
 	async (_, { rejectWithValue }) => {
 		try {
-			const response = await ApiService.auth.loginByGoogle();
-
-			const { user } = response;
-			const { email, uid, displayName, photoURL } = user;
-
-			return {
-				email: email!,
-				uid,
-				displayName: displayName!,
-				photoURL,
-			};
+			return await ApiService.auth.loginByGoogle();
 		} catch (error: unknown) {
 			if (error instanceof FirebaseError) {
 				return rejectWithValue(firebaseErrorParser(error.code, error.message));
 			} else {
-				const [code, message] = ERRNO.internal;
-				return rejectWithValue(`${code}: ${message}`);
+				const [code, message] = ERRNO;
+				return rejectWithValue({
+					code,
+					message,
+				});
 			}
 		}
 	},

@@ -1,0 +1,114 @@
+.container {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	display: grid;
+	grid-template-columns: 100px 1fr 100px;
+	grid-auto-flow: column;
+
+	align-items: center;
+
+	width: 100vw;
+	height: 100vh;
+
+	background-color: rgb(0, 0, 0, 0.7);
+}
+
+.button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	height: 70vh;
+	width: 100px;
+
+	transition: all var(--primary-animation-duration) ease;
+
+	&:hover {
+		background-color: rgba(96, 96, 96, 0.5);
+	}
+
+	&_disabled {
+		background-color: transparent;
+
+		&:hover {
+			background-color: transparent;
+		}
+	}
+
+	&__icon {
+		width: 50px;
+		height: 50px;
+
+		background-color: rgb(255, 255, 255, 0.5);
+		clip-path: polygon(65% 0, 100% 50%, 65% 100%, 25% 100%, 60% 51%, 25% 0);
+
+		transition: all var(--primary-animation-duration) ease;
+
+		&_rotated {
+			transform: rotate(180deg);
+		}
+
+		&_disabled {
+			background-color: rgb(255, 255, 255, 0.2);
+		}
+	}
+}
+
+.modal {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&__image {
+		display: block;
+
+		max-width: calc(100vw - 200px);
+		max-height: calc(100vh - 200px);
+
+		object-fit: cover;
+	}
+}
+
+.close_modal {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 60px;
+	height: 60px;
+
+	transition: all var(--primary-animation-duration) ease;
+
+	&:hover {
+		background-color: rgba(96, 96, 96, 0.5);
+	}
+
+	&__icon {
+		width: 35px;
+		height: 35px;
+
+		background-color: rgb(255, 255, 255, 0.5);
+		clip-path: polygon(
+			20% 0%,
+			0% 20%,
+			30% 50%,
+			0% 80%,
+			20% 100%,
+			50% 70%,
+			80% 100%,
+			100% 80%,
+			70% 50%,
+			100% 20%,
+			80% 0%,
+			50% 30%
+		);
+
+		transition: all var(--primary-animation-duration) ease;
+	}
+}

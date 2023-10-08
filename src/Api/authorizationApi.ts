@@ -6,12 +6,12 @@ import {
 	updateProfile,
 	UserCredential,
 } from 'firebase/auth';
-import { collection, doc, setDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, setDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 
 import { auth, db, storage } from '@Config';
 import { DATABASES } from '@Shared/content/constants';
-import { LoginRequestParamsType, RegistrationRequestParamsType } from '@Shared/model';
+import { LoginRequestParamsType, RegistrationRequestParamsType, User } from '@Shared/model';
 
 interface SetDocUser {
 	uid: string;
@@ -72,7 +72,53 @@ export const loginWithEmailPassword = async ({
 	return await signInWithEmailAndPassword(auth, email, password);
 };
 
-export const loginWithGoogle = async (): Promise<UserCredential> => {
-	const result = await signInWithPopup(auth, new GoogleAuthProvider());
-	return result;
+export const loginWithGoogle = async (): Promise<User> => {
+	const response = await signInWithPopup(auth, new GoogleAuthProvider());
+	const { user } = response;
+	const { uid, email, displayName, photoURL } = user;
+
+	const usersRef = collection(db, DATABASES.users);
+	const userDoc = await getDoc(doc(usersRef, user.uid));
+
+	if (userDoc.exists()) {
+		return {
+			email: email!,
+			uid: uid,
+			displayName: displayName!,
+			photoURL: photoURL,
+		};
+	} else {
+		const userData: SetDocUser = {
+			uid,
+			displayName: displayName!,
+			email: email!,
+		};
+
+		if (photoURL) {
+			await updateProfile(user, {
+				displayName,
+				photoURL,
+			});
+
+			userData.photoURL = photoURL;
+		} else {
+			await updateProfile(user, {
+				displayName,
+			});
+		}
+
+		// create user in firestore
+		await setDoc(doc(usersRef, uid), userData);
+
+		// create empty user chats in firestore
+		const userChatsRef = collection(db, DATABASES.userChats);
+		await setDoc(doc(userChatsRef, uid), {});
+
+		return {
+			email: userData.email,
+			uid: userData.uid,
+			displayName: userData.displayName,
+			photoURL: userData.photoURL || null,
+		};
+	}
 };

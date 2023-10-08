@@ -30,18 +30,21 @@ export const LOCAL_STORAGE_KEYS = {
 
 export const VISIBLE_NOTIFICATIONS_NUMBER = 4;
 
-export const ERRNO = {
-	internal: [
-		500,
-		'We are sorry, but service is not available at this moment. Please try again later!',
-	],
-};
+export const MAXIMUM_FILES_TO_UPLOAD = 4;
 
-export const firebaseErrors = {
+export const ERRNO: [number, string] = [
+	500,
+	'К сожалению, сервис недоступен в данный момент. Пожалуйста попробуйте позже!',
+];
+
+export const FIREBASE_ERRORS = {
 	// Auth
 	userNotFound: 'auth/user-not-found',
+	invalidEmail: 'auth/invalid-email',
+	wrongPassword: 'auth/wrong-password',
 	emailAlreadyExists: 'auth/email-already-exists',
 	emailAlreadyUsed: 'auth/email-already-in-use',
+	weakPassword: 'auth/weak-password',
 	tokenExpired: 'auth/id-token-expired',
 	internal: 'auth/internal-error',
 	invalidPassword: 'auth/invalid-password',
@@ -52,4 +55,7 @@ export const firebaseErrors = {
 	quotaExceeded: 'storage/quota-exceeded',
 	blobSlice: 'storage/cannot-slice-blob',
 	fileSize: 'storage/server-file-wrong-size',
+
+	// Network
+	network: 'auth/network-request-failed',
 };

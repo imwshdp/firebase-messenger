@@ -16,7 +16,7 @@
 	overflow: hidden;
 
 	&_collapsed {
-		width: 50px;
+		width: 75px;
 	}
 
 	&__button {
@@ -26,4 +26,19 @@
 	&__button-rotated {
 		transform: rotate(0deg);
 	}
+}
+
+.icon_link {
+	fill: var(--accent-1);
+	path {
+		fill: var(--accent-1);
+	}
+
+	&_logout {
+		transform: rotate(180deg);
+	}
+}
+
+.name {
+	text-align: center;
 }

@@ -24,10 +24,16 @@ export function useScrollToEnd<T, D>(items: T, dependency: D) {
 	}, [items]);
 
 	const triggerScroll = () => {
-		containerRef.current?.scrollTo({
-			top: containerRef.current.scrollHeight,
-			behavior: 'smooth',
-		});
+		if (
+			containerRef.current &&
+			containerRef.current.scrollHeight - containerRef.current.scrollTop ===
+				containerRef.current?.offsetHeight + 80
+		) {
+			containerRef.current?.scrollTo({
+				top: containerRef.current.scrollHeight,
+				behavior: 'smooth',
+			});
+		}
 	};
 
 	return { containerRef, triggerScroll };

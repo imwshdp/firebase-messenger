@@ -4,6 +4,9 @@
 	flex-direction: row;
 	align-items: center;
 
+	min-width: 100px;
+	width: 100%;
+
 	gap: var(--secondary-offset);
 	padding: var(--secondary-offset);
 
@@ -18,7 +21,7 @@
 		background-color: var(--color-3);
 	}
 
-	&__user-info {
+	&__user_info {
 		display: flex;
 		flex-direction: column;
 
@@ -28,8 +31,6 @@
 
 		&__userName {
 			display: inline-block;
-
-			max-width: 60%;
 
 			white-space: nowrap;
 			overflow: hidden;

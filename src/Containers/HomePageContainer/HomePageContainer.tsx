@@ -18,24 +18,22 @@ const HomePageContainer: FC = () => {
 	const currentUserId = useAppSelector((state) => state.user.uid);
 
 	useEffect(() => {
-		const getChats = () => {
-			const unsub = onSnapshot(
-				doc(db, DATABASES.userChats, currentUserId).withConverter(
-					converter<UserChatsSnapshotResponseType>(),
-				),
-				(doc) => {
-					const response = doc.data();
-					const data = response ? Object.entries(response) : [];
-					dispatch(setChats(data));
-				},
-			);
+		if (!currentUserId) return;
 
-			return () => {
-				unsub();
-			};
+		const unsub = onSnapshot(
+			doc(db, DATABASES.userChats, currentUserId).withConverter(
+				converter<UserChatsSnapshotResponseType>(),
+			),
+			(doc) => {
+				const response = doc.data();
+				const data = response ? Object.entries(response) : [];
+				data.every((chat) => chat[1].date) && dispatch(setChats(data));
+			},
+		);
+
+		return () => {
+			unsub();
 		};
-
-		currentUserId && getChats();
 	}, [currentUserId]);
 
 	useEffect(() => {

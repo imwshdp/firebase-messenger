@@ -15,13 +15,15 @@ const FormOfLoginContainer: FC = () => {
 	const handleLogin = (email: string, password: string) => {
 		dispatch(loginWithEmailPassword({ email, password }))
 			.unwrap()
-			.then(() => navigate(RoutesLinks.root, { replace: true }));
+			.then(() => navigate(RoutesLinks.root, { replace: true }))
+			.catch(console.error);
 	};
 
 	const handleGoogleLogin = () => {
 		dispatch(loginWithGoogle())
 			.unwrap()
-			.then(() => navigate(RoutesLinks.root));
+			.then(() => navigate(RoutesLinks.root))
+			.catch(console.error);
 	};
 
 	return (

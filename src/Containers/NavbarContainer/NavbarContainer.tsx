@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { auth } from '@Config';
 import { COLOR_SCHEMES } from '@Shared/content/constants';
@@ -36,19 +36,13 @@ const NavbarContainer: FC = () => {
 	return (
 		<Navbar
 			user={currentUser}
+			isAuth={isAuth}
 			isNavbarCollapsed={isNavbarCollapsed}
 			toggleNavbar={toggleNavbar}
 			colorScheme={colorScheme}
 			toggleColorScheme={toggleColorScheme}
-		>
-			{isAuth ? (
-				<NavLink to='login' onClick={handleLogout}>
-					Выйти
-				</NavLink>
-			) : (
-				<NavLink to='login'>Войти</NavLink>
-			)}
-		</Navbar>
+			handleLogout={handleLogout}
+		/>
 	);
 };
 

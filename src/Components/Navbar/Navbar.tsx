@@ -1,9 +1,10 @@
-import { FC, ReactNode } from 'react';
+import { FC } from 'react';
+import { NavLink } from 'react-router-dom';
 
 import clsx from 'clsx';
 
 import { COLOR_SCHEMES } from '@Shared/content/constants';
-import { IconOfArrow } from '@Shared/content/icons';
+import { IconOfArrow, IconOfAuth } from '@Shared/content/icons';
 import { User } from '@Shared/model';
 
 import { ButtonWithIcon, ProfilePicture, ThemeSwitcher } from '@Components';
@@ -11,25 +12,49 @@ import { ButtonWithIcon, ProfilePicture, ThemeSwitcher } from '@Components';
 import styles from './Navbar.module.scss';
 
 interface PropsType {
-	children: ReactNode;
 	user: User;
+	isAuth: boolean;
 
 	isNavbarCollapsed: boolean;
 	toggleNavbar: () => void;
 
 	colorScheme: COLOR_SCHEMES;
 	toggleColorScheme: () => void;
+	handleLogout: () => void;
 }
 
 const Navbar: FC<PropsType> = ({
-	children,
 	user,
+	isAuth,
 	isNavbarCollapsed,
 	toggleNavbar,
 	colorScheme,
 	toggleColorScheme,
+	handleLogout,
 }) => {
 	const { displayName, photoURL } = user;
+
+	const loginLink = isNavbarCollapsed ? (
+		<NavLink to='login'>
+			<IconOfAuth className={styles['icon_link']} />
+		</NavLink>
+	) : (
+		<NavLink to='login'>Войти</NavLink>
+	);
+
+	const logoutLink = isNavbarCollapsed ? (
+		<NavLink to='login' onClick={handleLogout}>
+			<IconOfAuth
+				className={clsx(styles['icon_link'], {
+					[styles['icon_link_logout']]: isAuth,
+				})}
+			/>
+		</NavLink>
+	) : (
+		<NavLink to='login' onClick={handleLogout}>
+			Выйти
+		</NavLink>
+	);
 
 	return (
 		<nav
@@ -38,9 +63,12 @@ const Navbar: FC<PropsType> = ({
 			})}
 		>
 			<>
-				{children}
-				{displayName && <span>{displayName}</span>}
+				{isAuth ? logoutLink : loginLink}
+
+				{!isNavbarCollapsed && displayName && <span className={styles['name']}>{displayName}</span>}
+
 				<ProfilePicture photoURL={photoURL} title={displayName} />
+
 				<ButtonWithIcon
 					icon={<IconOfArrow />}
 					onClick={toggleNavbar}

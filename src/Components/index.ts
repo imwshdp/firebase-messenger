@@ -14,6 +14,7 @@ export { default as LinkList } from './LinkList';
 export { default as Loader } from './Loader';
 export { default as MessagesHistory } from './MessagesHistory';
 export { default as MessageView } from './MessageView';
+export { default as Modal } from './Modal';
 export { default as Navbar } from './Navbar';
 export { default as NewMessageSection } from './NewMessageSection';
 export { default as NewMessageView } from './NewMessageView';

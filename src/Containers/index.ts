@@ -6,6 +6,7 @@ export { default as FormOfLoginContainer } from './FormOfLoginContainer';
 export { default as FormOfRegistrationContainer } from './FormOfRegistrationContainer';
 export { default as HomePageContainer } from './HomePageContainer';
 export { default as MessagesHistoryContainer } from './MessagesHistoryContainer';
+export { default as ModalContainer } from './ModalContainer';
 export { default as NavbarContainer } from './NavbarContainer';
 export { default as NewMessageSectionContainer } from './NewMessageSectionContainer';
 export { default as NotificationsWidgetContainer } from './NotificationsWidgetContainer';

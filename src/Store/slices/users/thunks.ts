@@ -3,6 +3,7 @@ import { FirebaseError } from 'firebase/app';
 import ApiService from '@Api';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ERRNO } from '@Shared/content/constants';
+import { firebaseErrorParser } from '@Shared/helpers/firebaseErrorParser';
 import { FilterChatsRequestParamsType, UserInfo } from '@Shared/model';
 import { RejectWithValueType } from '@Store';
 
@@ -13,10 +14,13 @@ export const fetchUsers = createAsyncThunk<UserInfo[], void, RejectWithValueType
 			return await ApiService.users.fetch();
 		} catch (error: unknown) {
 			if (error instanceof FirebaseError) {
-				return rejectWithValue(`${error.code}: ${error.message}`);
+				return rejectWithValue(firebaseErrorParser(error.code, error.message));
 			} else {
-				const [code, message] = ERRNO.internal;
-				return rejectWithValue(`${code}: ${message}`);
+				const [code, message] = ERRNO;
+				return rejectWithValue({
+					code,
+					message,
+				});
 			}
 		}
 	},
@@ -31,10 +35,13 @@ export const searchUsers = createAsyncThunk<
 		return await ApiService.users.search(data);
 	} catch (error: unknown) {
 		if (error instanceof FirebaseError) {
-			return rejectWithValue(`${error.code}: ${error.message}`);
+			return rejectWithValue(firebaseErrorParser(error.code, error.message));
 		} else {
-			const [code, message] = ERRNO.internal;
-			return rejectWithValue(`${code}: ${message}`);
+			const [code, message] = ERRNO;
+			return rejectWithValue({
+				code,
+				message,
+			});
 		}
 	}
 });

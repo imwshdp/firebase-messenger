@@ -19,9 +19,9 @@ const ChatLink: FC<PropsType> = ({ displayName, photoURL, onClick, lastMessage, 
 	return (
 		<div className={styles['chat']} onClick={onClick}>
 			<ProfilePicture photoURL={photoURL} title={displayName} />
-			<div className={styles['chat__user-info']}>
-				<span className={styles['chat__user-info__userName']}>{displayName}</span>
-				{lastMessage && <i className={styles['chat__user-info__message']}>{lastMessage.text}</i>}
+			<div className={styles['chat__user_info']}>
+				<span className={styles['chat__user_info__userName']}>{displayName}</span>
+				{lastMessage && <i className={styles['chat__user_info__message']}>{lastMessage.text}</i>}
 			</div>
 
 			{date && <i className={styles['chat__date']}>{date}</i>}

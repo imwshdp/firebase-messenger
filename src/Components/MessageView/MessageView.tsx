@@ -12,9 +12,11 @@ interface PropsType {
 	message: Message;
 	isMyMessage: boolean;
 	photoURL: string | null;
+
+	openModal: (index: number) => void;
 }
 
-const MessageView: FC<PropsType> = ({ message, isMyMessage, photoURL }) => {
+const MessageView: FC<PropsType> = ({ message, isMyMessage, photoURL, openModal }) => {
 	return (
 		<div
 			className={clsx(styles['wrapper'], {
@@ -31,14 +33,24 @@ const MessageView: FC<PropsType> = ({ message, isMyMessage, photoURL }) => {
 
 				<div className={styles['wrapper__message__content']}>
 					<div>{message.text}</div>
-					{message.files?.map((file) => (
-						<img
-							className={styles['wrapper__message__content__file']}
-							key={file}
-							src={file}
-							alt='File'
-						/>
-					))}
+					<div
+						className={clsx(styles['wrapper__message__content__files'], {
+							[styles['wrapper__message__content__files_column_grid']]:
+								message.files && message.files.length == 4,
+							[styles['wrapper__message__content__files_row_grid']]:
+								message.files && message.files.length == 3,
+						})}
+					>
+						{message.files?.map((file, index) => (
+							<img
+								className={styles['wrapper__message__content__files__file']}
+								key={file}
+								src={file}
+								alt='File'
+								onClick={() => openModal(index)}
+							/>
+						))}
+					</div>
 					<i className={styles['wrapper__message__content__date']}>{message.date}</i>
 				</div>
 

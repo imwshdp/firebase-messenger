@@ -3,6 +3,7 @@ import { FC, useEffect, useState } from 'react';
 import { Timestamp } from 'firebase/firestore';
 
 import ApiService from '@Api';
+import { MAXIMUM_FILES_TO_UPLOAD } from '@Shared/content/constants';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import useAppSelector from '@Shared/hooks/useAppSelector';
 import { updateChat } from '@Store/slices/chats';
@@ -25,7 +26,7 @@ const NewMessageSectionContainer: FC<PropsType> = ({ triggerScroll }) => {
 	const messageFilesUrls = messageFiles.map((file) => URL.createObjectURL(file));
 
 	const isSubmitDisabled = !chatId || (!messageText.length && !messageFiles.length);
-	const isAttachFileDisabled = !chatId;
+	const isAttachFileDisabled = !chatId || messageFiles.length === MAXIMUM_FILES_TO_UPLOAD;
 
 	const handleChangeMessageText = (value: string) => {
 		setMessageText(value);
@@ -33,7 +34,9 @@ const NewMessageSectionContainer: FC<PropsType> = ({ triggerScroll }) => {
 
 	const handleChangeMessageFiles = (files: FileList | null) => {
 		setMessageFiles((previousMessageFiles) =>
-			files ? [...previousMessageFiles, ...Array.from(files)] : previousMessageFiles,
+			files
+				? [...previousMessageFiles, ...Array.from(files)].slice(0, MAXIMUM_FILES_TO_UPLOAD)
+				: previousMessageFiles,
 		);
 	};
 
@@ -53,9 +56,7 @@ const NewMessageSectionContainer: FC<PropsType> = ({ triggerScroll }) => {
 	}, [chatId]);
 
 	useEffect(() => {
-		if (messageFiles.length === 1) {
-			setTimeout(() => triggerScroll(), 300);
-		}
+		setTimeout(() => triggerScroll(), 300);
 	}, [messageFiles]);
 
 	const sendMessage = () => {

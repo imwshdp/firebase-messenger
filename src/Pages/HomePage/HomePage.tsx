@@ -8,10 +8,12 @@ import styles from './HomePage.module.scss';
 
 const HomePage: FC = () => {
 	return (
-		<section className={styles['page_wrapper']}>
-			<ChatsPanel />
-			<ChatViewContainer />
-		</section>
+		<>
+			<section className={styles['page_wrapper']}>
+				<ChatsPanel />
+				<ChatViewContainer />
+			</section>
+		</>
 	);
 };
 

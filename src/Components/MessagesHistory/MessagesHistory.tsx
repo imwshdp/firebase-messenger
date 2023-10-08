@@ -1,8 +1,7 @@
 import { forwardRef } from 'react';
 
+import MessageViewContainer from '@Containers/MessageViewContainer/MessageViewContainer';
 import { Message } from '@Shared/model';
-
-import { MessageView } from '@Components';
 
 interface PropsType {
 	className?: string;
@@ -23,7 +22,7 @@ const MessagesHistory = forwardRef<HTMLDivElement, PropsType>(function MessagesH
 				const isMessageByCurrentUser = message.senderId === currentUserId;
 
 				return (
-					<MessageView
+					<MessageViewContainer
 						key={index}
 						message={message}
 						isMyMessage={isMessageByCurrentUser}

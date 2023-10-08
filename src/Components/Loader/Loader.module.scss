@@ -1,4 +1,5 @@
 .wrapper {
+	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -9,7 +10,38 @@
 	background-color: var(--color-1);
 
 	&__loader {
-		width: fit-content;
-		height: fit-content;
+		position: absolute;
+
+		width: 150px;
+		height: 150px;
+
+		background-color: var(--color-4, #ced4da);
+	}
+
+	&__logo {
+		position: absolute;
+		display: block;
+
+		width: 100px;
+		height: 100px;
+
+		&__icon {
+			width: 100px;
+			height: 100px;
+
+			path {
+				&:nth-child(1) {
+					fill: #ffa000;
+				}
+
+				&:nth-child(2) {
+					fill: #f57c00;
+				}
+
+				&:nth-child(3) {
+					fill: #ffca28;
+				}
+			}
+		}
 	}
 }
