@@ -5,10 +5,8 @@ import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '@Config';
 import { DATABASES } from '@Shared/content/constants';
 import { converter } from '@Shared/helpers/typesConverter';
-import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import useAppSelector from '@Shared/hooks/useAppSelector';
-import { MessagesSnapshotResponseType } from '@Shared/model';
-import { setMessages } from '@Store/slices/messages';
+import { MessageSnapshotResponseType } from '@Shared/model';
 
 import { MessagesHistory } from '@Components';
 
@@ -18,8 +16,6 @@ interface PropsType {
 
 const MessagesHistoryContainer = forwardRef<HTMLDivElement, PropsType>(
 	function MessagesHistoryContainer({ className }, ref) {
-		const dispatch = useAppDispatch();
-
 		const messagesList = useAppSelector((state) => state.messages.messages);
 		const chatId = useAppSelector((state) => state.messages.chatId);
 
@@ -31,13 +27,16 @@ const MessagesHistoryContainer = forwardRef<HTMLDivElement, PropsType>(
 		useEffect(() => {
 			if (!chatId) return;
 
+			const chatDocRef = doc(db, DATABASES.chats, chatId);
+
 			const unsub = onSnapshot(
-				doc(db, DATABASES.chats, chatId).withConverter(converter<MessagesSnapshotResponseType>()),
+				chatDocRef.withConverter(converter<Array<MessageSnapshotResponseType>>()),
 				(doc) => {
-					const response = doc.data();
-					if (doc.exists() && response) {
-						dispatch(setMessages(response.messages));
-					}
+					console.log('doc', doc.data());
+					// const response = doc;
+					// if (doc.exists() && response) {
+					// 	dispatch(setMessages(response));
+					// }
 				},
 			);
 

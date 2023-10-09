@@ -1,12 +1,4 @@
-import {
-	arrayUnion,
-	collection,
-	doc,
-	getDoc,
-	serverTimestamp,
-	setDoc,
-	updateDoc,
-} from 'firebase/firestore';
+import { collection, doc, getDoc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { v4 } from 'uuid';
 
@@ -39,9 +31,7 @@ export const openChat = async ({ currentUser, chatUser }: OpenChatWithUserReques
 
 	// create chat history and userChat for both users if chat doesn't exist yet
 	if (!response.exists()) {
-		await setDoc(doc(chatsRef, combinedId), {
-			messages: [],
-		});
+		await setDoc(doc(chatsRef, combinedId), {});
 
 		const userChatsRef = collection(db, DATABASES.userChats);
 		await updateDoc(doc(userChatsRef, currentUserId), {
@@ -73,6 +63,9 @@ export const sendMessage = async ({
 	senderId,
 	date,
 }: SendMessageRequestParamsType) => {
+	const newMessageId = v4() + Date.now();
+	const chatRef = doc(db, DATABASES.chats, chatId);
+
 	if (messageFiles.length) {
 		const filesURL = [];
 
@@ -83,23 +76,23 @@ export const sendMessage = async ({
 			filesURL.push(fileURL);
 		}
 
-		await updateDoc(doc(db, DATABASES.chats, chatId), {
-			messages: arrayUnion({
-				uid: v4(),
+		await updateDoc(chatRef, {
+			[`${newMessageId}`]: {
+				uid: newMessageId,
 				text: messageText,
 				files: filesURL,
 				senderId,
 				date,
-			}),
+			},
 		});
 	} else {
-		await updateDoc(doc(db, DATABASES.chats, chatId), {
-			messages: arrayUnion({
-				uid: v4(),
+		await updateDoc(chatRef, {
+			[`${newMessageId}`]: {
+				uid: newMessageId,
 				text: messageText,
 				senderId,
 				date,
-			}),
+			},
 		});
 	}
 };
