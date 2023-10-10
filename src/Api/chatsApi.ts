@@ -1,11 +1,26 @@
-import { collection, doc, getDoc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
+import {
+	collection,
+	doc,
+	getDoc,
+	getDocs,
+	limitToLast,
+	orderBy,
+	query,
+	serverTimestamp,
+	setDoc,
+	startAfter,
+	updateDoc,
+} from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { v4 } from 'uuid';
 
 import { db, storage } from '@Config';
-import { DATABASES } from '@Shared/content/constants';
+import { COLLECTIONS, DATABASES, PAGE_MESSAGE_NUMBER } from '@Shared/content/constants';
 import { getCombinedId } from '@Shared/helpers/getCombinedId';
+import { converter } from '@Shared/helpers/typesConverter';
 import {
+	FetchMessagesRequestParamsType,
+	Message,
 	OpenChatWithUserRequestParamsType,
 	SendMessageRequestParamsType,
 	UpdateChatRequestParamsType,
@@ -27,13 +42,14 @@ export const openChat = async ({ currentUser, chatUser }: OpenChatWithUserReques
 	const combinedId = getCombinedId(currentUserId, chatUserId);
 
 	const chatsRef = collection(db, DATABASES.chats);
-	const response = await getDoc(doc(chatsRef, combinedId));
+	const chatSnapshot = await getDoc(doc(chatsRef, combinedId));
 
 	// create chat history and userChat for both users if chat doesn't exist yet
-	if (!response.exists()) {
+	if (!chatSnapshot.exists()) {
+		const userChatsRef = collection(db, DATABASES.userChats);
+
 		await setDoc(doc(chatsRef, combinedId), {});
 
-		const userChatsRef = collection(db, DATABASES.userChats);
 		await updateDoc(doc(userChatsRef, currentUserId), {
 			[`${combinedId}.userInfo`]: {
 				uid: chatUserId,
@@ -63,8 +79,8 @@ export const sendMessage = async ({
 	senderId,
 	date,
 }: SendMessageRequestParamsType) => {
-	const newMessageId = v4() + Date.now();
-	const chatRef = doc(db, DATABASES.chats, chatId);
+	const newMessageId = Date.now() + v4();
+	const newMessageDocRef = doc(db, DATABASES.chats, chatId, COLLECTIONS.messages, newMessageId);
 
 	if (messageFiles.length) {
 		const filesURL = [];
@@ -76,23 +92,19 @@ export const sendMessage = async ({
 			filesURL.push(fileURL);
 		}
 
-		await updateDoc(chatRef, {
-			[`${newMessageId}`]: {
-				uid: newMessageId,
-				text: messageText,
-				files: filesURL,
-				senderId,
-				date,
-			},
+		await setDoc(newMessageDocRef, {
+			uid: newMessageId,
+			text: messageText,
+			files: filesURL,
+			senderId,
+			date,
 		});
 	} else {
-		await updateDoc(chatRef, {
-			[`${newMessageId}`]: {
-				uid: newMessageId,
-				text: messageText,
-				senderId,
-				date,
-			},
+		await setDoc(newMessageDocRef, {
+			uid: newMessageId,
+			text: messageText,
+			senderId,
+			date,
 		});
 	}
 };
@@ -112,4 +124,21 @@ export const updateChat = async ({
 		[`${chatId}.lastMessage`]: { text },
 		[`${chatId}.date`]: serverTimestamp(),
 	});
+};
+
+export const fetchMessages = async ({ chatId, page }: FetchMessagesRequestParamsType) => {
+	const messagesCollectionRef = collection(db, DATABASES.chats, chatId, COLLECTIONS.messages);
+
+	const messagesQuery = query(
+		messagesCollectionRef,
+		orderBy('date'),
+		startAfter((page + 1) * PAGE_MESSAGE_NUMBER),
+		limitToLast(page * PAGE_MESSAGE_NUMBER),
+	).withConverter(converter<Message>());
+
+	const result: Message[] = [];
+
+	const querySnapshot = await getDocs(messagesQuery);
+	querySnapshot.forEach((document) => result.push(document.data()));
+	return result;
 };

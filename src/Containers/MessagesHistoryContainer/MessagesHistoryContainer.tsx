@@ -1,12 +1,14 @@
 import { forwardRef, useEffect } from 'react';
 
-import { doc, onSnapshot } from 'firebase/firestore';
+import { collection, limitToLast, onSnapshot, orderBy, query } from 'firebase/firestore';
 
 import { db } from '@Config';
-import { DATABASES } from '@Shared/content/constants';
+import { COLLECTIONS, DATABASES, PAGE_MESSAGE_NUMBER } from '@Shared/content/constants';
 import { converter } from '@Shared/helpers/typesConverter';
+import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import useAppSelector from '@Shared/hooks/useAppSelector';
 import { MessageSnapshotResponseType } from '@Shared/model';
+import { fetchMessages, setMessages } from '@Store/slices/messages';
 
 import { MessagesHistory } from '@Components';
 
@@ -16,27 +18,36 @@ interface PropsType {
 
 const MessagesHistoryContainer = forwardRef<HTMLDivElement, PropsType>(
 	function MessagesHistoryContainer({ className }, ref) {
-		const messagesList = useAppSelector((state) => state.messages.messages);
-		const chatId = useAppSelector((state) => state.messages.chatId);
+		const dispatch = useAppDispatch();
 
+		const messagesList = useAppSelector((state) => state.messages.messages);
+
+		const chatId = useAppSelector((state) => state.messages.chatId);
 		const chatUserPhotoURL = useAppSelector((state) => state.messages.user?.photoURL);
 
 		const currentUserId = useAppSelector((state) => state.user.uid);
 		const currentUserPhotoURL = useAppSelector((state) => state.user.photoURL);
 
+		const messagePage = useAppSelector((state) => state.messages.page);
+
 		useEffect(() => {
 			if (!chatId) return;
 
-			const chatDocRef = doc(db, DATABASES.chats, chatId);
+			const collectionChatRef = collection(db, DATABASES.chats, chatId, COLLECTIONS.messages);
+			const messagesQuery = query(
+				collectionChatRef,
+				orderBy('date'),
+				limitToLast(messagePage * PAGE_MESSAGE_NUMBER),
+			);
 
 			const unsub = onSnapshot(
-				chatDocRef.withConverter(converter<Array<MessageSnapshotResponseType>>()),
+				messagesQuery.withConverter(converter<MessageSnapshotResponseType>()),
 				(doc) => {
-					console.log('doc', doc.data());
-					// const response = doc;
-					// if (doc.exists() && response) {
-					// 	dispatch(setMessages(response));
-					// }
+					const response: Array<MessageSnapshotResponseType> = [];
+					doc.forEach((doc) => response.push(doc.data()));
+					if (response) {
+						dispatch(setMessages(response));
+					}
 				},
 			);
 
@@ -44,6 +55,17 @@ const MessagesHistoryContainer = forwardRef<HTMLDivElement, PropsType>(
 				unsub();
 			};
 		}, [chatId]);
+
+		const handleFetchMessages = () => {
+			console.log('CALLED');
+			if (!chatId) return;
+			dispatch(
+				fetchMessages({
+					chatId,
+					page: messagePage,
+				}),
+			);
+		};
 
 		return (
 			<MessagesHistory
@@ -53,6 +75,7 @@ const MessagesHistoryContainer = forwardRef<HTMLDivElement, PropsType>(
 				currentUserId={currentUserId}
 				currentUserPhotoURL={currentUserPhotoURL}
 				ref={ref}
+				observerCallback={handleFetchMessages}
 			/>
 		);
 	},

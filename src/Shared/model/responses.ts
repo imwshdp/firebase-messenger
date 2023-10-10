@@ -28,7 +28,3 @@ export type MessageSnapshotResponseType = {
 	senderId: string;
 	date: Timestamp;
 };
-
-export type MessagesSnapshotResponseType = {
-	messages: Array<MessageSnapshotResponseType>;
-};

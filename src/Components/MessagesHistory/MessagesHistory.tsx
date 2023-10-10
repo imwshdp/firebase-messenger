@@ -1,6 +1,7 @@
-import { forwardRef } from 'react';
+import { forwardRef, useRef } from 'react';
 
 import MessageViewContainer from '@Containers/MessageViewContainer/MessageViewContainer';
+import { useIntersectionObserver } from '@Shared/hooks/useIntersectionObserver';
 import { Message } from '@Shared/model';
 
 interface PropsType {
@@ -10,26 +11,42 @@ interface PropsType {
 	chatUserPhotoURL?: string | null;
 	currentUserId: string;
 	currentUserPhotoURL: string | null;
+
+	observerCallback: () => void;
 }
 
 const MessagesHistory = forwardRef<HTMLDivElement, PropsType>(function MessagesHistory(
-	{ className, messages, currentUserId, currentUserPhotoURL, chatUserPhotoURL },
+	{ className, messages, currentUserId, currentUserPhotoURL, chatUserPhotoURL, observerCallback },
 	ref,
 ) {
+	const observerRef = useRef<HTMLDivElement | null>(null);
+
+	useIntersectionObserver({
+		ref: observerRef,
+		callback: observerCallback,
+	});
+
+	const messagesList = messages.map((message, index) => {
+		const isMessageByCurrentUser = message.senderId === currentUserId;
+
+		return (
+			<MessageViewContainer
+				key={index}
+				message={message}
+				isMyMessage={isMessageByCurrentUser}
+				photoURL={isMessageByCurrentUser ? currentUserPhotoURL : chatUserPhotoURL || null}
+			/>
+		);
+	});
+
 	return (
 		<div className={className} ref={ref}>
-			{messages.map((message, index) => {
-				const isMessageByCurrentUser = message.senderId === currentUserId;
-
-				return (
-					<MessageViewContainer
-						key={index}
-						message={message}
-						isMyMessage={isMessageByCurrentUser}
-						photoURL={isMessageByCurrentUser ? currentUserPhotoURL : chatUserPhotoURL || null}
-					/>
-				);
-			})}
+			{messages.length > 0 && (
+				<>
+					<div ref={observerRef} style={{ border: '1px solid red' }} />
+					{messagesList}
+				</>
+			)}
 		</div>
 	);
 });

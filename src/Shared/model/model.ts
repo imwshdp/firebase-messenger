@@ -60,6 +60,9 @@ export interface MessagesState {
 	chatId: string | null;
 	user: UserInfo | null;
 	messages: Array<Message>;
+	page: number;
+	loading: boolean;
+	error: boolean;
 }
 
 export interface MessageState {
