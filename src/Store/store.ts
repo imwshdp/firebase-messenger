@@ -27,3 +27,8 @@ export type AppDispatch = typeof store.dispatch;
 export type RejectWithValueType = {
 	rejectValue: ErrorState;
 };
+
+export type RejectValueWithGetStateType = {
+	rejectValue: ErrorState;
+	state: RootState;
+};

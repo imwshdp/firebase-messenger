@@ -63,6 +63,7 @@ export interface MessagesState {
 	page: number;
 	loading: boolean;
 	error: boolean;
+	isAllLoaded: boolean;
 }
 
 export interface MessageState {

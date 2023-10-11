@@ -12,6 +12,7 @@ const initialState: MessagesState = {
 
 	loading: false,
 	error: false,
+	isAllLoaded: false,
 };
 
 const messagesSlice = createSlice({
@@ -59,10 +60,6 @@ const messagesSlice = createSlice({
 			},
 		},
 
-		increasePage(state) {
-			return { ...state, page: state.page + 1 };
-		},
-
 		resetChat() {
 			return initialState;
 		},
@@ -74,16 +71,25 @@ const messagesSlice = createSlice({
 				return { ...state, loading: true, error: false };
 			})
 			.addCase(fetchMessages.fulfilled, (state, { payload }: PayloadAction<Message[]>) => {
-				return {
-					...state,
-					loading: false,
-					error: false,
-					messages: [...payload, ...state.messages],
-					page: state.page + 1,
-				};
+				if (payload.length > 0) {
+					return {
+						...state,
+						loading: false,
+						error: false,
+						messages: [...payload, ...state.messages],
+						page: state.page + 1,
+					};
+				} else {
+					return {
+						...state,
+						loading: false,
+						error: false,
+						isAllLoaded: true,
+					};
+				}
 			});
 	},
 });
 
-export const { setChatUser, setMessages, increasePage, resetChat } = messagesSlice.actions;
+export const { setChatUser, setMessages, resetChat } = messagesSlice.actions;
 export default messagesSlice.reducer;

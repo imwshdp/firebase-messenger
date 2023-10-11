@@ -21,6 +21,7 @@ const MessagesHistoryContainer = forwardRef<HTMLDivElement, PropsType>(
 		const dispatch = useAppDispatch();
 
 		const messagesList = useAppSelector((state) => state.messages.messages);
+		const isAllMessagesListLoaded = useAppSelector((state) => state.messages.isAllLoaded);
 
 		const chatId = useAppSelector((state) => state.messages.chatId);
 		const chatUserPhotoURL = useAppSelector((state) => state.messages.user?.photoURL);
@@ -57,14 +58,14 @@ const MessagesHistoryContainer = forwardRef<HTMLDivElement, PropsType>(
 		}, [chatId]);
 
 		const handleFetchMessages = () => {
-			console.log('CALLED');
-			if (!chatId) return;
-			dispatch(
-				fetchMessages({
-					chatId,
-					page: messagePage,
-				}),
-			);
+			if (chatId) {
+				dispatch(
+					fetchMessages({
+						chatId,
+						page: messagePage,
+					}),
+				);
+			}
 		};
 
 		return (
@@ -76,6 +77,7 @@ const MessagesHistoryContainer = forwardRef<HTMLDivElement, PropsType>(
 				currentUserPhotoURL={currentUserPhotoURL}
 				ref={ref}
 				observerCallback={handleFetchMessages}
+				isUnobserve={isAllMessagesListLoaded}
 			/>
 		);
 	},

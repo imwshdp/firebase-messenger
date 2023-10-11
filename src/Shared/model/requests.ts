@@ -46,3 +46,9 @@ export type FetchMessagesRequestParamsType = {
 	chatId: string;
 	page: number;
 };
+
+export type FetchMessagesQueryRequestParamsType = {
+	chatId: string;
+	page: number;
+	endBeforeUid: string;
+};

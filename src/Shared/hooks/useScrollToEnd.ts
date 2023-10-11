@@ -1,14 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 
-export function useScrollToEnd<T, D>(items: T, dependency: D) {
+export function useScrollToEnd<T, D>(items: T, resetDependency: D, isNeedCancelScroll?: boolean) {
 	const containerRef = useRef<HTMLDivElement | null>(null);
 	const [isScrollDirty, setIsScrollDirty] = useState<boolean>(false);
 
 	useEffect(() => {
 		setIsScrollDirty(false);
-	}, [dependency]);
+	}, [resetDependency]);
 
 	useEffect(() => {
+		if (isNeedCancelScroll) return;
+
 		if (isScrollDirty) {
 			containerRef.current?.scrollTo({
 				top: containerRef.current.scrollHeight,

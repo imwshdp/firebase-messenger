@@ -1,6 +1,7 @@
 import {
 	collection,
 	doc,
+	endBefore,
 	getDoc,
 	getDocs,
 	limitToLast,
@@ -8,7 +9,6 @@ import {
 	query,
 	serverTimestamp,
 	setDoc,
-	startAfter,
 	updateDoc,
 } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
@@ -17,10 +17,12 @@ import { v4 } from 'uuid';
 import { db, storage } from '@Config';
 import { COLLECTIONS, DATABASES, PAGE_MESSAGE_NUMBER } from '@Shared/content/constants';
 import { getCombinedId } from '@Shared/helpers/getCombinedId';
+import { getParsedDateFromIso } from '@Shared/helpers/getParsedDateFromIso';
 import { converter } from '@Shared/helpers/typesConverter';
 import {
-	FetchMessagesRequestParamsType,
+	FetchMessagesQueryRequestParamsType,
 	Message,
+	MessageSnapshotResponseType,
 	OpenChatWithUserRequestParamsType,
 	SendMessageRequestParamsType,
 	UpdateChatRequestParamsType,
@@ -126,19 +128,31 @@ export const updateChat = async ({
 	});
 };
 
-export const fetchMessages = async ({ chatId, page }: FetchMessagesRequestParamsType) => {
+export const fetchMessages = async ({
+	chatId,
+	page,
+	endBeforeUid,
+}: FetchMessagesQueryRequestParamsType) => {
 	const messagesCollectionRef = collection(db, DATABASES.chats, chatId, COLLECTIONS.messages);
 
 	const messagesQuery = query(
 		messagesCollectionRef,
-		orderBy('date'),
-		startAfter((page + 1) * PAGE_MESSAGE_NUMBER),
-		limitToLast(page * PAGE_MESSAGE_NUMBER),
-	).withConverter(converter<Message>());
+		orderBy('uid'),
+		endBefore(endBeforeUid),
+		limitToLast((page + 1) * PAGE_MESSAGE_NUMBER),
+	).withConverter(converter<MessageSnapshotResponseType>());
 
-	const result: Message[] = [];
+	const snapshotResult: MessageSnapshotResponseType[] = [];
 
 	const querySnapshot = await getDocs(messagesQuery);
-	querySnapshot.forEach((document) => result.push(document.data()));
-	return result;
+	querySnapshot.forEach((document) => snapshotResult.push(document.data()));
+
+	const serializableMessages: Message[] = snapshotResult.map((message) => {
+		return {
+			...message,
+			date: getParsedDateFromIso(message.date.toDate().toISOString()),
+		};
+	});
+
+	return serializableMessages;
 };

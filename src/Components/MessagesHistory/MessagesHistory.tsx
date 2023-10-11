@@ -13,10 +13,19 @@ interface PropsType {
 	currentUserPhotoURL: string | null;
 
 	observerCallback: () => void;
+	isUnobserve: boolean;
 }
 
 const MessagesHistory = forwardRef<HTMLDivElement, PropsType>(function MessagesHistory(
-	{ className, messages, currentUserId, currentUserPhotoURL, chatUserPhotoURL, observerCallback },
+	{
+		className,
+		messages,
+		currentUserId,
+		currentUserPhotoURL,
+		chatUserPhotoURL,
+		observerCallback,
+		isUnobserve,
+	},
 	ref,
 ) {
 	const observerRef = useRef<HTMLDivElement | null>(null);
@@ -24,6 +33,7 @@ const MessagesHistory = forwardRef<HTMLDivElement, PropsType>(function MessagesH
 	useIntersectionObserver({
 		ref: observerRef,
 		callback: observerCallback,
+		isUnobserve,
 	});
 
 	const messagesList = messages.map((message, index) => {
