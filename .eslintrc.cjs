@@ -68,6 +68,12 @@ module.exports = {
 			},
 		],
 
+		'prettier/prettier': [
+			2,
+			{
+				endOfLine: 'auto',
+			},
+		],
 		'prettier/prettier': [2, {}, { usePrettierrc: true }],
 	},
 };
