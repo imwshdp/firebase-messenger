@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { forwardRef } from 'react';
 
 import clsx from 'clsx';
 
@@ -16,12 +16,16 @@ interface PropsType {
 	openModal: (index: number) => void;
 }
 
-const MessageView: FC<PropsType> = ({ message, isMyMessage, photoURL, openModal }) => {
+const MessageView = forwardRef<HTMLDivElement, PropsType>(function MessageView(
+	{ message, isMyMessage, photoURL, openModal },
+	ref,
+) {
 	return (
 		<div
 			className={clsx(styles['wrapper'], {
 				[styles['wrapper_justified-to-right']]: isMyMessage,
 			})}
+			ref={ref}
 		>
 			<div className={styles['wrapper__message']}>
 				{!isMyMessage && (
@@ -63,6 +67,6 @@ const MessageView: FC<PropsType> = ({ message, isMyMessage, photoURL, openModal 
 			</div>
 		</div>
 	);
-};
+});
 
 export default MessageView;

@@ -1,9 +1,12 @@
-import { forwardRef, useRef } from 'react';
+import { forwardRef } from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
 
 import MessageViewContainer from '@Containers/MessageViewContainer/MessageViewContainer';
-import { useIntersectionObserver } from '@Shared/hooks/useIntersectionObserver';
 import { Message } from '@Shared/model';
 
+import { MessagesLoader } from '@Components';
+
+import styles from './MessagesHistory.module.scss';
 interface PropsType {
 	className?: string;
 	messages: Message[];
@@ -12,8 +15,8 @@ interface PropsType {
 	currentUserId: string;
 	currentUserPhotoURL: string | null;
 
-	observerCallback: () => void;
-	isUnobserve: boolean;
+	fetchMessages: () => void;
+	isAllLoaded: boolean;
 }
 
 const MessagesHistory = forwardRef<HTMLDivElement, PropsType>(function MessagesHistory(
@@ -23,41 +26,37 @@ const MessagesHistory = forwardRef<HTMLDivElement, PropsType>(function MessagesH
 		currentUserId,
 		currentUserPhotoURL,
 		chatUserPhotoURL,
-		observerCallback,
-		isUnobserve,
+		fetchMessages,
+		isAllLoaded,
 	},
 	ref,
 ) {
-	const observerRef = useRef<HTMLDivElement | null>(null);
-
-	useIntersectionObserver({
-		ref: observerRef,
-		callback: observerCallback,
-		isUnobserve,
-	});
-
-	const messagesList = messages.map((message, index) => {
-		const isMessageByCurrentUser = message.senderId === currentUserId;
-
-		return (
-			<MessageViewContainer
-				key={index}
-				message={message}
-				isMyMessage={isMessageByCurrentUser}
-				photoURL={isMessageByCurrentUser ? currentUserPhotoURL : chatUserPhotoURL || null}
-			/>
-		);
-	});
+	const messagesComponents = messages.map((message) => (
+		<MessageViewContainer
+			key={message.uid}
+			message={message}
+			isMyMessage={message.senderId === currentUserId}
+			photoURL={message.senderId === currentUserId ? currentUserPhotoURL : chatUserPhotoURL || null}
+		/>
+	));
 
 	return (
-		<div className={className} ref={ref}>
+		<section className={className} ref={ref}>
 			{messages.length > 0 && (
-				<>
-					<div ref={observerRef} style={{ border: '1px solid red' }} />
-					{messagesList}
-				</>
+				<InfiniteScroll
+					className={styles['container']}
+					pageStart={0}
+					loadMore={fetchMessages}
+					hasMore={!isAllLoaded}
+					isReverse
+					initialLoad={false}
+					loader={<MessagesLoader />}
+					useWindow={false}
+				>
+					{messagesComponents}
+				</InfiniteScroll>
 			)}
-		</div>
+		</section>
 	);
 });
 

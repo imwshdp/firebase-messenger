@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { forwardRef } from 'react';
 
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import { Message } from '@Shared/model';
@@ -12,17 +12,19 @@ interface PropsType {
 	photoURL: string | null;
 }
 
-const MessageViewContainer: FC<PropsType> = (props) => {
-	const dispatch = useAppDispatch();
+const MessageViewContainer = forwardRef<HTMLDivElement, PropsType>(
+	function MessageViewContainer(props, ref) {
+		const dispatch = useAppDispatch();
 
-	const handleOpenModal = (activeUrlIndex: number) => {
-		if (props.message.files) {
-			dispatch(setModalUrls(props.message.files));
-			dispatch(openModalWithIndex(activeUrlIndex));
-		}
-	};
+		const handleOpenModal = (activeUrlIndex: number) => {
+			if (props.message.files) {
+				dispatch(setModalUrls(props.message.files));
+				dispatch(openModalWithIndex(activeUrlIndex));
+			}
+		};
 
-	return <MessageView {...props} openModal={handleOpenModal} />;
-};
+		return <MessageView {...props} openModal={handleOpenModal} ref={ref} />;
+	},
+);
 
 export default MessageViewContainer;

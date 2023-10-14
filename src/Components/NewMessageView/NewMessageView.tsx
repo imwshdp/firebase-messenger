@@ -1,7 +1,7 @@
 import { ChangeEvent, CSSProperties, FC } from 'react';
 
 import { MAX_CHAT_VIEW_PANEL_HEIGHT } from '@Shared/content/constants';
-import { IconOfSend } from '@Shared/content/icons';
+import { IconOfMail } from '@Shared/content/icons';
 
 import { ButtonWithIcon, FileAttacher, TextArea } from '@Components';
 
@@ -44,7 +44,7 @@ const NewMessageView: FC<PropsType> = ({
 
 			<FileAttacher onChange={handleFilesChange} disabled={isAttachFileDisabled} />
 
-			<ButtonWithIcon icon={<IconOfSend />} onClick={onSubmit} disabled={isSubmitDisabled} />
+			<ButtonWithIcon icon={<IconOfMail />} onClick={onSubmit} disabled={isSubmitDisabled} />
 		</div>
 	);
 };

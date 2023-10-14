@@ -1,8 +1,7 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 
 import useAppSelector from '@Shared/hooks/useAppSelector';
-import { useHandleScrollEnd } from '@Shared/hooks/useHandleScrollEnd';
-import { useScrollToEnd } from '@Shared/hooks/useScrollToEnd';
+import { useScrollAtEnd } from '@Shared/hooks/useScrollAtEnd';
 
 import { ChatView } from '@Components';
 
@@ -12,14 +11,7 @@ const ChatViewContainer: FC = () => {
 
 	const messages = useAppSelector((state) => state.messages.messages);
 
-	const [isScrollOnBottom, setIsScrollOnBottom] = useState<boolean>(true);
-
-	const { containerRef, triggerScroll } = useScrollToEnd(messages, chatUserId, !isScrollOnBottom);
-
-	useHandleScrollEnd({
-		containerRef,
-		setIsScrollOnBottom,
-	});
+	const { containerRef, triggerScroll } = useScrollAtEnd(messages, chatUserId);
 
 	return <ChatView chatUser={chatUser} ref={containerRef} triggerScroll={triggerScroll} />;
 };

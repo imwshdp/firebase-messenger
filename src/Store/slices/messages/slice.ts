@@ -8,11 +8,12 @@ const initialState: MessagesState = {
 	chatId: null,
 	user: null,
 	messages: [],
+
 	page: 1,
+	isAllLoaded: false,
 
 	loading: false,
 	error: false,
-	isAllLoaded: false,
 };
 
 const messagesSlice = createSlice({

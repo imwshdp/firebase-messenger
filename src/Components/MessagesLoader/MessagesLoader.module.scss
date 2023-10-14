@@ -1,0 +1,19 @@
+.loader {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: inherit;
+
+	padding: var(--secondary-offset);
+
+	&__icon {
+		animation: rotate var(--primary-animation-duration) linear infinite;
+	}
+}
+
+@keyframes rotate {
+	from {
+		transform: rotate(180deg);
+	}
+}
