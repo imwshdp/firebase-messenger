@@ -1,14 +1,9 @@
-import { forwardRef, useEffect } from 'react';
+import { forwardRef } from 'react';
 
-import { doc, onSnapshot } from 'firebase/firestore';
-
-import { db } from '@Config';
-import { DATABASES } from '@Shared/content/constants';
-import { converter } from '@Shared/helpers/typesConverter';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import useAppSelector from '@Shared/hooks/useAppSelector';
-import { MessagesSnapshotResponseType } from '@Shared/model';
-import { setMessages } from '@Store/slices/messages';
+import { useOnSnapshotMessages } from '@Shared/hooks/useOnSnapshotMessages';
+import { fetchMessages } from '@Store/slices/messages';
 
 import { MessagesHistory } from '@Components';
 
@@ -21,39 +16,39 @@ const MessagesHistoryContainer = forwardRef<HTMLDivElement, PropsType>(
 		const dispatch = useAppDispatch();
 
 		const messagesList = useAppSelector((state) => state.messages.messages);
+
+		const isAllMessagesLoaded = useAppSelector((state) => state.messages.isAllLoaded);
+		const fetchPage = useAppSelector((state) => state.messages.page);
+
 		const chatId = useAppSelector((state) => state.messages.chatId);
-
-		const chatUserPhotoURL = useAppSelector((state) => state.messages.user?.photoURL);
-
 		const currentUserId = useAppSelector((state) => state.user.uid);
+		const chatUserPhotoURL = useAppSelector((state) => state.messages.user?.photoURL);
 		const currentUserPhotoURL = useAppSelector((state) => state.user.photoURL);
 
-		useEffect(() => {
-			if (!chatId) return;
+		useOnSnapshotMessages({
+			chatId,
+			page: fetchPage,
+		});
 
-			const unsub = onSnapshot(
-				doc(db, DATABASES.chats, chatId).withConverter(converter<MessagesSnapshotResponseType>()),
-				(doc) => {
-					const response = doc.data();
-					if (doc.exists() && response) {
-						dispatch(setMessages(response.messages));
-					}
-				},
+		const fetchTopMessages = () => {
+			dispatch(
+				fetchMessages({
+					chatId: chatId!,
+					page: fetchPage,
+				}),
 			);
-
-			return () => {
-				unsub();
-			};
-		}, [chatId]);
+		};
 
 		return (
 			<MessagesHistory
+				ref={ref}
 				className={className}
 				messages={messagesList}
 				chatUserPhotoURL={chatUserPhotoURL}
 				currentUserId={currentUserId}
 				currentUserPhotoURL={currentUserPhotoURL}
-				ref={ref}
+				fetchMessages={fetchTopMessages}
+				isAllLoaded={isAllMessagesLoaded}
 			/>
 		);
 	},

@@ -60,6 +60,12 @@ export interface MessagesState {
 	chatId: string | null;
 	user: UserInfo | null;
 	messages: Array<Message>;
+
+	page: number;
+	isAllLoaded: boolean;
+
+	loading: boolean;
+	error: boolean;
 }
 
 export interface MessageState {

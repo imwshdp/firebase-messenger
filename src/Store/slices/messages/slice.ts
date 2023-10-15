@@ -2,10 +2,18 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getParsedDateFromIso } from '@Shared/helpers/getParsedDateFromIso';
 import { Message, MessageSnapshotResponseType, MessagesState, UserInfo } from '@Shared/model';
 
+import { fetchMessages } from './thunks';
+
 const initialState: MessagesState = {
 	chatId: null,
 	user: null,
 	messages: [],
+
+	page: 1,
+	isAllLoaded: false,
+
+	loading: false,
+	error: false,
 };
 
 const messagesSlice = createSlice({
@@ -56,6 +64,31 @@ const messagesSlice = createSlice({
 		resetChat() {
 			return initialState;
 		},
+	},
+
+	extraReducers: (builder) => {
+		builder
+			.addCase(fetchMessages.pending, (state) => {
+				return { ...state, loading: true, error: false };
+			})
+			.addCase(fetchMessages.fulfilled, (state, { payload }: PayloadAction<Message[]>) => {
+				if (payload.length > 0) {
+					return {
+						...state,
+						loading: false,
+						error: false,
+						messages: [...payload, ...state.messages],
+						page: state.page + 1,
+					};
+				} else {
+					return {
+						...state,
+						loading: false,
+						error: false,
+						isAllLoaded: true,
+					};
+				}
+			});
 	},
 });
 

@@ -1,7 +1,15 @@
 module.exports = {
 	root: true,
 	env: { browser: true, node: true, es2023: true },
-	ignorePatterns: ['.eslintrc.cjs', 'node_modules', 'package.json', 'public', 'build', 'dist'],
+	ignorePatterns: [
+		'.eslintrc.cjs',
+		'node_modules',
+		'package.json',
+		'package-lock.json',
+		'public',
+		'build',
+		'dist',
+	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
 		ecmaVersion: 'latest',
@@ -68,6 +76,12 @@ module.exports = {
 			},
 		],
 
+		'prettier/prettier': [
+			2,
+			{
+				endOfLine: 'auto',
+			},
+		],
 		'prettier/prettier': [2, {}, { usePrettierrc: true }],
 	},
 };

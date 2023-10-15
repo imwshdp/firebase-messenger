@@ -1,8 +1,12 @@
 import { forwardRef } from 'react';
+import InfiniteScroll from 'react-infinite-scroller';
 
 import MessageViewContainer from '@Containers/MessageViewContainer/MessageViewContainer';
 import { Message } from '@Shared/model';
 
+import { MessagesLoader } from '@Components';
+
+import styles from './MessagesHistory.module.scss';
 interface PropsType {
 	className?: string;
 	messages: Message[];
@@ -10,27 +14,49 @@ interface PropsType {
 	chatUserPhotoURL?: string | null;
 	currentUserId: string;
 	currentUserPhotoURL: string | null;
+
+	fetchMessages: () => void;
+	isAllLoaded: boolean;
 }
 
 const MessagesHistory = forwardRef<HTMLDivElement, PropsType>(function MessagesHistory(
-	{ className, messages, currentUserId, currentUserPhotoURL, chatUserPhotoURL },
+	{
+		className,
+		messages,
+		currentUserId,
+		currentUserPhotoURL,
+		chatUserPhotoURL,
+		fetchMessages,
+		isAllLoaded,
+	},
 	ref,
 ) {
-	return (
-		<div className={className} ref={ref}>
-			{messages.map((message, index) => {
-				const isMessageByCurrentUser = message.senderId === currentUserId;
+	const messagesComponents = messages.map((message) => (
+		<MessageViewContainer
+			key={message.uid}
+			message={message}
+			isMyMessage={message.senderId === currentUserId}
+			photoURL={message.senderId === currentUserId ? currentUserPhotoURL : chatUserPhotoURL || null}
+		/>
+	));
 
-				return (
-					<MessageViewContainer
-						key={index}
-						message={message}
-						isMyMessage={isMessageByCurrentUser}
-						photoURL={isMessageByCurrentUser ? currentUserPhotoURL : chatUserPhotoURL || null}
-					/>
-				);
-			})}
-		</div>
+	return (
+		<section className={className} ref={ref}>
+			{messages.length > 0 && (
+				<InfiniteScroll
+					className={styles['container']}
+					pageStart={0}
+					loadMore={fetchMessages}
+					hasMore={!isAllLoaded}
+					isReverse
+					initialLoad={false}
+					loader={<MessagesLoader />}
+					useWindow={false}
+				>
+					{messagesComponents}
+				</InfiniteScroll>
+			)}
+		</section>
 	);
 });
 

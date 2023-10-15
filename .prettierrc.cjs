@@ -1,7 +1,7 @@
 const config = {
 	trailingComma: 'all',
 	arrowParens: 'always',
-	endOfLine: 'lf',
+	endOfLine: 'crlf',
 	singleQuote: true,
 	jsxSingleQuote: true,
 	printWidth: 100,

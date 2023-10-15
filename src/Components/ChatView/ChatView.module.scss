@@ -30,10 +30,7 @@
 		flex-direction: column;
 		flex: 1;
 
-		height: fit-content;
-
-		gap: var(--primary-offset);
-		padding: var(--primary-offset);
+		padding: 0 var(--primary-offset);
 
 		overflow: auto;
 		scrollbar-gutter: stable;
