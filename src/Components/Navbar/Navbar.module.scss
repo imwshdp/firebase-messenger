@@ -1,3 +1,5 @@
+@import '@Assets/styles/breakpoints.scss';
+
 .navbar {
 	display: flex;
 	flex-direction: column;
@@ -41,4 +43,18 @@
 
 .name {
 	text-align: center;
+}
+
+@media screen and (max-width: $mobile) {
+	.navbar {
+		flex-direction: row-reverse;
+		align-items: center;
+
+		width: inherit;
+
+		&__button {
+			display: none;
+			transform: rotate(180deg);
+		}
+	}
 }

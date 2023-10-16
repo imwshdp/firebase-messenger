@@ -1,10 +1,11 @@
 import { FC } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import clsx from 'clsx';
 
+import { RoutesLinks } from '@Router';
 import { COLOR_SCHEMES } from '@Shared/content/constants';
-import { IconOfArrow, IconOfAuth } from '@Shared/content/icons';
+import { IconOfArrow, IconOfAuth, IconOfMenu } from '@Shared/content/icons';
 import { User } from '@Shared/model';
 
 import { ButtonWithIcon, ProfilePicture, ThemeSwitcher } from '@Components';
@@ -21,6 +22,8 @@ interface PropsType {
 	colorScheme: COLOR_SCHEMES;
 	toggleColorScheme: () => void;
 	handleLogout: () => void;
+
+	toggleMenuModal: () => void;
 }
 
 const Navbar: FC<PropsType> = ({
@@ -31,25 +34,38 @@ const Navbar: FC<PropsType> = ({
 	colorScheme,
 	toggleColorScheme,
 	handleLogout,
+	toggleMenuModal,
 }) => {
+	const navigate = useNavigate();
+
 	const { displayName, photoURL } = user;
 
+	const logoutClick = () => {
+		handleLogout();
+		navigate(RoutesLinks.login);
+	};
+
+	const loginClick = () => {
+		navigate(RoutesLinks.login);
+	};
+
 	const loginLink = isNavbarCollapsed ? (
-		<NavLink to='login'>
-			<IconOfAuth className={styles['icon_link']} />
-		</NavLink>
+		<ButtonWithIcon icon={<IconOfAuth className={styles['icon_link']} />} onClick={loginClick} />
 	) : (
 		<NavLink to='login'>Войти</NavLink>
 	);
 
 	const logoutLink = isNavbarCollapsed ? (
-		<NavLink to='login' onClick={handleLogout}>
-			<IconOfAuth
-				className={clsx(styles['icon_link'], {
-					[styles['icon_link_logout']]: isAuth,
-				})}
-			/>
-		</NavLink>
+		<ButtonWithIcon
+			icon={
+				<IconOfAuth
+					className={clsx(styles['icon_link'], {
+						[styles['icon_link_logout']]: isAuth,
+					})}
+				/>
+			}
+			onClick={logoutClick}
+		/>
 	) : (
 		<NavLink to='login' onClick={handleLogout}>
 			Выйти
@@ -78,6 +94,8 @@ const Navbar: FC<PropsType> = ({
 				/>
 
 				<ThemeSwitcher colorScheme={colorScheme} toggleColorScheme={toggleColorScheme} />
+
+				<ButtonWithIcon icon={<IconOfMenu />} onClick={toggleMenuModal} />
 			</>
 		</nav>
 	);

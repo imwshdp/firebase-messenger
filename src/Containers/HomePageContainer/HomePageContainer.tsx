@@ -1,5 +1,6 @@
 import { FC, useEffect } from 'react';
 
+import { ModalOfFilesViewContainer } from '@Containers';
 import { HomePage } from '@Pages';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import useAppSelector from '@Shared/hooks/useAppSelector';
@@ -11,6 +12,8 @@ const HomePageContainer: FC = () => {
 	const dispatch = useAppDispatch();
 	const currentUserId = useAppSelector((state) => state.user.uid);
 
+	const isFilesModalOpen = useAppSelector((state) => state.modal.isModalOpen);
+
 	useOnSnapshotChats({ currentUserId });
 
 	useEffect(() => {
@@ -21,7 +24,12 @@ const HomePageContainer: FC = () => {
 		};
 	}, []);
 
-	return <HomePage />;
+	return (
+		<>
+			<HomePage />
+			{isFilesModalOpen && <ModalOfFilesViewContainer />}
+		</>
+	);
 };
 
 export default HomePageContainer;

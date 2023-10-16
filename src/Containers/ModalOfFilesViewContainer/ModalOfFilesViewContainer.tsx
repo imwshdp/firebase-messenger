@@ -4,9 +4,9 @@ import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import useAppSelector from '@Shared/hooks/useAppSelector';
 import { closeModal, resetModalUrls, setModalActiveUrlIndex } from '@Store/slices/modal';
 
-import { Modal } from '@Components';
+import { ModalOfFilesView } from '@Components';
 
-const ModalContainer: FC = () => {
+const ModalOfFilesViewContainer: FC = () => {
 	const dispatch = useAppDispatch();
 	const urls = useAppSelector((state) => state.modal.urls);
 	const activeUrlIndex = useAppSelector((state) => state.modal.activeUrlIndex);
@@ -31,7 +31,7 @@ const ModalContainer: FC = () => {
 	};
 
 	return (
-		<Modal
+		<ModalOfFilesView
 			urls={urls}
 			activeUrlIndex={activeUrlIndex}
 			openPrevious={handleOpenPrevious}
@@ -43,4 +43,4 @@ const ModalContainer: FC = () => {
 	);
 };
 
-export default ModalContainer;
+export default ModalOfFilesViewContainer;

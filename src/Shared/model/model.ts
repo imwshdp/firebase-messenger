@@ -94,3 +94,7 @@ export interface ModalState {
 	urls: Array<string>;
 	activeUrlIndex: number;
 }
+
+export interface MenuState {
+	isModalOpen: boolean;
+}

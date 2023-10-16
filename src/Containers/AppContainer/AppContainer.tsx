@@ -38,9 +38,12 @@ const AppContainer: FC = () => {
 		}
 	}, [user]);
 
-	const isModalOpen = useAppSelector((state) => state.modal.isModalOpen);
-
-	return <>{isLoading ? <Loader /> : <App isModalOpen={isModalOpen} />}</>;
+	return (
+		<>
+			<App />
+			{isLoading && <Loader />}
+		</>
+	);
 };
 
 export default AppContainer;

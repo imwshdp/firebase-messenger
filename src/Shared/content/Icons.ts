@@ -6,6 +6,7 @@ export { ReactComponent as IconOfFiles } from '@Assets/icons/files.svg';
 export { ReactComponent as IconOfFirebase } from '@Assets/icons/firebase.svg';
 export { ReactComponent as IconOfLoad } from '@Assets/icons/load.svg';
 export { ReactComponent as IconOfMail } from '@Assets/icons/mail.svg';
+export { ReactComponent as IconOfMenu } from '@Assets/icons/menu.svg';
 export { ReactComponent as IconOfMoon } from '@Assets/icons/moon.svg';
 export { ReactComponent as IconOfSun } from '@Assets/icons/sun.svg';
 export { ReactComponent as IconOfTrash } from '@Assets/icons/trash.svg';

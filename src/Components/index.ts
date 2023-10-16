@@ -16,6 +16,7 @@ export { default as MessagesHistory } from './MessagesHistory';
 export { default as MessagesLoader } from './MessagesLoader';
 export { default as MessageView } from './MessageView';
 export { default as Modal } from './Modal';
+export { default as ModalOfFilesView } from './ModalOfFilesView';
 export { default as Navbar } from './Navbar';
 export { default as NewMessageSection } from './NewMessageSection';
 export { default as NewMessageView } from './NewMessageView';

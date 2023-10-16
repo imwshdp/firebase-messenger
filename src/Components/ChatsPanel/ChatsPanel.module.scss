@@ -1,10 +1,12 @@
+@import '@Assets/styles/breakpoints.scss';
+
 .aside {
 	display: flex;
 	flex-direction: column;
 	flex-grow: 1;
 
 	max-height: calc(100vh - 2 * var(--primary-padding-page));
-	min-width: 100px;
+	min-width: 200px;
 
 	gap: var(--secondary-offset);
 
@@ -28,5 +30,25 @@
 		width: 100%;
 
 		background-color: var(--color-4);
+	}
+}
+
+@media screen and (max-width: $mobile) {
+	.aside {
+		display: none;
+	}
+
+	.modal {
+		display: flex;
+		flex-direction: column;
+
+		padding: var(--primary-padding-page);
+		gap: var(--secondary-offset);
+
+		width: calc(90vw - var(--primary-padding-page));
+		height: calc(90vh - var(--primary-padding-page));
+
+		background-color: var(--color-2);
+		border-radius: var(--primary-border-radius);
 	}
 }

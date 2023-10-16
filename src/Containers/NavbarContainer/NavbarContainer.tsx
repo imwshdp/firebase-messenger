@@ -7,6 +7,7 @@ import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import useAppSelector from '@Shared/hooks/useAppSelector';
 import { useAuth } from '@Shared/hooks/useAuth';
 import { setColorScheme, setNavbarStatus } from '@Store/slices/config';
+import { closeMenu, openMenu } from '@Store/slices/menu';
 import { removeUser } from '@Store/slices/user';
 
 import { Navbar } from '@Components';
@@ -14,6 +15,9 @@ import { Navbar } from '@Components';
 const NavbarContainer: FC = () => {
 	const dispatch = useAppDispatch();
 	const currentUser = useAppSelector((state) => state.user);
+
+	const isMenuModalOpen = useAppSelector((state) => state.menu.isModalOpen);
+	const toggleMenuModal = () => (isMenuModalOpen ? dispatch(closeMenu()) : dispatch(openMenu()));
 
 	const isNavbarCollapsed = useAppSelector((state) => state.config.isNavbarCollapsed);
 	const toggleNavbar = () => dispatch(setNavbarStatus(!isNavbarCollapsed));
@@ -42,6 +46,7 @@ const NavbarContainer: FC = () => {
 			colorScheme={colorScheme}
 			toggleColorScheme={toggleColorScheme}
 			handleLogout={handleLogout}
+			toggleMenuModal={toggleMenuModal}
 		/>
 	);
 };

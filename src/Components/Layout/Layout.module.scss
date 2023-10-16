@@ -1,6 +1,9 @@
+@import '@Assets/styles/breakpoints.scss';
+
 .app {
 	display: grid;
 	grid-template-columns: auto 1fr;
+	grid-auto-flow: column;
 
 	background-color: var(--color-1);
 
@@ -16,5 +19,24 @@
 	&__main {
 		padding: var(--primary-padding-page);
 		overflow: auto;
+	}
+}
+
+@media screen and (max-width: $mobile) {
+	.app {
+		display: grid;
+		grid-template-rows: 60px 1fr;
+		grid-auto-flow: column;
+
+		height: 100vh;
+
+		&__aside {
+			width: 100vw;
+			height: auto;
+		}
+
+		&__main {
+			height: auto;
+		}
 	}
 }
