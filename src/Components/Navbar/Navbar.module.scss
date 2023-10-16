@@ -28,6 +28,14 @@
 	&__button-rotated {
 		transform: rotate(0deg);
 	}
+
+	&__name {
+		text-align: center;
+	}
+
+	&__menu {
+		display: none;
+	}
 }
 
 .icon_link {
@@ -41,10 +49,6 @@
 	}
 }
 
-.name {
-	text-align: center;
-}
-
 @media screen and (max-width: $mobile) {
 	.navbar {
 		flex-direction: row-reverse;
@@ -55,6 +59,14 @@
 		&__button {
 			display: none;
 			transform: rotate(180deg);
+		}
+
+		&__menu {
+			display: flex;
+		}
+
+		& > *:last-child {
+			margin-right: auto;
 		}
 	}
 }

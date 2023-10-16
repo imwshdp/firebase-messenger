@@ -1,3 +1,5 @@
+@import '@Assets/styles/breakpoints.scss';
+
 .container {
 	display: grid;
 	grid-template-columns: 100px 1fr 100px;
@@ -6,7 +8,6 @@
 	align-items: center;
 
 	width: 100vw;
-	height: 100%;
 }
 
 .button {
@@ -104,5 +105,51 @@
 		);
 
 		transition: all var(--primary-animation-duration) ease;
+	}
+}
+
+@media screen and (max-width: $mobile) {
+	.container {
+		display: flex;
+	}
+
+	.button {
+		position: absolute;
+
+		height: 50px;
+		width: 50px;
+
+		background-color: rgba(96, 96, 96, 0.5);
+		border-radius: 50%;
+
+		&__icon {
+			width: 25px;
+			height: 25px;
+		}
+
+		&_left {
+			left: 10px;
+		}
+
+		&_right {
+			right: 10px;
+		}
+
+		&_disabled {
+			&:hover {
+				background-color: rgba(96, 96, 96, 0.5);
+			}
+		}
+	}
+
+	.modal {
+		&__image {
+			display: block;
+
+			max-width: 100vw;
+			max-height: 100vh;
+
+			object-fit: cover;
+		}
 	}
 }

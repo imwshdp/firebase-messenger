@@ -81,7 +81,9 @@ const Navbar: FC<PropsType> = ({
 			<>
 				{isAuth ? logoutLink : loginLink}
 
-				{!isNavbarCollapsed && displayName && <span className={styles['name']}>{displayName}</span>}
+				{!isNavbarCollapsed && displayName && (
+					<span className={styles['navbar__name']}>{displayName}</span>
+				)}
 
 				<ProfilePicture photoURL={photoURL} title={displayName} />
 
@@ -95,7 +97,11 @@ const Navbar: FC<PropsType> = ({
 
 				<ThemeSwitcher colorScheme={colorScheme} toggleColorScheme={toggleColorScheme} />
 
-				<ButtonWithIcon icon={<IconOfMenu />} onClick={toggleMenuModal} />
+				<ButtonWithIcon
+					icon={<IconOfMenu />}
+					onClick={toggleMenuModal}
+					className={styles['navbar__menu']}
+				/>
 			</>
 		</nav>
 	);

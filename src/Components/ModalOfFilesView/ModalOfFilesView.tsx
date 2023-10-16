@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
 import clsx from 'clsx';
 
@@ -26,11 +26,28 @@ const ModalOfFilesView: FC<PropsType> = ({
 	isNextDisabled,
 	isPreviousDisabled,
 }) => {
+	useEffect(() => {
+		const handleKeyDown = (event: KeyboardEvent) => {
+			if (event.key === 'ArrowLeft' && !isPreviousDisabled) {
+				openPrevious();
+			}
+
+			if (event.key === 'ArrowRight' && !isNextDisabled) {
+				openNext();
+			}
+		};
+
+		window.addEventListener('keydown', handleKeyDown);
+		return () => {
+			window.removeEventListener('keydown', handleKeyDown);
+		};
+	}, [isNextDisabled, isPreviousDisabled, openNext, openPrevious]);
+
 	return (
 		<Modal closeModal={closeModal}>
 			<div className={styles['container']}>
 				<button
-					className={clsx(styles['button'], {
+					className={clsx(styles['button'], styles['button_left'], {
 						[styles['button_disabled']]: isPreviousDisabled,
 					})}
 					onClick={openPrevious}
@@ -41,6 +58,7 @@ const ModalOfFilesView: FC<PropsType> = ({
 						})}
 					/>
 				</button>
+
 				<div className={styles['modal']}>
 					<img
 						className={styles['modal__image']}
@@ -48,8 +66,9 @@ const ModalOfFilesView: FC<PropsType> = ({
 						alt={urls[activeUrlIndex]}
 					/>
 				</div>
+
 				<button
-					className={clsx(styles['button'], {
+					className={clsx(styles['button'], styles['button_right'], {
 						[styles['button_disabled']]: isNextDisabled,
 					})}
 					onClick={openNext}

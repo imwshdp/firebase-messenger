@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useMemo } from 'react';
+import React, { MouseEvent, ReactNode, useEffect, useMemo, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 import styles from './Modal.module.scss';
@@ -6,12 +6,13 @@ import styles from './Modal.module.scss';
 const modalRoot = document.getElementById('modal-root');
 
 interface PropsType {
+	closeModal?: () => void;
 	children: ReactNode;
-	closeModal: () => void;
 }
 
-const Modal: FC<PropsType> = ({ children, closeModal }) => {
+const Modal: React.FC<PropsType> = ({ closeModal, children }) => {
 	const element = useMemo(() => document.createElement('div'), []);
+	const modalContainerRef = useRef<HTMLDivElement | null>(null);
 
 	useEffect(() => {
 		modalRoot!.appendChild(element);
@@ -19,6 +20,12 @@ const Modal: FC<PropsType> = ({ children, closeModal }) => {
 			modalRoot!.removeChild(element);
 		};
 	}, [element]);
+
+	const onClick = (e: MouseEvent): void => {
+		if (closeModal && e.target === modalContainerRef.current) {
+			closeModal();
+		}
+	};
 
 	useEffect(() => {
 		const handleKeyDown = (event: KeyboardEvent) => {
@@ -28,12 +35,14 @@ const Modal: FC<PropsType> = ({ children, closeModal }) => {
 		};
 
 		window.addEventListener('keydown', handleKeyDown);
-		return () => window.removeEventListener('keydown', handleKeyDown);
-	}, []);
+		return () => {
+			window.removeEventListener('keydown', handleKeyDown);
+		};
+	}, [closeModal]);
 
 	return createPortal(
-		<div className={styles['container']} onClick={closeModal}>
-			<div className={styles['container__modal']}>{children}</div>
+		<div ref={modalContainerRef} onClick={onClick} className={styles['container']}>
+			{children}
 		</div>,
 		element,
 	);

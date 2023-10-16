@@ -53,13 +53,13 @@
 					grid-template-rows: 1fr 75px;
 					grid-template-areas:
 						'first first'
-						' second third';
+						'second third';
 
 					height: fit-content;
 
 					img:nth-child(1) {
 						grid-area: first;
-						max-width: calc(150px + 5px * 2 - 4px);
+						width: calc(150px + 5px * 2 - 4px);
 					}
 
 					img:not(:first-child) {
