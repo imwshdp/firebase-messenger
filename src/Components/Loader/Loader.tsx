@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { motion } from 'framer-motion';
 
-import { IconOfFirebase } from '@Shared/content/Icons';
+import { IconOfFirebase } from '@Shared/content/icons.ts';
 
 import styles from './Loader.module.scss';
 

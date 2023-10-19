@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { IconOfTrash } from '@Shared/content/Icons';
+import { IconOfTrash } from '@Shared/content/icons.ts';
 
 import styles from './FileThumbnail.module.scss';
 

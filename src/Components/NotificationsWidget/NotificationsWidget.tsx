@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { IconOfAttention, IconOfCancel } from '@Shared/content/Icons';
+import { IconOfAttention, IconOfCancel } from '@Shared/content/icons.ts';
 import { ErrorState } from '@Shared/model';
 
 import { ButtonWithIcon } from '@Components';

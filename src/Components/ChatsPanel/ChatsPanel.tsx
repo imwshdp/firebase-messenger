@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import { ChatListWithSearchContainer, UserListWithSearchContainer } from '@Containers';
-import { IconOfCancel } from '@Shared/content/Icons';
+import { IconOfCancel } from '@Shared/content/icons.ts';
 
 import { ButtonWithIcon, Modal } from '@Components';
 

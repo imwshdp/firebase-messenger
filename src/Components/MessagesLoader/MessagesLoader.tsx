@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { IconOfLoad } from '@Shared/content/Icons';
+import { IconOfLoad } from '@Shared/content/icons.ts';
 
 import styles from './MessagesLoader.module.scss';
 

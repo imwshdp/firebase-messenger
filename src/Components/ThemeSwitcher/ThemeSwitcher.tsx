@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react';
 
 import { COLOR_SCHEMES } from '@Shared/content/constants';
-import { IconOfMoon, IconOfSun } from '@Shared/content/Icons';
+import { IconOfMoon, IconOfSun } from '@Shared/content/icons.ts';
 
 import { ButtonWithIcon } from '@Components';
 
