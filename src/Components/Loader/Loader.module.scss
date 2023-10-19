@@ -13,35 +13,96 @@
 	background-color: var(--color-1);
 
 	&__loader {
+		position: relative;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
 		width: 150px;
 		height: 150px;
 
-		background-color: var(--color-4, #ced4da);
-	}
+		border: 1px solid red;
 
-	&__logo {
-		display: block;
+		&__overlay {
+			position: absolute;
 
-		width: 100px;
-		height: 100px;
+			width: 150px;
+			height: 150px;
 
-		&__icon {
+			background-color: var(--color-4, #ced4da);
+		}
+
+		&__logo {
+			position: absolute;
+			display: block;
+
 			width: 100px;
 			height: 100px;
 
-			path {
-				&:nth-child(1) {
-					fill: #ffa000;
-				}
+			&__icon {
+				width: 100px;
+				height: 100px;
 
-				&:nth-child(2) {
-					fill: #f57c00;
-				}
+				path {
+					&:nth-child(1) {
+						fill: #ffa000;
+						animation: left-lighting 3s infinite ease-in-out;
+					}
 
-				&:nth-child(3) {
-					fill: #ffca28;
+					&:nth-child(2) {
+						fill: #f57c00;
+						animation: center-lighting 3s infinite ease-in-out;
+					}
+
+					&:nth-child(3) {
+						fill: #ffca28;
+						animation: right-lighting 3s infinite ease-in-out;
+					}
 				}
 			}
 		}
+	}
+}
+
+@keyframes left-lighting {
+	0% {
+		fill: #ffa000;
+	}
+
+	50% {
+		fill: #ffca28;
+	}
+
+	100% {
+		fill: #ffa000;
+	}
+}
+
+@keyframes center-lighting {
+	0% {
+		fill: #f57c00;
+	}
+
+	50% {
+		fill: #ffa000;
+	}
+
+	100% {
+		fill: #f57c00;
+	}
+}
+
+@keyframes right-lighting {
+	0% {
+		fill: #ffca28;
+	}
+
+	50% {
+		fill: #f57c00;
+	}
+
+	100% {
+		fill: #ffca28;
 	}
 }

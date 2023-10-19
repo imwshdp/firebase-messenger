@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import clsx from 'clsx';
 
-import { IconOfUser } from '@Shared/content/icons';
+import { IconOfUser } from '@Shared/content/Icons';
 
 import styles from './ProfilePicture.module.scss';
 

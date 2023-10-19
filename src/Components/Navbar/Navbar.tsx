@@ -5,7 +5,7 @@ import clsx from 'clsx';
 
 import { RoutesLinks } from '@Router';
 import { COLOR_SCHEMES } from '@Shared/content/constants';
-import { IconOfArrow, IconOfAuth, IconOfMenu } from '@Shared/content/icons';
+import { IconOfArrow, IconOfAuth, IconOfMenu } from '@Shared/content/Icons';
 import { User } from '@Shared/model';
 
 import { ButtonWithIcon, ProfilePicture, ThemeSwitcher } from '@Components';

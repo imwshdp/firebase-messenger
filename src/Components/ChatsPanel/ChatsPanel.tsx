@@ -1,8 +1,9 @@
 import { FC } from 'react';
 
 import { ChatListWithSearchContainer, UserListWithSearchContainer } from '@Containers';
+import { IconOfCancel } from '@Shared/content/Icons';
 
-import { Modal } from '@Components';
+import { ButtonWithIcon, Modal } from '@Components';
 
 import styles from './ChatsPanel.module.scss';
 
@@ -38,6 +39,11 @@ const ChatsPanel: FC<PropsType> = ({ isMenuOpen, closeModal }) => {
 						<div className={styles['aside__users']}>
 							<UserListWithSearchContainer />
 						</div>
+						<ButtonWithIcon
+							className={styles['aside__chats__close-button']}
+							icon={<IconOfCancel />}
+							onClick={closeModal}
+						/>
 					</div>
 				</Modal>
 			)}

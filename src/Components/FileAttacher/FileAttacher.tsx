@@ -2,7 +2,7 @@ import { ChangeEvent, FC } from 'react';
 
 import clsx from 'clsx';
 
-import { IconOfFiles } from '@Shared/content/icons';
+import { IconOfFiles } from '@Shared/content/Icons';
 
 import styles from './FileAttacher.module.scss';
 

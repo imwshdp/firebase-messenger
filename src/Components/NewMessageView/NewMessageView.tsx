@@ -1,7 +1,7 @@
 import { ChangeEvent, CSSProperties, FC } from 'react';
 
 import { MAX_CHAT_VIEW_PANEL_HEIGHT } from '@Shared/content/constants';
-import { IconOfMail } from '@Shared/content/icons';
+import { IconOfMail } from '@Shared/content/Icons';
 
 import { ButtonWithIcon, FileAttacher, TextArea } from '@Components';
 

@@ -2,6 +2,7 @@ import { forwardRef } from 'react';
 
 import clsx from 'clsx';
 
+import { MOBILE_BREAKPOINT } from '@Shared/content/constants';
 import { Message } from '@Shared/model';
 
 import { ProfilePicture } from '@Components';
@@ -20,6 +21,8 @@ const MessageView = forwardRef<HTMLDivElement, PropsType>(function MessageView(
 	{ message, isMyMessage, photoURL, openModal },
 	ref,
 ) {
+	const isDesktop = document.body.clientWidth > MOBILE_BREAKPOINT;
+
 	return (
 		<div
 			className={clsx(styles['wrapper'], {
@@ -28,7 +31,7 @@ const MessageView = forwardRef<HTMLDivElement, PropsType>(function MessageView(
 			ref={ref}
 		>
 			<div className={styles['wrapper__message']}>
-				{!isMyMessage && (
+				{isDesktop && !isMyMessage && (
 					<ProfilePicture
 						photoURL={photoURL}
 						className={styles['wrapper__message__profile-picture']}
@@ -58,7 +61,7 @@ const MessageView = forwardRef<HTMLDivElement, PropsType>(function MessageView(
 					<i className={styles['wrapper__message__content__date']}>{message.date}</i>
 				</div>
 
-				{isMyMessage && (
+				{isDesktop && isMyMessage && (
 					<ProfilePicture
 						photoURL={photoURL}
 						className={styles['wrapper__message__profile-picture']}

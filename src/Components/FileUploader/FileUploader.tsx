@@ -1,6 +1,6 @@
 import { ChangeEvent, FC } from 'react';
 
-import { IconOfFiles } from '@Shared/content/icons';
+import { IconOfFiles } from '@Shared/content/Icons';
 
 import styles from './FileUploader.module.scss';
 

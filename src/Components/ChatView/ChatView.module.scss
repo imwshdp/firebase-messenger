@@ -42,5 +42,12 @@
 @media screen and (max-width: $mobile) {
 	.chat_view {
 		height: auto;
+
+		&__container {
+			&::-webkit-scrollbar {
+				height: 0;
+				width: 0;
+			}
+		}
 	}
 }

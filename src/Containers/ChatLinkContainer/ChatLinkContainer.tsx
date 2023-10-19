@@ -4,6 +4,7 @@ import { getCombinedId } from '@Shared/helpers/getCombinedId';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import useAppSelector from '@Shared/hooks/useAppSelector';
 import { openChat } from '@Store/slices/chats';
+import { closeMenu } from '@Store/slices/menu';
 import { setChatUser } from '@Store/slices/messages';
 
 import { ChatLink } from '@Components';
@@ -24,6 +25,8 @@ const ChatLinkContainer: FC<PropsType> = (props) => {
 	const currentUser = useAppSelector((state) => state.user);
 
 	const handleClick = () => {
+		dispatch(closeMenu());
+
 		dispatch(
 			setChatUser({
 				chatId: getCombinedId(currentUser.uid, props.uid),
