@@ -20,12 +20,11 @@ const FilesPreview: FC<PropsType> = ({ files, urls, deleteFile }) => {
 	}, [files]);
 
 	const imageList: Array<JSX.Element> = urls.map((url, index) => {
-		const filename = files[index].name;
 		return (
 			<FileThumbnail
 				url={url}
 				key={index}
-				filename={filename}
+				file={files[index]}
 				deleteFile={() => deleteFile(index)}
 			/>
 		);

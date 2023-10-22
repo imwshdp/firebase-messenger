@@ -9,8 +9,21 @@
 
 	cursor: pointer;
 
-	&__file {
+	&__image {
 		height: inherit;
+	}
+
+	&__file {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		height: inherit;
+		width: auto;
+
+		padding: var(--secondary-offset);
+
+		border: 1px solid var(--color-4);
 	}
 
 	&__overlay {

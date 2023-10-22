@@ -4,11 +4,26 @@
 	align-items: center;
 
 	gap: var(--secondary-offset);
-	padding: 8px 16px;
+	padding: 14px 20px;
 
-	border: 1px solid black; // TODO add var
+	font-size: clamp(12px, 1vw, 16px);
+	line-height: clamp(15px, 1vw, 17px);
+
+	border: none;
 	border-radius: var(--primary-border-radius);
+
+	outline: 1px solid var(--color-4);
+	outline-offset: -5px;
+
 	cursor: pointer;
+	transition: all var(--primary-animation-duration) ease-in-out;
+
+	&:hover,
+	&:focus {
+		background-color: var(--color-2);
+		outline-offset: 3px;
+		outline-color: var(--color-2);
+	}
 
 	svg {
 		width: 18px;
@@ -17,6 +32,9 @@
 
 	&__input {
 		position: absolute;
+		height: 0;
+		width: 0;
+
 		overflow: hidden;
 		opacity: 0;
 		z-index: -1;

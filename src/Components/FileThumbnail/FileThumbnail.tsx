@@ -2,17 +2,33 @@ import { FC, useState } from 'react';
 
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { IconOfTrash } from '@Shared/content/icons.ts';
+import { IconOfFile, IconOfTrash } from '@Shared/content/icons.ts';
 
 import styles from './FileThumbnail.module.scss';
 
 interface PropsType {
 	url: string;
-	filename: string;
+	file: File;
 	deleteFile: () => void;
 }
 
-const FileThumbnail: FC<PropsType> = ({ url, filename, deleteFile }) => {
+const FileThumbnail: FC<PropsType> = ({ url, file, deleteFile }) => {
+	const filename = file.name;
+	const type = file.type.slice(0, file.type.indexOf('/'));
+
+	const filePreview = () => {
+		switch (type) {
+			case 'image':
+				return <img className={styles['thumbnail__image']} src={url} alt={filename} />;
+			default:
+				return (
+					<div className={styles['thumbnail__file']} title={filename}>
+						<IconOfFile />
+					</div>
+				);
+		}
+	};
+
 	const [isHovered, setIsHovered] = useState<boolean>(false);
 
 	const handleMouseLeave = () => setIsHovered(false);
@@ -28,7 +44,7 @@ const FileThumbnail: FC<PropsType> = ({ url, filename, deleteFile }) => {
 			animate={{ opacity: 1 }}
 			transition={{ duration: 0.3 }}
 		>
-			<img className={styles['thumbnail__file']} src={url} alt={filename} />
+			{filePreview()}
 
 			<AnimatePresence>
 				{isHovered && (

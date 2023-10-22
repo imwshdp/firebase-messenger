@@ -1,8 +1,10 @@
 @import '@Assets/styles/mixins.scss';
 
 .input {
-	padding: 8px 16px;
-	font-size: 14px;
-
 	@include input-stylesheets;
+
+	padding: 8px 16px;
+
+	font-size: clamp(12px, 1vw, 16px);
+	line-height: clamp(15px, 1vw, 17px);
 }

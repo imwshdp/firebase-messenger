@@ -2,6 +2,7 @@ export { ReactComponent as IconOfArrow } from '@Assets/icons/arrow.svg';
 export { ReactComponent as IconOfAttention } from '@Assets/icons/attention.svg';
 export { ReactComponent as IconOfCancel } from '@Assets/icons/cancel.svg';
 export { ReactComponent as IconOfAuth } from '@Assets/icons/exit.svg';
+export { ReactComponent as IconOfFile } from '@Assets/icons/file.svg';
 export { ReactComponent as IconOfFiles } from '@Assets/icons/files.svg';
 export { ReactComponent as IconOfFirebase } from '@Assets/icons/firebase.svg';
 export { ReactComponent as IconOfLoad } from '@Assets/icons/load.svg';

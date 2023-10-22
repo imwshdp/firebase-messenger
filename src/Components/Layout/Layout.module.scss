@@ -20,10 +20,8 @@
 		padding: var(--primary-padding-page);
 		overflow: auto;
 	}
-}
 
-@media screen and (max-width: $mobile) {
-	.app {
+	@media screen and (max-width: $tablet) {
 		display: grid;
 		grid-template-rows: 60px 1fr;
 		grid-auto-flow: column;
@@ -37,6 +35,12 @@
 
 		&__main {
 			height: auto;
+		}
+	}
+
+	@media screen and (max-width: $mobile) {
+		&__main {
+			padding: 0;
 		}
 	}
 }

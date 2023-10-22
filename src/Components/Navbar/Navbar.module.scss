@@ -36,25 +36,14 @@
 	&__menu {
 		display: none;
 	}
-}
 
-.icon_link {
-	fill: var(--accent-1);
-	path {
-		fill: var(--accent-1);
-	}
-
-	&_logout {
-		transform: rotate(180deg);
-	}
-}
-
-@media screen and (max-width: $mobile) {
-	.navbar {
+	@media screen and (max-width: $tablet) {
 		flex-direction: row-reverse;
 		align-items: center;
 
 		width: inherit;
+
+		border-radius: 0;
 
 		&__button {
 			display: none;
@@ -68,5 +57,16 @@
 		& > *:last-child {
 			margin-right: auto;
 		}
+	}
+}
+
+.icon_link {
+	fill: var(--accent-1);
+	path {
+		fill: var(--accent-1);
+	}
+
+	&_logout {
+		transform: rotate(180deg);
 	}
 }

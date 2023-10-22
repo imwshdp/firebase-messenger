@@ -64,6 +64,38 @@
 
 		object-fit: cover;
 	}
+
+	&__file {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		width: 100%;
+		height: 150px;
+
+		gap: var(--secondary-offset);
+
+		background-color: var(--color-3);
+
+		svg {
+			height: 40px;
+			width: 40px;
+
+			path {
+				fill: var(--accent-1);
+			}
+		}
+
+		&__url {
+			display: -webkit-box;
+			-webkit-line-clamp: 1;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+
+			margin: 0 40px;
+		}
+	}
 }
 
 .close_modal {
@@ -108,7 +140,7 @@
 	}
 }
 
-@media screen and (max-width: $mobile) {
+@media screen and (max-width: $tablet) {
 	.container {
 		display: flex;
 	}

@@ -10,12 +10,11 @@ interface PropsType {
 	lastMessage?: {
 		text: string;
 	};
-	date?: string;
 
 	onClick: () => void;
 }
 
-const ChatLink: FC<PropsType> = ({ displayName, photoURL, onClick, lastMessage, date }) => {
+const ChatLink: FC<PropsType> = ({ displayName, photoURL, onClick, lastMessage }) => {
 	return (
 		<div className={styles['chat']} onClick={onClick}>
 			<ProfilePicture photoURL={photoURL} title={displayName} />
@@ -23,8 +22,6 @@ const ChatLink: FC<PropsType> = ({ displayName, photoURL, onClick, lastMessage, 
 				<span className={styles['chat__user_info__userName']}>{displayName}</span>
 				{lastMessage && <i className={styles['chat__user_info__message']}>{lastMessage.text}</i>}
 			</div>
-
-			{date && <i className={styles['chat__date']}>{date}</i>}
 		</div>
 	);
 };

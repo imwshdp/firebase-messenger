@@ -37,10 +37,8 @@
 		overflow: auto;
 		scrollbar-gutter: stable;
 	}
-}
 
-@media screen and (max-width: $mobile) {
-	.chat_view {
+	@media screen and (max-width: $tablet) {
 		height: auto;
 
 		&__container {
@@ -49,5 +47,10 @@
 				width: 0;
 			}
 		}
+	}
+
+	@media screen and (max-width: $mobile) {
+		max-height: 100%;
+		border-radius: 0;
 	}
 }

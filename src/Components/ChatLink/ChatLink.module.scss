@@ -49,16 +49,4 @@
 			text-overflow: ellipsis;
 		}
 	}
-
-	&__date {
-		position: absolute;
-
-		top: var(--secondary-offset);
-		right: var(--secondary-offset);
-
-		font-size: 10px;
-		font-style: italic;
-
-		opacity: 0.5;
-	}
 }

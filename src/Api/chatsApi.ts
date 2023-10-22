@@ -88,7 +88,7 @@ export const sendMessage = async ({
 		const filesURL = [];
 
 		for (const messageFile of messageFiles) {
-			const storageRef = ref(storage, v4());
+			const storageRef = ref(storage, `${v4()}.${messageFile.type}`);
 			await uploadBytesResumable(storageRef, messageFile);
 			const fileURL = await getDownloadURL(storageRef);
 			filesURL.push(fileURL);

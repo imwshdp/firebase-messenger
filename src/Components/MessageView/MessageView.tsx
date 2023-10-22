@@ -2,7 +2,8 @@ import { forwardRef } from 'react';
 
 import clsx from 'clsx';
 
-import { MOBILE_BREAKPOINT } from '@Shared/content/constants';
+import { TABLET_BREAKPOINT } from '@Shared/content/constants';
+import { IconOfFile } from '@Shared/content/icons';
 import { Message } from '@Shared/model';
 
 import { ProfilePicture } from '@Components';
@@ -21,7 +22,33 @@ const MessageView = forwardRef<HTMLDivElement, PropsType>(function MessageView(
 	{ message, isMyMessage, photoURL, openModal },
 	ref,
 ) {
-	const isDesktop = document.body.clientWidth > MOBILE_BREAKPOINT;
+	const isDesktop = document.body.clientWidth > TABLET_BREAKPOINT;
+
+	const renderFile = (fileURL: string, index: number) => {
+		const isImage = fileURL.includes('.image');
+		if (isImage) {
+			return (
+				<img
+					className={styles['wrapper__message__content__files__image']}
+					key={fileURL}
+					src={fileURL}
+					alt='File'
+					onClick={() => openModal(index)}
+				/>
+			);
+		} else {
+			return (
+				<a
+					key={fileURL}
+					href={fileURL}
+					title={fileURL}
+					className={styles['wrapper__message__content__files__file']}
+				>
+					<IconOfFile />
+				</a>
+			);
+		}
+	};
 
 	return (
 		<div
@@ -39,24 +66,16 @@ const MessageView = forwardRef<HTMLDivElement, PropsType>(function MessageView(
 				)}
 
 				<div className={styles['wrapper__message__content']}>
-					<div>{message.text}</div>
+					<span>{message.text}</span>
 					<div
 						className={clsx(styles['wrapper__message__content__files'], {
-							[styles['wrapper__message__content__files_column_grid']]:
+							[styles['wrapper__message__content__files_four_grid']]:
 								message.files && message.files.length == 4,
-							[styles['wrapper__message__content__files_row_grid']]:
+							[styles['wrapper__message__content__files_three_grid']]:
 								message.files && message.files.length == 3,
 						})}
 					>
-						{message.files?.map((file, index) => (
-							<img
-								className={styles['wrapper__message__content__files__file']}
-								key={file}
-								src={file}
-								alt='File'
-								onClick={() => openModal(index)}
-							/>
-						))}
+						{message.files?.map((file, index) => renderFile(file, index))}
 					</div>
 					<i className={styles['wrapper__message__content__date']}>{message.date}</i>
 				</div>

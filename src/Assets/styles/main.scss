@@ -1,3 +1,5 @@
+@import '@Assets/styles/breakpoints.scss';
+
 * {
 	font-family: 'Montserrat', sans-serif;
 
@@ -65,35 +67,31 @@ body {
 	position: relative;
 	top: 0;
 	left: 0;
+
 	overflow: hidden;
 	color: var(--text-color);
 }
 
-.h1 {
+h1 {
 	font-weight: 500;
-	font-size: 24px;
-	line-height: 29px;
-}
-
-.h2 {
-	font-size: 16px;
+	font-size: clamp(14px, 1vw, 18px);
 	line-height: 20px;
 }
 
-.h3 {
-	font-size: 14px;
-	line-height: 18px;
+h2 {
+	font-size: clamp(12px, 1vw, 16px);
+	line-height: 20px;
 }
 
-.text {
-	&_common {
-		font-size: 14px;
-		line-height: 17px;
-	}
-	&_small {
-		font-size: 12px;
-		line-height: 15px;
-	}
+p,
+span {
+	font-size: clamp(12px, 1vw, 16px);
+	line-height: clamp(15px, 1vw, 17px);
+}
+
+i {
+	font-size: clamp(8px, 1vw, 10px);
+	line-height: clamp(14px, 1vw, 16px);
 }
 
 a {

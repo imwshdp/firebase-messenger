@@ -8,11 +8,11 @@ interface PropsType {
 	icon: ReactNode;
 	onClick?: () => void;
 	disabled?: boolean;
-
+	title?: string;
 	className?: string;
 }
 
-const ButtonWithIcon: FC<PropsType> = ({ icon, onClick, disabled, className }) => {
+const ButtonWithIcon: FC<PropsType> = ({ icon, onClick, disabled, title, className }) => {
 	const handlePreventedClick = (event: MouseEvent) => {
 		event.preventDefault();
 		if (onClick) onClick();
@@ -21,6 +21,7 @@ const ButtonWithIcon: FC<PropsType> = ({ icon, onClick, disabled, className }) =
 	return (
 		<button
 			type='button'
+			title={title}
 			className={clsx(
 				styles['button'],
 				{

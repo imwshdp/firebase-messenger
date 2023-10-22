@@ -1,4 +1,4 @@
-import { ChangeEvent, CSSProperties, FC } from 'react';
+import { ChangeEvent, CSSProperties, FC, useEffect } from 'react';
 
 import { MAX_CHAT_VIEW_PANEL_HEIGHT } from '@Shared/content/constants';
 import { IconOfMail } from '@Shared/content/icons.ts';
@@ -31,6 +31,19 @@ const NewMessageView: FC<PropsType> = ({
 	const handleFilesChange = (event: ChangeEvent<HTMLInputElement>) => {
 		setFiles(event.target.files);
 	};
+
+	useEffect(() => {
+		const handleKeyDown = (event: KeyboardEvent) => {
+			if (event.key === 'Enter' && !isSubmitDisabled) {
+				onSubmit();
+			}
+		};
+
+		window.addEventListener('keydown', handleKeyDown);
+		return () => {
+			window.removeEventListener('keydown', handleKeyDown);
+		};
+	}, [isSubmitDisabled, onSubmit]);
 
 	return (
 		<div className={className} style={style}>

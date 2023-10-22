@@ -1,3 +1,5 @@
+@import '@Assets/styles/breakpoints.scss';
+
 .container {
 	position: fixed;
 	top: 0;
@@ -57,6 +59,15 @@
 
 				&__message {
 					font-size: 14px;
+				}
+			}
+
+			@media screen and (max-width: $tablet) {
+				width: calc(100% - 60px);
+
+				& > *:last-child {
+					display: flex;
+					align-self: start;
 				}
 			}
 		}

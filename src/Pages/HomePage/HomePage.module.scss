@@ -7,10 +7,8 @@
 	flex: 1;
 
 	gap: var(--primary-gap-page);
-}
 
-@media screen and (max-width: $mobile) {
-	.page_wrapper {
+	@media screen and (max-width: $tablet) {
 		display: flex;
 		height: calc(100% - 2 * var(--primary-padding-page));
 	}

@@ -2,6 +2,8 @@ import { FC, useEffect } from 'react';
 
 import clsx from 'clsx';
 
+import { IconOfFile } from '@Shared/content/icons';
+
 import { Modal } from '@Components';
 
 import styles from './ModalOfFilesView.module.scss';
@@ -43,6 +45,25 @@ const ModalOfFilesView: FC<PropsType> = ({
 		};
 	}, [isNextDisabled, isPreviousDisabled, openNext, openPrevious]);
 
+	const getFileContent = (fileURL: string) => {
+		if (fileURL.includes('.image')) {
+			return (
+				<img
+					className={styles['modal__image']}
+					src={urls[activeUrlIndex]}
+					alt={urls[activeUrlIndex]}
+				/>
+			);
+		} else {
+			return (
+				<a href={fileURL} className={styles['modal__file']}>
+					<IconOfFile />
+					<span className={styles['modal__file__url']}>{fileURL}</span>
+				</a>
+			);
+		}
+	};
+
 	return (
 		<Modal closeModal={closeModal}>
 			<div className={styles['container']}>
@@ -59,13 +80,7 @@ const ModalOfFilesView: FC<PropsType> = ({
 					/>
 				</button>
 
-				<div className={styles['modal']}>
-					<img
-						className={styles['modal__image']}
-						src={urls[activeUrlIndex]}
-						alt={urls[activeUrlIndex]}
-					/>
-				</div>
+				<div className={styles['modal']}>{getFileContent(urls[activeUrlIndex])}</div>
 
 				<button
 					className={clsx(styles['button'], styles['button_right'], {

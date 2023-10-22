@@ -72,4 +72,4 @@ export const FIREBASE_ERRORS = {
 	network: 'auth/network-request-failed',
 };
 
-export const MOBILE_BREAKPOINT = 600;
+export const TABLET_BREAKPOINT = 820;

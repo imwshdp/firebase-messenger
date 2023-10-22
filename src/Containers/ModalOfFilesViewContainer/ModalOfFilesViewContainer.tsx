@@ -1,10 +1,11 @@
 import { FC, useEffect } from 'react';
 
+import { TABLET_BREAKPOINT } from '@Shared/content/constants';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import useAppSelector from '@Shared/hooks/useAppSelector';
 import { closeModal, resetModalUrls, setModalActiveUrlIndex } from '@Store/slices/modal';
 
-import { ModalOfFilesView } from '@Components';
+import { MobileModalOfFilesView, ModalOfFilesView } from '@Components';
 
 const ModalOfFilesViewContainer: FC = () => {
 	const dispatch = useAppDispatch();
@@ -30,16 +31,28 @@ const ModalOfFilesViewContainer: FC = () => {
 		if (!isNextDisabled) dispatch(setModalActiveUrlIndex(activeUrlIndex + 1));
 	};
 
+	const isDesktop = document.body.clientWidth > TABLET_BREAKPOINT;
+
 	return (
-		<ModalOfFilesView
-			urls={urls}
-			activeUrlIndex={activeUrlIndex}
-			openPrevious={handleOpenPrevious}
-			isPreviousDisabled={isPreviousDisabled}
-			openNext={handleOpenNext}
-			isNextDisabled={isNextDisabled}
-			closeModal={handleCloseModal}
-		/>
+		<>
+			{!isDesktop ? (
+				<MobileModalOfFilesView
+					urls={urls}
+					closeModal={handleCloseModal}
+					activeUrlIndex={activeUrlIndex}
+				/>
+			) : (
+				<ModalOfFilesView
+					urls={urls}
+					activeUrlIndex={activeUrlIndex}
+					openPrevious={handleOpenPrevious}
+					isPreviousDisabled={isPreviousDisabled}
+					openNext={handleOpenNext}
+					isNextDisabled={isNextDisabled}
+					closeModal={handleCloseModal}
+				/>
+			)}
+		</>
 	);
 };
 

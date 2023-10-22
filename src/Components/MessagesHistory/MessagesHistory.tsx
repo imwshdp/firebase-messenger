@@ -40,6 +40,8 @@ const MessagesHistory = forwardRef<HTMLDivElement, PropsType>(function MessagesH
 		/>
 	));
 
+	const loader = isAllLoaded ? <MessagesLoader /> : <div />;
+
 	return (
 		<section className={className} ref={ref}>
 			{messages.length > 0 && (
@@ -50,7 +52,7 @@ const MessagesHistory = forwardRef<HTMLDivElement, PropsType>(function MessagesH
 					hasMore={!isAllLoaded}
 					isReverse
 					initialLoad={false}
-					loader={<MessagesLoader />}
+					loader={loader}
 					useWindow={false}
 				>
 					{messagesComponents}

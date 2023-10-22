@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
 
 import { RoutesLinks } from '@Router';
-import { COLOR_SCHEMES } from '@Shared/content/constants';
+import { COLOR_SCHEMES, TABLET_BREAKPOINT } from '@Shared/content/constants';
 import { IconOfArrow, IconOfAuth, IconOfMenu } from '@Shared/content/icons.ts';
 import { User } from '@Shared/model';
 
@@ -40,6 +40,8 @@ const Navbar: FC<PropsType> = ({
 
 	const { displayName, photoURL } = user;
 
+	const isDesktop = document.body.clientWidth > TABLET_BREAKPOINT;
+
 	const logoutClick = () => {
 		handleLogout();
 		navigate(RoutesLinks.login);
@@ -49,13 +51,34 @@ const Navbar: FC<PropsType> = ({
 		navigate(RoutesLinks.login);
 	};
 
-	const loginLink = isNavbarCollapsed ? (
-		<ButtonWithIcon icon={<IconOfAuth className={styles['icon_link']} />} onClick={loginClick} />
+	const loginLink = isDesktop ? (
+		isNavbarCollapsed ? (
+			<ButtonWithIcon icon={<IconOfAuth className={styles['icon_link']} />} onClick={loginClick} />
+		) : (
+			<NavLink to='login'>Войти</NavLink>
+		)
 	) : (
-		<NavLink to='login'>Войти</NavLink>
+		<ButtonWithIcon icon={<IconOfAuth className={styles['icon_link']} />} onClick={loginClick} />
 	);
 
-	const logoutLink = isNavbarCollapsed ? (
+	const logoutLink = isDesktop ? (
+		isNavbarCollapsed ? (
+			<ButtonWithIcon
+				icon={
+					<IconOfAuth
+						className={clsx(styles['icon_link'], {
+							[styles['icon_link_logout']]: isAuth,
+						})}
+					/>
+				}
+				onClick={logoutClick}
+			/>
+		) : (
+			<NavLink to='login' onClick={handleLogout}>
+				Выйти
+			</NavLink>
+		)
+	) : (
 		<ButtonWithIcon
 			icon={
 				<IconOfAuth
@@ -66,10 +89,6 @@ const Navbar: FC<PropsType> = ({
 			}
 			onClick={logoutClick}
 		/>
-	) : (
-		<NavLink to='login' onClick={handleLogout}>
-			Выйти
-		</NavLink>
 	);
 
 	return (
@@ -81,7 +100,7 @@ const Navbar: FC<PropsType> = ({
 			<>
 				{isAuth ? logoutLink : loginLink}
 
-				{!isNavbarCollapsed && displayName && (
+				{isDesktop && !isNavbarCollapsed && displayName && (
 					<span className={styles['navbar__name']}>{displayName}</span>
 				)}
 

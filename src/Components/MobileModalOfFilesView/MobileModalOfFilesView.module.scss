@@ -1,0 +1,101 @@
+@import '@Assets/styles/breakpoints.scss';
+
+.container {
+	display: flex;
+	width: 100vw;
+}
+
+.slide {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 100vw;
+	height: 100%;
+
+	&__image {
+		display: flex;
+
+		max-width: 100vw;
+		max-height: 70vh;
+
+		object-fit: cover;
+	}
+
+	&__file {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		width: 100vw;
+		height: 100%;
+
+		gap: var(--secondary-offset);
+
+		background-color: var(--color-3);
+
+		svg {
+			height: 30px;
+			width: 30px;
+
+			path {
+				fill: var(--accent-1);
+			}
+		}
+
+		&__url {
+			display: -webkit-box;
+			-webkit-line-clamp: 1;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+
+			margin: 0 40px;
+		}
+	}
+}
+
+.close_modal {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 60px;
+	height: 60px;
+
+	&__icon {
+		width: 25px;
+		height: 25px;
+
+		background-color: rgb(255, 255, 255, 0.5);
+		clip-path: polygon(
+			20% 0%,
+			0% 20%,
+			30% 50%,
+			0% 80%,
+			20% 100%,
+			50% 70%,
+			80% 100%,
+			100% 80%,
+			70% 50%,
+			100% 20%,
+			80% 0%,
+			50% 30%
+		);
+
+		transition: all var(--primary-animation-duration) ease;
+	}
+}
+
+.swiper {
+	display: flex;
+	width: 100vw;
+}
+
+.swiper-slide {
+	display: flex !important;
+}
