@@ -1,0 +1,19 @@
+.page {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	width: 100%;
+	height: 100%;
+
+	gap: var(--primary-offset);
+
+	&__error {
+		font-size: 1.5em;
+	}
+
+	&__message {
+		font-size: 1.3em;
+	}
+}

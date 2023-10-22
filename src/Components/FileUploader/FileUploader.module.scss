@@ -12,11 +12,15 @@
 	border: none;
 	border-radius: var(--primary-border-radius);
 
-	outline: 1px solid var(--color-4);
+	outline: 2px solid var(--color-3);
 	outline-offset: -5px;
 
 	cursor: pointer;
 	transition: all var(--primary-animation-duration) ease-in-out;
+
+	&_uploaded {
+		background-color: var(--color-2);
+	}
 
 	&:hover,
 	&:focus {

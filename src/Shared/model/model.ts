@@ -98,3 +98,16 @@ export interface ModalState {
 export interface MenuState {
 	isModalOpen: boolean;
 }
+
+// validation
+export interface InputRules {
+	required: string;
+	minLength?: string;
+}
+
+export interface ValidationState {
+	isValidated: boolean;
+	email: string;
+	password: string;
+	name: string;
+}

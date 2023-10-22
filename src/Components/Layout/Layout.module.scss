@@ -21,6 +21,11 @@
 		overflow: auto;
 	}
 
+	&__tooltip {
+		background-color: rgba(247, 134, 134) !important;
+		color: var(--text-color) !important;
+	}
+
 	@media screen and (max-width: $tablet) {
 		display: grid;
 		grid-template-rows: 60px 1fr;

@@ -37,6 +37,10 @@ export const ERRNO: [number, string] = [
 	'К сожалению, сервис недоступен в данный момент. Пожалуйста попробуйте позже!',
 ];
 
+export const TABLET_BREAKPOINT = 820;
+
+export const TOOLTIP_ID = 'my-tooltip';
+
 // firebase
 
 export const DATABASES = {
@@ -71,5 +75,3 @@ export const FIREBASE_ERRORS = {
 	// Network
 	network: 'auth/network-request-failed',
 };
-
-export const TABLET_BREAKPOINT = 820;

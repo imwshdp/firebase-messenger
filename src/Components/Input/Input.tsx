@@ -2,6 +2,8 @@ import { ChangeEvent, FC, useId } from 'react';
 
 import clsx from 'clsx';
 
+import { TOOLTIP_ID } from '@Shared/content/constants';
+
 import styles from './Input.module.scss';
 
 interface PropsType {
@@ -11,11 +13,22 @@ interface PropsType {
 	disabled?: boolean;
 	placeholder?: string;
 
-	name?: string;
+	name: string;
 	type?: string;
+
+	errorMessage?: string;
 }
 
-const Input: FC<PropsType> = ({ value, setValue, disabled, placeholder, name, type = 'text' }) => {
+const Input: FC<PropsType> = ({
+	value,
+	setValue,
+	disabled,
+	placeholder,
+	name,
+	type = 'text',
+
+	errorMessage,
+}) => {
 	const id = useId();
 
 	const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -24,6 +37,9 @@ const Input: FC<PropsType> = ({ value, setValue, disabled, placeholder, name, ty
 
 	return (
 		<input
+			data-tooltip-id={TOOLTIP_ID}
+			data-tooltip-content={errorMessage}
+			data-tooltip-place='top'
 			type={type}
 			value={value}
 			onChange={handleOnChange}
@@ -31,7 +47,9 @@ const Input: FC<PropsType> = ({ value, setValue, disabled, placeholder, name, ty
 			id={id}
 			disabled={disabled}
 			placeholder={placeholder}
-			className={clsx(styles['input'])}
+			className={clsx(styles['input'], {
+				[styles['input_validated']]: errorMessage,
+			})}
 		/>
 	);
 };

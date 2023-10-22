@@ -9,6 +9,7 @@ import { default as messagesReducer } from './slices/messages';
 import { default as modalReducer } from './slices/modal';
 import { default as userReducer } from './slices/user';
 import { default as usersReducer } from './slices/users';
+import { default as validationReducer } from './slices/validation';
 
 export const store = configureStore({
 	reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
 		errors: errorsReducer,
 		modal: modalReducer,
 		menu: menuReducer,
+		validation: validationReducer,
 	},
 });
 

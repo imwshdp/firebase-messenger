@@ -3,8 +3,14 @@
 .input {
 	@include input-stylesheets;
 
-	padding: 8px 16px;
+	padding: 14px 20px;
 
 	font-size: clamp(12px, 1vw, 16px);
 	line-height: clamp(15px, 1vw, 17px);
+
+	transition: all var(--primary-animation-duration) ease-in-out;
+
+	&_validated {
+		background-color: rgba(247, 134, 134, 0.3);
+	}
 }
