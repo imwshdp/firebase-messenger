@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { RoutesLinks } from '@Router';
@@ -20,11 +20,23 @@ const FormOfLoginContainer: FC = () => {
 	const navigate = useNavigate();
 
 	const validation = useAppSelector((state) => state.validation);
-	const isValidationActive = validation.isValidated;
+
+	const [email, setEmail] = useState<string>('');
+	const [password, setPassword] = useState<string>('');
 
 	const isFormNotValid = validation.email.length || validation.password.length;
 
-	const handleLogin = (email: string, password: string) => {
+	const handleSetEmail = (value: string) => {
+		dispatch(validateEmail(value));
+		setEmail(value);
+	};
+
+	const handleSetPassword = (value: string) => {
+		dispatch(validatePassword(value));
+		setPassword(value);
+	};
+
+	const handleSubmit = () => {
 		dispatch(validateForm());
 
 		!isFormNotValid &&
@@ -47,15 +59,10 @@ const FormOfLoginContainer: FC = () => {
 			.catch(console.error);
 	};
 
-	const handleValidateEmail = (value: string) => {
-		dispatch(validateEmail(value));
-	};
-
-	const handleValidatePassword = (value: string) => {
-		dispatch(validatePassword(value));
-	};
-
 	useEffect(() => {
+		dispatch(validateEmail(email));
+		dispatch(validatePassword(password));
+
 		return () => {
 			dispatch(resetValidation());
 		};
@@ -66,11 +73,19 @@ const FormOfLoginContainer: FC = () => {
 			<Form
 				buttonTitle='Залогиниться'
 				type={FORM_TYPES.login}
-				handleLogin={handleLogin}
-				handleAlternativeLogin={handleGoogleLogin}
-				validateEmail={handleValidateEmail}
-				validatePassword={handleValidatePassword}
-				validation={isValidationActive ? validation : undefined}
+				state={{
+					email: {
+						value: email,
+						setValue: handleSetEmail,
+					},
+					password: {
+						value: password,
+						setValue: handleSetPassword,
+					},
+				}}
+				validation={validation}
+				onSubmit={handleSubmit}
+				onAlternativeSubmit={handleGoogleLogin}
 			>
 				<span>
 					Впервые здесь? <Link to='/registration'>Зарегистрироваться</Link>

@@ -22,7 +22,7 @@ const ChatView = forwardRef<HTMLDivElement, PropsType>(function ChatView(
 				<header className={styles['chat_view__header']}>
 					<ProfilePicture photoURL={chatUser.photoURL} title={chatUser.displayName} />
 					<h1>
-						Conversation with <b>{chatUser.displayName}</b>
+						Чат с пользователем <b>{chatUser.displayName}</b>
 					</h1>
 				</header>
 			)}

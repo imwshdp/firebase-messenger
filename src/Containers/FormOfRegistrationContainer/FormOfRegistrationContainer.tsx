@@ -1,11 +1,10 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { RoutesLinks } from '@Router';
 import { FORM_TYPES } from '@Shared/content/constants';
 import useAppDispatch from '@Shared/hooks/useAppDispatch';
 import useAppSelector from '@Shared/hooks/useAppSelector';
-import { RegistrationRequestParamsType } from '@Shared/model';
 import { registerUser } from '@Store/slices/user';
 import {
 	resetValidation,
@@ -22,15 +21,40 @@ const FormOfRegistrationContainer: FC = () => {
 	const dispatch = useAppDispatch();
 
 	const validation = useAppSelector((state) => state.validation);
-	const isValidationActive = validation.isValidated;
+
+	const [email, setEmail] = useState<string>('');
+	const [password, setPassword] = useState<string>('');
+	const [profilePicture, setProfilePicture] = useState<File | null>(null);
+	const [displayName, setDisplayName] = useState<string>('');
 
 	const isFormNotValid =
 		validation.email.length || validation.password.length || validation.name.length;
 
-	const handleRegister = (data: RegistrationRequestParamsType) => {
+	const handleSetEmail = (value: string) => {
+		dispatch(validateEmail(value));
+		setEmail(value);
+	};
+
+	const handleSetPassword = (value: string) => {
+		dispatch(validatePassword(value));
+		setPassword(value);
+	};
+
+	const handleSetDisplayName = (value: string) => {
+		dispatch(validateName(value));
+		setDisplayName(value);
+	};
+
+	const handleSetProfilePicture = (value: File) => {
+		if (value.type === 'image') {
+			setProfilePicture(value);
+		}
+	};
+
+	const handleSubmit = () => {
 		dispatch(validateForm());
 		!isFormNotValid &&
-			dispatch(registerUser(data))
+			dispatch(registerUser({ email, password, displayName, profilePicture }))
 				.unwrap()
 				.then(() => navigate(RoutesLinks.login, { replace: true }))
 				.then(() => {
@@ -39,36 +63,41 @@ const FormOfRegistrationContainer: FC = () => {
 				.catch(console.error);
 	};
 
-	const handleValidateEmail = (value: string) => {
-		dispatch(validateEmail(value));
-	};
-
-	const handleValidatePassword = (value: string) => {
-		dispatch(validatePassword(value));
-	};
-
-	const handleValidateName = (value: string) => {
-		dispatch(validateName(value));
-	};
-
 	useEffect(() => {
+		dispatch(validateEmail(email));
+		dispatch(validatePassword(password));
+		dispatch(validateName(displayName));
+
 		return () => {
 			dispatch(resetValidation());
 		};
 	}, []);
 
-	console.log('validation :>> ', validation);
-
 	return (
 		<div>
 			<Form
 				buttonTitle='Зарегистрироваться'
-				handleRegister={handleRegister}
 				type={FORM_TYPES.register}
-				validateEmail={handleValidateEmail}
-				validatePassword={handleValidatePassword}
-				validateName={handleValidateName}
-				validation={isValidationActive ? validation : undefined}
+				state={{
+					email: {
+						value: email,
+						setValue: handleSetEmail,
+					},
+					password: {
+						value: password,
+						setValue: handleSetPassword,
+					},
+					displayName: {
+						value: displayName,
+						setValue: handleSetDisplayName,
+					},
+					profilePicture: {
+						value: profilePicture,
+						setValue: handleSetProfilePicture,
+					},
+				}}
+				onSubmit={handleSubmit}
+				validation={validation}
 			>
 				<span>
 					Уже есть запись? <Link to='/login'>Войти</Link>

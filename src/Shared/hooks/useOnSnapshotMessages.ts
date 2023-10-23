@@ -15,7 +15,6 @@ interface Params {
 	page: number;
 }
 
-// TODO don't forget to use!
 export function useOnSnapshotMessages({ chatId, page }: Params) {
 	const dispatch = useAppDispatch();
 

@@ -8,7 +8,7 @@ import { store } from '@Store';
 
 import '@Assets/styles/index.scss';
 
-import '@Config'; // TODO research firebase config
+import '@Config';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>

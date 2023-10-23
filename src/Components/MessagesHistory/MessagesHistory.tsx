@@ -1,7 +1,7 @@
 import { forwardRef } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 
-import MessageViewContainer from '@Containers/MessageViewContainer/MessageViewContainer';
+import { MessageViewContainer } from '@Containers';
 import { Message } from '@Shared/model';
 
 import { MessagesLoader } from '@Components';

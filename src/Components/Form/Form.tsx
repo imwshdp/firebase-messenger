@@ -1,7 +1,7 @@
-import { FC, ReactNode, useState } from 'react';
+import { FC, ReactNode } from 'react';
 
 import { FORM_TYPES } from '@Shared/content/constants';
-import { RegistrationRequestParamsType, ValidationState } from '@Shared/model';
+import { ValidationState } from '@Shared/model';
 
 import { Button, FileUploader, Input } from '@Components';
 
@@ -12,74 +12,43 @@ interface PropsType {
 	type: FORM_TYPES;
 	children?: ReactNode;
 
-	handleLogin?: (email: string, password: string) => void;
-	handleRegister?: (data: RegistrationRequestParamsType) => void;
-	handleAlternativeLogin?: () => void;
+	state: {
+		email: {
+			value: string;
+			setValue: (value: string) => void;
+		};
+		password: {
+			value: string;
+			setValue: (value: string) => void;
+		};
+		displayName?: {
+			value: string;
+			setValue: (value: string) => void;
+		};
+		profilePicture?: {
+			value: File | null;
+			setValue: (value: File) => void;
+		};
+	};
+	validation: ValidationState;
 
-	validateEmail: (value: string) => void;
-	validatePassword: (value: string) => void;
-	validateName?: (value: string) => void;
-
-	validation?: ValidationState;
+	onSubmit: () => void;
+	onAlternativeSubmit?: () => void;
 }
 const Form: FC<PropsType> = ({
 	buttonTitle,
 	type,
 	children,
 
-	handleLogin = () => {},
-	handleRegister = () => {},
-	handleAlternativeLogin,
-
-	validateEmail,
-	validatePassword,
-	validateName,
-
+	state,
 	validation,
+
+	onSubmit,
+	onAlternativeSubmit,
 }) => {
-	const [email, setEmail] = useState<string>('');
-	const [password, setPassword] = useState<string>('');
-	const [profilePicture, setProfilePicture] = useState<File | null>(null);
-	const [displayName, setDisplayName] = useState<string>('');
+	const { email, password, displayName, profilePicture } = state;
 
-	const handleSetAndValidateEmail = (value: string) => {
-		// validateEmail(value);
-		setEmail(value);
-	};
-
-	const handleSetAndValidatePassword = (value: string) => {
-		// validatePassword(value);
-		setPassword(value);
-	};
-
-	const handleSetAndValidateName = (value: string) => {
-		// validateName && validateName(value);
-		setDisplayName(value);
-	};
-
-	const handleProfilePictureChange = (file: File) => {
-		setProfilePicture(file);
-	};
-
-	const handleLoginClick = () => {
-		validateEmail(email);
-		validatePassword(password);
-
-		handleLogin(email, password);
-	};
-
-	const handleRegisterClick = () => {
-		validateEmail(email);
-		validatePassword(password);
-		validateName && validateName(displayName);
-
-		handleRegister({ email, password, displayName, profilePicture });
-	};
-
-	const handleSubmitButtonClick =
-		type === FORM_TYPES.login ? handleLoginClick : handleRegisterClick;
-
-	const isSubmitDisabled = validation
+	const isSubmitDisabled = validation.isValidated
 		? type === FORM_TYPES.login
 			? validation?.email.length > 0 || validation?.password.length > 0
 			: validation?.email.length > 0 ||
@@ -92,44 +61,44 @@ const Form: FC<PropsType> = ({
 			<Input
 				type='email'
 				name='email'
-				value={email}
-				setValue={handleSetAndValidateEmail}
+				value={email.value}
+				setValue={email.setValue}
 				placeholder='Введите почту'
-				errorMessage={validation?.email}
+				errorMessage={validation.isValidated ? validation.email : undefined}
 			/>
 			<Input
 				type='password'
 				name='password'
-				value={password}
-				setValue={handleSetAndValidatePassword}
+				value={password.value}
+				setValue={password.setValue}
 				placeholder='Введите пароль'
-				errorMessage={validation?.password}
+				errorMessage={validation.isValidated ? validation.password : undefined}
 			/>
 
-			{type === FORM_TYPES.register && (
+			{type === FORM_TYPES.register && displayName && profilePicture && (
 				<>
 					<Input
 						type='displayName'
 						name='displayName'
-						value={displayName}
-						setValue={handleSetAndValidateName}
+						value={displayName.value}
+						setValue={displayName.setValue}
 						placeholder='Введите отображаемое имя'
-						errorMessage={validation?.name}
+						errorMessage={validation.isValidated ? validation.name : undefined}
 					/>
 					<FileUploader
 						placeholder='Загрузить аватар'
-						onChange={handleProfilePictureChange}
-						isUploaded={!!profilePicture}
+						onChange={profilePicture.setValue}
+						isUploaded={!!profilePicture.value}
 					/>
 				</>
 			)}
 
-			<Button onClick={handleSubmitButtonClick} title={buttonTitle} disabled={isSubmitDisabled} />
+			<Button onClick={onSubmit} title={buttonTitle} disabled={isSubmitDisabled} />
 
 			{type === FORM_TYPES.login && (
 				<>
 					<b className={styles['form__text']}>или</b>
-					<Button onClick={handleAlternativeLogin} title='Войти с помощью Google' />
+					<Button onClick={onAlternativeSubmit} title='Войти с помощью Google' />
 				</>
 			)}
 
