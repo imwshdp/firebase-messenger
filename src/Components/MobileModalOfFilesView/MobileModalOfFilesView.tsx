@@ -1,5 +1,5 @@
 // eslint-disable-next-line simple-import-sort/imports
-import { FC } from 'react';
+import { CSSProperties, FC } from 'react';
 
 import { A11y, Navigation, Pagination, Scrollbar } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -53,10 +53,12 @@ const MobileModalOfFilesView: FC<PropsType> = ({ closeModal, urls, activeUrlInde
 					slidesPerView={1}
 					navigation
 					scrollbar={{ draggable: true }}
-					style={{
-						'--swiper-navigation-color': 'var(--color-4)',
-						'--swiper-navigation-size': 25,
-					}}
+					style={
+						{
+							'--swiper-navigation-color': 'var(--color-4)',
+							'--swiper-navigation-size': 25,
+						} as CSSProperties
+					}
 				>
 					{slides()}
 				</Swiper>
