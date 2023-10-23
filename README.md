@@ -5,7 +5,7 @@ Application configuration of firebase provides real time watching and observing 
 
 Authentication is implemented using firebase tools: login via email / password and login via Google Account.
 
-Check hosted application by following the [link]().
+Check hosted application by following the [link](https://firebase-messenger.vercel.app/).
 
 ## Backend stack:
 
