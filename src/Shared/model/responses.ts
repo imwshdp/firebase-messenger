@@ -2,13 +2,6 @@ import { Timestamp } from 'firebase/firestore';
 
 import { UserInfo } from './model';
 
-export type LoginResponseType = {
-	email: string | null;
-	password: string | null;
-	displayName: string | null;
-	profilePicture: File | null;
-};
-
 export type UserChatSnapshotInfo = {
 	date: Timestamp;
 	userInfo: UserInfo;

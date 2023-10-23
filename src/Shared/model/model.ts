@@ -68,11 +68,6 @@ export interface MessagesState {
 	error: boolean;
 }
 
-export interface MessageState {
-	text: string;
-	files: string[];
-}
-
 // Config
 
 export interface ConfigState {
@@ -100,10 +95,6 @@ export interface MenuState {
 }
 
 // validation
-export interface InputRules {
-	required: string;
-	minLength?: string;
-}
 
 export interface ValidationState {
 	isValidated: boolean;

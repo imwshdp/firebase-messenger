@@ -34,8 +34,9 @@ const NewMessageView: FC<PropsType> = ({
 
 	useEffect(() => {
 		const handleKeyDown = (event: KeyboardEvent) => {
-			if (event.key === 'Enter' && !isSubmitDisabled) {
+			if (event.key === 'Enter' && !event.shiftKey && !isSubmitDisabled) {
 				onSubmit();
+				setText('');
 			}
 		};
 

@@ -1,27 +1,42 @@
-# React + TypeScript + Vite
+# Firebase real time messenger
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Messenger application, based on firebase technologies: database and storage.
+Application configuration of firebase provides real time watching and observing on changes in database's collections.
 
-Currently, two official plugins are available:
+Authentication is implemented using firebase tools: login via email / password and login via Google Account.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Check hosted application by following the [link]().
 
-## Expanding the ESLint configuration
+## Backend stack:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- `Firebase Authentication`
+- `Firebase Storage`
+- `Firestore Database`
 
-- Configure the top-level `parserOptions` property like this:
+## Frontend stack:
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+- `React`
+- `React Router`
+- `Redux Toolkit`
+- `Sass`
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+# Other technologies
+
+- Vite for building
+- Eslint + Prettier for code style
+- Framer as beautiful animations source
+- husky for github hooks
+
+# Something interesting from the insides
+
+- Redux error slice, watched for rejected actions and working as error boundary widget
+- Firebase typization using types converter util
+- Firebase errors parser for most popular asynchronous errors
+- Form validation implemented with redux store logic
+- React custom hooks, controlling specific events as scrolling and debounce
+- Infinite scroll for messages history
+- Responsive design with media queries
+
+# Local running
+
+Clone the repository using Git, then use Node.js terminal with command `yarn dev`.
