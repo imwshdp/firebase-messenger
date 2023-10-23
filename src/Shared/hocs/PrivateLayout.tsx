@@ -8,8 +8,8 @@ interface PropsType {
 	children: JSX.Element;
 }
 const PrivateLayout: FC<PropsType> = ({ children }) => {
-	const { isAuth } = useAuth();
 	const location = useLocation();
+	const { isAuth } = useAuth();
 
 	if (!isAuth) {
 		return <Navigate to={RoutesLinks.login} state={{ from: location }} />;
