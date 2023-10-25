@@ -46,7 +46,7 @@ const FormOfRegistrationContainer: FC = () => {
 	};
 
 	const handleSetProfilePicture = (value: File) => {
-		if (value.type === 'image') {
+		if (value.type.includes('image')) {
 			setProfilePicture(value);
 		}
 	};
