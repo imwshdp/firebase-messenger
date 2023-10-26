@@ -3,7 +3,7 @@
 .page_wrapper {
 	display: grid;
 	grid-auto-flow: column;
-	grid-template-columns: auto 1fr;
+	grid-template-columns: minmax(200px, 20%) 1fr;
 	flex: 1;
 
 	gap: var(--primary-gap-page);

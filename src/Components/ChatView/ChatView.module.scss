@@ -3,7 +3,6 @@
 .chat_view {
 	display: flex;
 	flex-direction: column;
-	flex: 1;
 
 	max-height: calc(100vh - 2 * var(--primary-padding-page));
 

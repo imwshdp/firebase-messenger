@@ -1,9 +1,7 @@
 @import '@Assets/styles/breakpoints.scss';
 
 .aside {
-	display: flex;
-	flex-direction: column;
-	flex-grow: 1;
+	display: grid;
 
 	max-height: calc(100vh - 2 * var(--primary-padding-page));
 	min-width: 200px;
@@ -17,8 +15,6 @@
 	&__users {
 		display: flex;
 		flex-direction: column;
-
-		height: min(fit-content, 100%);
 
 		gap: var(--secondary-offset);
 
