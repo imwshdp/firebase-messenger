@@ -21,7 +21,6 @@ export function useScrollAtEnd<T, D>(items: Array<T>, resetDependency: D) {
 		} else {
 			containerRef.current?.scrollTo({
 				top: containerRef.current.scrollHeight,
-				behavior: 'instant',
 			});
 
 			setIsScrollDirty(true);
