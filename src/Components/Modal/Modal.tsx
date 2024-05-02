@@ -1,4 +1,4 @@
-import React, { MouseEvent, ReactNode, useEffect, useMemo, useRef } from 'react';
+import { FC, MouseEvent, ReactNode, useEffect, useMemo, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
 import styles from './Modal.module.scss';
@@ -7,12 +7,12 @@ const modalRoot = document.getElementById('modal-root');
 
 interface PropsType {
 	closeModal?: () => void;
-	children: ReactNode;
+	children?: ReactNode;
 }
 
-const Modal: React.FC<PropsType> = ({ closeModal, children }) => {
+const Modal: FC<PropsType> = ({ closeModal, children }) => {
 	const element = useMemo(() => document.createElement('div'), []);
-	const modalContainerRef = useRef<HTMLDivElement | null>(null);
+	const modalContainerRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		modalRoot!.appendChild(element);

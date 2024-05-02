@@ -10,6 +10,7 @@ ARG VITE_FIREBASE_APP_ID
 WORKDIR /app
 
 COPY package.json .
+RUN yarn cache clean --force
 RUN yarn install
 
 COPY . .
